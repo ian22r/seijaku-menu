@@ -94,13 +94,13 @@ body {
    HERO / ENTRADA ZEN DE MARCA
    ========================================================================== */
 .hero-section {
-    background-color: #095a35; /* El fondo verde exacto de tu logo */
-    min-height: 60vh;
+    background-color: #095a35; 
+    min-height: 35vh;          /* Reducimos la altura del bloque verde */
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 120px 20px 80px 20px;
+    padding: 100px 20px 40px 20px; /* Menos espacio arriba y abajo para compactarlo */
     position: relative;
 }
 
