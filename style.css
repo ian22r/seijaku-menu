@@ -34,62 +34,58 @@ body {
     z-index: -1;
     user-select: none;
 }
-
 /* ==========================================================================
-   NAVBAR REFINADA E INVISIBLE
-   ========================================================================== */
-/* ==========================================================================
-   NAVBAR REFINADA E INVISIBLE (CORREGIDA)
+   NAVBAR REFINADA E INVISIBLE (REPARACIÓN DEFINITIVA)
    ========================================================================== */
 .navbar {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(247, 244, 235, 0.95); /* Crema orgánico de la marca */
+    background-color: rgba(247, 244, 235, 0.92);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(225, 219, 207, 0.6);
     z-index: 1000;
-    display: flex; /* Asegura el correcto comportamiento flotante */
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 40px; /* Le devuelve su tamaño y altura premium a la barra */
-    box-sizing: border-box;
 }
 
-/* Forzar que el enlace o texto de SEIJAKU se alinee de forma correcta a la izquierda */
-.logo-text, .logo {
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.logo-text {
     font-size: 16px;
     font-weight: 400;
     letter-spacing: 7px;
     text-decoration: none;
-    color: #095a35 !important; /* Verde Matcha corporativo */
+    color: #095a35; /* Verde Matcha Identitario */
     text-transform: uppercase;
-    display: inline-block;
 }
 
-/* Contenedor de la derecha para MENÚ y CONTACTO */
 .nav-links {
     display: flex;
     list-style: none;
     margin: 0;
     padding: 0;
-    gap: 35px; /* Crea una separación elegante entre las opciones de la derecha */
 }
 
 .nav-links li {
-    margin: 0;
+    margin-left: 35px;
 }
 
 .nav-links a {
     text-decoration: none;
-    color: #7b8580; /* Gris sutil original */
+    color: #7b8580;
     font-size: 11px;
     font-weight: 400;
     letter-spacing: 3px;
     text-transform: uppercase;
     transition: color 0.3s ease;
-    display: inline-block;
 }
 
 .nav-links a:hover,
