@@ -113,9 +113,10 @@ body {
 }
 
 .brand-logo {
-    max-width: 200px;
+    max-width: 200px; /* Puedes subirlo a 250px si se ve muy chico */
     height: auto;
     display: block;
+
 }
 
 .slogan {
