@@ -64,6 +64,7 @@ body {
     letter-spacing: 7px;
     text-decoration: none;
     color: #095a35; /* Verde Matcha Identitario */
+    text-transform: uppercase;
 }
 
 .nav-links {
@@ -251,6 +252,69 @@ body {
 }
 
 /* ==========================================================================
+   SECCIÓN SEPARADA: HORARIOS Y REPARTO
+   ========================================================================== */
+.info-delivery-section {
+    background-color: #fcfbf7; /* Fondo claro y limpio */
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.info-container {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.info-block {
+    flex: 1;
+    min-width: 250px;
+}
+
+.info-block h3 {
+    font-family: 'Playfair Display', serif;
+    color: #095a35; /* Verde Matcha Identitario */
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.info-block p {
+    margin: 5px 0;
+    color: #4a4a4a;
+    font-size: 1.1rem;
+}
+
+.info-block .days, .info-block .delivery-zone {
+    font-weight: bold;
+}
+
+.info-block .hours {
+    color: #bc9654; /* Tono arena / bambú secundario sutil */
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.info-block .notes {
+    font-size: 0.9rem;
+    color: #8c8c8c;
+    font-style: italic;
+    margin-top: 8px;
+}
+
+.info-divider {
+    width: 1px;
+    height: 80px;
+    background-color: #095a35;
+    opacity: 0.2;
+}
+
+/* ==========================================================================
    CONTACTO / FOOTER DE LUJO MATTE
    ========================================================================== */
 .contact-section {
@@ -335,23 +399,6 @@ body {
     text-transform: uppercase;
 }
 
-/* DISPOSITIVOS MÓVILES (Responsivo impecable) */
-@media (max-width: 768px) {
-    .menu-grid {
-        grid-template-columns: 1fr;
-        gap: 35px;
-    }
-    .kanji-background {
-        font-size: 60vw;
-        right: -20%;
-    }
-    .section-title {
-        font-size: 26px;
-    }
-    .brand-logo {
-        max-width: 170px;
-    }
-}
 /* ==========================================================================
    ESTILO DE IMÁGENES GOURMET (PREMIUM)
    ========================================================================== */
@@ -396,7 +443,34 @@ body {
     flex-grow: 1;
 }
 
-/* RESPONSIVO: En celulares la foto se acomoda arriba de forma estética */
+/* ==========================================================================
+   MEDIA QUERIES / RESPONSIVO IMPECABLE
+   ========================================================================== */
+@media (max-width: 768px) {
+    .menu-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+    .kanji-background {
+        font-size: 60vw;
+        right: -20%;
+    }
+    .section-title {
+        font-size: 26px;
+    }
+    .brand-logo {
+        max-width: 170px;
+    }
+    .info-container {
+        flex-direction: column;
+    }
+    .info-divider {
+        width: 50px;
+        height: 1px;
+        margin: 10px auto;
+    }
+}
+
 @media (max-width: 480px) {
     .menu-item.item-with-image {
         flex-direction: column;
@@ -409,95 +483,4 @@ body {
         width: 100%;
         height: 180px; /* Foto horizontal elegante en celular */
     }
-}
-/* Sección Horarios y Entrega */
-.info-delivery-section {
-    background-color: #fcfbf7; /* Mantiene el fondo claro y limpio de tu carta */
-    padding: 60px 20px;
-    text-align: center;
-}
-
-.info-container {
-    max-width: 800px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 30px;
-}
-
-.info-block {
-    flex: 1;
-    min-width: 250px;
-}
-
-.info-block h3 {
-    font-family: 'Playfair Display', serif; /* O la tipografía elegante que uses */
-    color: #095a35; /* Tu verde exacto corporativo */
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.info-block p {
-    margin: 5px 0;
-    color: #4a4a4a;
-    font-size: 1.1rem;
-}
-
-.info-block .days, .info-block .delivery-zone {
-    font-weight: bold;
-}
-
-.info-block .hours {
-    color: #bc9654; /* Un dorado o color secundario sutil si manejas, o déjalo en negro */
-    font-size: 1.2rem;
-    font-weight: 600;
-}
-
-.info-block .notes {
-    font-size: 0.9rem;
-    color: #8c8c8c;
-    font-style: italic;
-    margin-top: 8px;
-}
-
-.info-divider {
-    width: 1px;
-    height: 80px;
-    background-color: #095a35;
-    opacity: 0.2;
-}
-
-/* Ajuste para pantallas de celulares */
-@media (max-width: 768px) {
-    .info-container {
-        flex-direction: column;
-    }
-    .info-divider {
-        width: 50px;
-        height: 1px;
-        margin: 10px auto;
-    }
-}
-/* Corregir espacio y separación de los enlaces superiores */
-.nav-links {
-    display: flex;
-    gap: 25px; /* Esto va a separar cada palabra de forma elegante */
-    align-items: center;
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: #095a35; /* O el color oscuro que estés usando para tus textos */
-    font-size: 0.9rem;
-    letter-spacing: 1.5px; /* Mantiene el estilo fino y separado de las letras */
-    font-weight: 500;
-    transition: color 0.3s ease;
-}
-
-.nav-links a:hover {
-    color: #bc9654; /* Un tono sutil al pasar el mouse */
 }
