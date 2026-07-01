@@ -490,35 +490,32 @@ body {
    BOTÓN FLOTANTE DE WHATSAPP (ESTILO MINI)
    ========================================================================== */
 .whatsapp-btn {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background-color: #095a35; /* Tu Verde Matcha Identitario */
-    color: #f7f4eb; /* Tu crema mate para el icono */
-    width: 50px;
-    height: 50px;
-    border-radius: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-    z-index: 999;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    text-decoration: none;
+    position: fixed !important;
+    bottom: 30px !important;
+    right: 30px !important;
+    background-color: #095a35 !important; /* Tu Verde Matcha Identitario */
+    color: #f7f4eb !important; /* Tu crema mate */
+    width: 55px !important;
+    height: 55px !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+    z-index: 999999 !important; /* Forzar que esté al frente de todo */
+    text-decoration: none !important;
+    transition: transform 0.3s ease !important;
 }
 
 .whatsapp-btn:hover {
-    transform: scale(1.08) translateY(-3px);
-    background-color: #116940; /* Un verde ligeramente más vivo al pasar el mouse */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    transform: scale(1.1) !important;
 }
 
-/* Ajuste para celulares para que no estorbe de más */
 @media (max-width: 768px) {
     .whatsapp-btn {
-        bottom: 20px;
-        right: 20px;
-        width: 46px;
-        height: 46px;
+        bottom: 20px !important;
+        right: 20px !important;
+        width: 50px !important;
+        height: 50px !important;
     }
 }
