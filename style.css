@@ -1,0 +1,293 @@
+/* ==========================================================================
+   CONFIGURACIÓN JAPONESA ESTÉTICA (SEIJAKU)
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background-color: #f7f4eb; /* El mismo tono crema orgánico del logo */
+    color: #1c2b23; /* Un gris verdoso oscuro sutil, muy natural */
+    line-height: 1.6;
+}
+
+/* ==========================================================================
+   NAVBAR MINIMALISTA FINA
+   ========================================================================== */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(247, 244, 235, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #e1dbcf;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 15px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-text {
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 6px;
+    text-decoration: none;
+    color: #095a35; /* El color verde característico de tu logo */
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+}
+
+.nav-links li {
+    margin-left: 25px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #707a75;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: #095a35;
+}
+
+/* ==========================================================================
+   SECCIÓN HERO JAPONESA (Fondo Verde de tu marca)
+   ========================================================================== */
+.hero-section {
+    background-color: #095a35; /* Captura el fondo verde de tu logo */
+    min-height: 55vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 100px 20px 60px 20px;
+    border-bottom: 4px solid #ebdcb9; /* Línea de acento estilo arena */
+}
+
+.brand-logo {
+    max-width: 240px; /* Tamaño ideal y controlado para que luzca el gatito */
+    height: auto;
+    border-radius: 50%; /* Lo hace ver pulcro si la imagen original es cuadrada */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    margin-bottom: 20px;
+}
+
+.slogan {
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 5px;
+    color: #f7f4eb; /* Letras color crema del logo */
+    text-transform: uppercase;
+}
+
+/* ==========================================================================
+   DISEÑO DE LA CARTA / MENÚ AESTHETIC
+   ========================================================================== */
+.menu-section {
+    max-width: 950px;
+    margin: 60px auto;
+    padding: 0 25px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: 10px;
+    text-transform: uppercase;
+    margin-bottom: 60px;
+    color: #095a35;
+}
+
+.category-block {
+    margin-bottom: 65px;
+}
+
+.category-title {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: #095a35;
+    border-bottom: 1px solid #095a35;
+    padding-bottom: 8px;
+    margin-bottom: 30px;
+}
+
+/* Cuadrícula limpia */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 40px 60px;
+}
+
+.menu-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 6px;
+}
+
+.menu-item h4 {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #1c2b23;
+}
+
+.price {
+    font-size: 14px;
+    font-weight: 600;
+    color: #b83b30; /* El acento rojo de tus precios */
+    letter-spacing: 1px;
+}
+
+.description {
+    font-size: 12.5px;
+    font-weight: 300;
+    line-height: 1.6;
+    color: #55615a;
+    text-align: justify;
+}
+
+/* RESPONSIVO PARA MÓVILES */
+@media (max-width: 768px) {
+    .menu-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    .brand-logo {
+        max-width: 180px;
+    }
+    .section-title {
+        font-size: 20px;
+        letter-spacing: 6px;
+    }
+}
+/* ==========================================================================
+   SECCIÓN DE CONTACTO AESTHETIC
+   ========================================================================== */
+.contact-section {
+    background-color: #095a35; /* El hermoso verde de tu marca */
+    color: #f7f4eb; /* Letras crema */
+    padding: 60px 25px;
+    text-align: center;
+    border-top: 4px solid #ebdcb9;
+}
+
+.contact-container {
+    max-width: 950px;
+    margin: 0 auto;
+}
+
+.contact-title {
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.contact-subtitle {
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    color: #ebdcb9; /* Tono arena suave */
+    margin-bottom: 40px;
+}
+
+/* Contenedor de las tarjetas de contacto */
+.contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap; /* Para que en móvil se acomoden uno abajo del otro */
+    margin-bottom: 40px;
+}
+
+/* Tarjetas individuales de redes */
+.contact-card {
+    background-color: rgba(247, 244, 235, 0.06); /* Un sutil contraste translúcido */
+    border: 1px solid rgba(235, 220, 185, 0.2);
+    padding: 25px 35px;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #f7f4eb;
+    min-width: 220px;
+    transition: all 0.3s ease;
+}
+
+/* Efecto elegante al pasar el cursor */
+.contact-card:hover {
+    background-color: #f7f4eb;
+    color: #095a35;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.contact-icon {
+    font-size: 24px;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.contact-card h4 {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.contact-card p {
+    font-size: 11px;
+    font-weight: 300;
+    opacity: 0.8;
+}
+
+/* Créditos del final */
+.footer-credits {
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    opacity: 0.5;
+    text-transform: uppercase;
+    border-top: 1px solid rgba(247, 244, 235, 0.1);
+    padding-top: 20px;
+}
+
+/* Ajuste móvil */
+@media (max-width: 480px) {
+    .contact-links {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .contact-card {
+        width: 100%;
+    }
+}
