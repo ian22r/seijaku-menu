@@ -482,3 +482,22 @@ body {
         margin: 10px auto;
     }
 }
+/* Corregir espacio y separación de los enlaces superiores */
+.nav-links {
+    display: flex;
+    gap: 25px; /* Esto va a separar cada palabra de forma elegante */
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #095a35; /* O el color oscuro que estés usando para tus textos */
+    font-size: 0.9rem;
+    letter-spacing: 1.5px; /* Mantiene el estilo fino y separado de las letras */
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #bc9654; /* Un tono sutil al pasar el mouse */
+}
