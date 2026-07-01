@@ -3,217 +3,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seijaku - Menú Digital</title>
+    <title>Seijaku — Menú Japonés</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Fuentes premium: Playfair Display para títulos elegantes y Montserrat para lectura limpia -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- BARRA DE NAVEGACIÓN -->
+    <!-- MARCA DE AGUA FLOTANTE (KANJI TRADICIONAL) -->
+    <div class="kanji-background">静寂</div>
+
+    <!-- BARRA DE NAVEGACIÓN MINIMALISTA -->
     <nav class="navbar">
         <div class="nav-container">
             <a href="#" class="logo-text">SEIJAKU</a>
             <ul class="nav-links">
                 <li><a href="#" class="active">Menú</a></li>
-                <li><a href="#">Contacto</a></li>
+                <li><a href="#contacto">Contacto</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- BIENVENIDA / SECCIÓN ESTILO JAPONÉS CON LOGO -->
+    <!-- HERO / BIENVENIDA PREMIUM -->
     <header class="hero-section">
         <div class="hero-content">
-            <img src="logo.jpg" alt="Seijaku Logo" class="brand-logo">
-            <p class="slogan">EQUILIBRIO PARA EL ALMA</p>
+            <div class="logo-wrapper">
+                <img src="logo.jpg" alt="Seijaku Logo" class="brand-logo">
+            </div>
+            <p class="slogan">Equilibrio para el alma</p>
+            <div class="shoji-divider-center"></div>
         </div>
     </header>
 
-    <!-- SECCIÓN DEL MENÚ -->
+    <!-- CONTENIDOR PRINCIPAL DEL MENÚ -->
     <main class="menu-section">
-        <h2 class="section-title">Nuestro Menú</h2>
+        <h2 class="section-title">お品書き <span class="title-sub">Nuestra Carta</span></h2>
         
         <!-- CATEGORÍA: ROLLOS -->
-        <div class="category-block">
-            <h3 class="category-title">Rollos</h3>
+        <section class="category-block">
+            <h3 class="category-title">Rollos Básicos & Especialidades</h3>
             <div class="menu-grid">
                 <div class="menu-item">
                     <div class="item-header">
                         <h4>California</h4>
                         <span class="price">$110</span>
                     </div>
-                    <p class="description">Rollo de surimi, pepino y aguacate.</p>
+                    <p class="description">Fresco surimi balanceado con pepino crujiente y aguacate cremoso.</p>
                 </div>
                 <div class="menu-item">
                     <div class="item-header">
                         <h4>Yasai Maki</h4>
                         <span class="price">$90</span>
                     </div>
-                    <p class="description">Rollo con camarón empanizado, queso philadelphia y aguacate, por fuera pepino y salsa tamarindo.</p>
+                    <p class="description">Camarón empanizado, queso philadelphia y aguacate, envuelto en finas láminas de pepino y un toque de salsa tamarindo.</p>
                 </div>
                 <div class="menu-item">
                     <div class="item-header">
                         <h4>Amairo Roll</h4>
                         <span class="price">$100</span>
                     </div>
-                    <p class="description">Rollo con pollo teriyaki, queso manchego y philadelphia por fuera kiwi, fresa y salsa de tamarindo.</p>
+                    <p class="description">Pollo teriyaki de la casa, fusión de queso manchego y philadelphia, coronado con kiwi fresco, fresa y destellos de salsa tamarindo.</p>
                 </div>
                 <div class="menu-item">
                     <div class="item-header">
                         <h4>Mar y Tierra</h4>
                         <span class="price">$130</span>
                     </div>
-                    <p class="description">Rollo empanizado con pollo teriyaki, camarón empanizado y arrachera, por fuera salsa aderezo chipotle o cilantro, cebollín y ajonjolí.</p>
+                    <p class="description">Rollo crujiente empanizado relleno de pollo teriyaki, camarón y arrachera; bañado en aderezo artesanal de chipotle o cilantro, cebollín y ajonjolí tostado.</p>
                 </div>
                 <div class="menu-item">
                     <div class="item-header">
                         <h4>Kani Kani</h4>
                         <span class="price">$110</span>
                     </div>
-                    <p class="description">Rollo de camarón empanizado y aguacate, adornado con kanikama, ajonjolí y salsa unagi.</p>
+                    <p class="description">Interior de camarón empanizado y aguacate, cubierto con una fina capa de kanikama, ajonjolí y nuestra reducción de salsa unagi.</p>
                 </div>
                 <div class="menu-item">
                     <div class="item-header">
                         <h4>Tropical Roll</h4>
                         <span class="price">$110</span>
                     </div>
-                    <p class="description">Rollo con camarón empanizado, aguacate, queso philadelphia y cangrejo, por fuera mango y salsa tamarindo.</p>
+                    <p class="description">Combinación de camarón crujiente, aguacate, queso philadelphia y cangrejo, cubierto de mango maduro y un toque de tamarindo.</p>
                 </div>
                 <div class="menu-item">
                     <div class="item-header">
                         <h4>Harami Roru</h4>
                         <span class="price">$120</span>
                     </div>
-                    <p class="description">Rollo de arrachera, queso philadelphia y aguacate, por fuera queso manchego, chiles toreados y aderezo chipotle.</p>
+                    <p class="description">Arrachera marinada, queso philadelphia y aguacate, gratinado por fuera con queso manchego, chiles toreados y aderezo chipotle picante.</p>
                 </div>
                 <div class="menu-item">
                     <div class="item-header">
                         <h4>Tampico Roll</h4>
                         <span class="price">$110</span>
                     </div>
-                    <p class="description">Rollo empanizado con camarón, queso philadelphia y aguacate, por fuera aderezo tampico y ajonjolí.</p>
+                    <p class="description">Rollo empanizado clásico con camarón selecto, queso philadelphia y aguacate, cubierto con nuestra icónica pasta tampico y ajonjolí.</p>
                 </div>
                 <div class="menu-item">
                     <div class="item-header">
                         <h4>Toriniku Roll</h4>
                         <span class="price">$125</span>
                     </div>
-                    <p class="description">Rollo con pollo teriaki, queso manchego y aguacate, por fuera queso philadelphia, fresa y salsa de tamarindo.</p>
+                    <p class="description">Jugoso pollo teriyaki, queso manchego y aguacate, envuelto en una suave capa de queso philadelphia, fresa natural y reducción de tamarindo.</p>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- CATEGORÍA: APERITIVOS Y ENTRADAS -->
-        <div class="category-block">
+        <!-- CATEGORÍA: ANTESMESA -->
+        <section class="category-block">
             <h3 class="category-title">Aperitivos & Entradas</h3>
             <div class="menu-grid">
                 <div class="menu-item">
                     <div class="item-header">
-                        <h4>Gyozas (5 pzas.)</h4>
+                        <h4>Gyozas <span class="detail-count">(5 pzas.)</span></h4>
                         <span class="price">$55</span>
                     </div>
-                    <p class="description">Gyozas a la plancha rellenas con carne de cerdo y verduras.</p>
+                    <p class="description">Empanadillas japonesas doradas a la plancha, rellenas de carne de cerdo seleccionada y vegetales finos con soya sazonada.</p>
                 </div>
                 <div class="menu-item">
                     <div class="item-header">
-                        <h4>Yakitoris (3 pzas.)</h4>
+                        <h4>Yakitoris <span class="detail-count">(3 pzas.)</span></h4>
                         <span class="price">$75</span>
                     </div>
-                    <p class="description">Brochetas de pollo con verduras.</p>
+                    <p class="description">Brochetas tradicionales de muslo de pollo glaseadas en salsa tare dulce, intercaladas con cebollín asado.</p>
                 </div>
                 <div class="menu-item">
                     <div class="item-header">
-                        <h4>Kushiages (3 pzas.)</h4>
+                        <h4>Kushiages <span class="detail-count">(3 pzas.)</span></h4>
                     </div>
-                    <p class="description">Brochetas empanizadas de: Plátano ($55) • Queso ($65) • Camarón ($70) • Queso y Plátano ($60).</p>
+                    <p class="description">Brochetas japonesas empanizadas en panko crujiente. Variedades: Plátano ($55) • Queso ($65) • Camarón ($70) • Combinado Plátano y Queso ($60).</p>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- CATEGORÍA: SOPAS Y ARROCES -->
-        <div class="category-block">
-            <h3 class="category-title">Sopas & Arroces</h3>
+        <!-- CATEGORÍA: TRADICIÓN DE LA COCINA -->
+        <section class="category-block">
+            <h3 class="category-title">Sopas & Arroces Especiales</h3>
             <div class="menu-grid">
                 <div class="menu-item">
                     <div class="item-header">
-                        <h4>Ramen Tonkotsu</h4>
+                        <h4>Tonkotsu Ramen</h4>
                         <span class="price">$120</span>
                     </div>
-                    <p class="description">Servido con panceta de cerdo, huevo ajitsuke tamago, setas shitake, cebollín y espinacas.</p>
+                    <p class="description">Caldo artesanal profundo servido con panceta de cerdo braseada (chashu), huevo tierno marinado ajitsuke tamago, setas shiitake, cebollín fresco y hojas de espinaca.</p>
                 </div>
                 <div class="menu-item">
                     <div class="item-header">
-                        <h4>Yakimeshi</h4>
+                        <h4>Yakimeshi Tradicional</h4>
                     </div>
-                    <p class="description">Arroz gohan con verduras al vapor: Pollo ($80) • Camarón ($90) • Arrachera ($90) • Mixto ($100).</p>
+                    <p class="description">Arroz gohan salteado al wok con verduras selectas al vapor. Proteínas a elegir: Pollo ($80) • Camarón ($90) • Arrachera ($90) • Mixto ($100).</p>
                 </div>
                 <div class="menu-item">
                     <div class="item-header">
-                        <h4>Teppanyaki</h4>
+                        <h4>Teppanyaki de Res</h4>
                         <span class="price">$110</span>
                     </div>
-                    <p class="description">Carne de res a la parrilla estilo japonés, servido sobre una cama de verduras y arroz gohan.</p>
+                    <p class="description">Cortes finos de res preparados a la plancha de alta temperatura, acompañados de vegetales crujientes texturizados y base de arroz gohan natural.</p>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- CATEGORÍA: POSTRES Y BEBIDAS -->
-        <div class="category-block">
-            <h3 class="category-title">Postres & Bebidas</h3>
+        <!-- CATEGORÍA: DULCE & REFRESCANTE -->
+        <section class="category-block">
+            <h3 class="category-title">Postres & Elíxires</h3>
             <div class="menu-grid">
                 <div class="menu-item">
                     <div class="item-header">
-                        <h4>Mochis</h4>
+                        <h4>Mochis Artesanales</h4>
                         <span class="price">$60</span>
                     </div>
-                    <p class="description">Mochis esponjosos rellenos de: Fresa o Mango.</p>
+                    <p class="description">Pasteles de arroz glutinoso de textura sedosa y elástica, rellenos de helado premium: Fresa o Mango.</p>
                 </div>
                 <div class="menu-item">
                     <div class="item-header">
-                        <h4>Calpis de Sabores</h4>
+                        <h4>Calpis de la Casa</h4>
                         <span class="price">$70</span>
                     </div>
-                    <p class="description">Bebidas refrescantes a base de Calpis: Mora Azul, Fresa, Kiwi, Durazno, Mango o Frutos Rojos.</p>
+                    <p class="description">Bebida láctica tradicional japonesa, refrescante y ligera, infusionada con concentrados naturales: Mora Azul, Fresa, Kiwi, Durazno, Mango o Frutos Rojos.</p>
                 </div>
             </div>
-        </div>
+        </section>
     </main>
 
-    <!-- SECCIÓN DE CONTACTO / REDES SOCIALES (SEIJAKU) -->
+    <!-- PIE DE PÁGINA / CONTACTO ESTILO PREMIUM -->
     <footer id="contacto" class="contact-section">
         <div class="contact-container">
-            <h3 class="contact-title">Conéctate con Seijaku</h3>
-            <p class="contact-subtitle">Haz tu pedido o visítanos en nuestras redes</p>
+            <h3 class="contact-title">Contacto & Pedidos</h3>
+            <p class="contact-subtitle">Elige tu canal preferido para ordenar o seguir nuestro viaje gastronómico</p>
             
             <div class="contact-links">
-                <!-- WHATSAPP -->
-                <a href="https://wa.me/5217721540533" target="_blank" class="contact-card">
+                <a href="https://wa.me/521" target="_blank" class="contact-card">
                     <span class="contact-icon">💬</span>
                     <h4>WhatsApp</h4>
-                    <p>Haz tu pedido directo</p>
+                    <p>Pedidos en línea directos</p>
                 </a>
-
-                <!-- INSTAGRAM -->
-                <a href="https://instagram.com/seijakufood" target="_blank" class="contact-card">
-                    <span class="contact-icon">📸</span>
-                    <h4>Instagram</h4>
-                    <p>@seijakufood</p>
-                </a>
-                <!-- FACEBOOK -->
-                <a href="https://www.facebook.com/profile.php?id=61590828657838" target="_blank" class="contact-card">
+                <a href="https://facebook.com/" target="_blank" class="contact-card">
                     <span class="contact-icon">👥</span>
                     <h4>Facebook</h4>
-                    <p>Seijaku Sushi</p>
+                    <p>Comunidad Seijaku</p>
                 </a>
-
-                <!-- CORREO -->
-                <a href="mailto:contacto.seijakufood@gmail.com" class="contact-card">
+                <a href="https://instagram.com/" target="_blank" class="contact-card">
+                    <span class="contact-icon">📸</span>
+                    <h4>Instagram</h4>
+                    <p>@seijaku.sushi</p>
+                </a>
+                <a href="mailto:seijaku@gmail.com" class="contact-card">
                     <span class="contact-icon">✉️</span>
                     <h4>Correo</h4>
-                    <p>Escríbenos un email</p>
+                    <p>Consultas y eventos</p>
                 </a>
             </div>
             
-            <p class="footer-credits">© 2026 Seijaku • Equilibrio para el alma</p>
+            <div class="shoji-divider-center" style="opacity: 0.2; margin-bottom: 20px;"></div>
+            <p class="footer-credits">© 2026 Seijaku • Gastronomía Japonesa Balanceada</p>
         </div>
     </footer>
 

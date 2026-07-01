@@ -1,48 +1,69 @@
 /* ==========================================================================
-   CONFIGURACIÓN JAPONESA ESTÉTICA (SEIJAKU)
+   DISEÑO JAPONÉS EDITORIAL & PREMIUM (SEIJAKU)
    ========================================================================== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-    background-color: #f7f4eb; /* El mismo tono crema orgánico del logo */
-    color: #1c2b23; /* Un gris verdoso oscuro sutil, muy natural */
-    line-height: 1.6;
+    background-color: #f7f4eb; /* Crema mate orgánico de la marca */
+    color: #1e2923; /* Carbón vegetal con matiz verde muy suave */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* KANJI FLOTANTE DE TRASFONDO (Sello de autenticidad Zen) */
+.kanji-background {
+    position: fixed;
+    top: 20%;
+    right: -5%;
+    font-family: 'Playfair Display', serif;
+    font-size: 32vw;
+    color: rgba(9, 90, 53, 0.025); /* Súper sutil, casi imperceptible */
+    font-weight: 500;
+    pointer-events: none;
+    z-index: -1;
+    user-select: none;
 }
 
 /* ==========================================================================
-   NAVBAR MINIMALISTA FINA
+   NAVBAR REFINADA E INVISIBLE
    ========================================================================== */
 .navbar {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(247, 244, 235, 0.95);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid #e1dbcf;
+    background-color: rgba(247, 244, 235, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(225, 219, 207, 0.6);
     z-index: 1000;
 }
 
 .nav-container {
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 15px 25px;
+    padding: 20px 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .logo-text {
-    font-size: 18px;
-    font-weight: 500;
-    letter-spacing: 6px;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 7px;
     text-decoration: none;
-    color: #095a35; /* El color verde característico de tu logo */
+    color: #095a35; /* Verde Matcha Identitario */
 }
 
 .nav-links {
@@ -51,17 +72,17 @@ body {
 }
 
 .nav-links li {
-    margin-left: 25px;
+    margin-left: 35px;
 }
 
 .nav-links a {
     text-decoration: none;
-    color: #707a75;
+    color: #7b8580;
     font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 2px;
+    font-weight: 400;
+    letter-spacing: 3px;
     text-transform: uppercase;
-    transition: color 0.3s;
+    transition: color 0.3s ease;
 }
 
 .nav-links a:hover,
@@ -70,224 +91,263 @@ body {
 }
 
 /* ==========================================================================
-   SECCIÓN HERO JAPONESA (Fondo Verde de tu marca)
+   HERO / ENTRADA ZEN DE MARCA
    ========================================================================== */
 .hero-section {
-    background-color: #095a35; /* Captura el fondo verde de tu logo */
-    min-height: 55vh;
+    background-color: #095a35; /* El fondo verde exacto de tu logo */
+    min-height: 60vh;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 100px 20px 60px 20px;
-    border-bottom: 4px solid #ebdcb9; /* Línea de acento estilo arena */
+    padding: 120px 20px 80px 20px;
+    position: relative;
+}
+
+/* Efecto contenedor flotante premium para el logo */
+.logo-wrapper {
+    background-color: #095a35;
+    padding: 10px;
+    display: inline-block;
+    margin-bottom: 25px;
 }
 
 .brand-logo {
-    max-width: 240px; /* Tamaño ideal y controlado para que luzca el gatito */
+    max-width: 200px;
     height: auto;
-    border-radius: 50%; /* Lo hace ver pulcro si la imagen original es cuadrada */
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    margin-bottom: 20px;
+    display: block;
 }
 
 .slogan {
-    font-size: 12px;
-    font-weight: 400;
-    letter-spacing: 5px;
-    color: #f7f4eb; /* Letras color crema del logo */
-    text-transform: uppercase;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 18px;
+    letter-spacing: 3px;
+    color: #ebdcb9; /* Tono arena / bambú seco */
+    margin-bottom: 25px;
+}
+
+/* Línea divisoria estilo arquitectura Shoji */
+.shoji-divider-center {
+    width: 60px;
+    height: 1px;
+    background-color: #ebdcb9;
+    margin: 0 auto;
+    position: relative;
+}
+.shoji-divider-center::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: 27px;
+    width: 7px;
+    height: 7px;
+    background-color: #ebdcb9;
+    transform: rotate(45deg);
 }
 
 /* ==========================================================================
-   DISEÑO DE LA CARTA / MENÚ AESTHETIC
+   CARTA MENÚ (Estilo Editorial Premium)
    ========================================================================== */
 .menu-section {
-    max-width: 950px;
-    margin: 60px auto;
-    padding: 0 25px;
+    max-width: 1100px;
+    margin: 80px auto;
+    padding: 0 30px;
 }
 
 .section-title {
     text-align: center;
-    font-size: 24px;
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
     font-weight: 400;
-    letter-spacing: 10px;
-    text-transform: uppercase;
-    margin-bottom: 60px;
+    letter-spacing: 6px;
+    margin-bottom: 80px;
     color: #095a35;
+}
+
+.title-sub {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    color: #8c9690;
+    margin-top: 10px;
 }
 
 .category-block {
-    margin-bottom: 65px;
+    margin-bottom: 90px;
 }
 
 .category-title {
-    font-size: 15px;
-    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
     letter-spacing: 5px;
     text-transform: uppercase;
     color: #095a35;
-    border-bottom: 1px solid #095a35;
-    padding-bottom: 8px;
-    margin-bottom: 30px;
+    padding-bottom: 15px;
+    margin-bottom: 45px;
+    border-bottom: 1px solid rgba(9, 90, 53, 0.15);
+    position: relative;
 }
 
-/* Cuadrícula limpia */
+/* Rejilla de platillos con más espacio "para respirar" */
 .menu-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-    gap: 40px 60px;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 50px 80px;
 }
 
 .menu-item {
     display: flex;
     flex-direction: column;
+    transition: transform 0.3s ease;
 }
 
 .item-header {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    margin-bottom: 6px;
+    margin-bottom: 10px;
+    border-bottom: 1px dashed rgba(140, 150, 144, 0.3); /* Línea punteada fina japonesa */
+    padding-bottom: 6px;
 }
 
 .menu-item h4 {
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #1c2b23;
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: #1e2923;
+}
+
+.detail-count {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    color: #8c9690;
 }
 
 .price {
+    font-family: 'Montserrat', sans-serif;
     font-size: 14px;
-    font-weight: 600;
-    color: #b83b30; /* El acento rojo de tus precios */
+    font-weight: 400;
+    color: #a83232; /* Rojo laca tradicional controlado, no chillante */
     letter-spacing: 1px;
+    background-color: rgba(168, 50, 50, 0.05);
+    padding: 2px 8px;
+    border-radius: 2px;
 }
 
 .description {
     font-size: 12.5px;
     font-weight: 300;
-    line-height: 1.6;
-    color: #55615a;
+    line-height: 1.8;
+    color: #5c6660;
     text-align: justify;
 }
 
-/* RESPONSIVO PARA MÓVILES */
-@media (max-width: 768px) {
-    .menu-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-    .brand-logo {
-        max-width: 180px;
-    }
-    .section-title {
-        font-size: 20px;
-        letter-spacing: 6px;
-    }
-}
 /* ==========================================================================
-   SECCIÓN DE CONTACTO AESTHETIC
+   CONTACTO / FOOTER DE LUJO MATTE
    ========================================================================== */
 .contact-section {
-    background-color: #095a35; /* El hermoso verde de tu marca */
-    color: #f7f4eb; /* Letras crema */
-    padding: 60px 25px;
+    background-color: #095a35;
+    color: #f7f4eb;
+    padding: 80px 30px;
     text-align: center;
-    border-top: 4px solid #ebdcb9;
 }
 
 .contact-container {
-    max-width: 950px;
+    max-width: 1100px;
     margin: 0 auto;
 }
 
 .contact-title {
-    font-size: 20px;
-    font-weight: 500;
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    margin-bottom: 10px;
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    margin-bottom: 12px;
 }
 
 .contact-subtitle {
     font-size: 13px;
-    font-weight: 300;
+    font-weight: 200;
     letter-spacing: 1px;
-    color: #ebdcb9; /* Tono arena suave */
-    margin-bottom: 40px;
+    color: #ebdcb9;
+    margin-bottom: 50px;
 }
 
-/* Contenedor de las tarjetas de contacto */
 .contact-links {
     display: flex;
     justify-content: center;
-    gap: 30px;
-    flex-wrap: wrap; /* Para que en móvil se acomoden uno abajo del otro */
-    margin-bottom: 40px;
+    gap: 25px;
+    flex-wrap: wrap;
+    margin-bottom: 60px;
 }
 
-/* Tarjetas individuales de redes */
 .contact-card {
-    background-color: rgba(247, 244, 235, 0.06); /* Un sutil contraste translúcido */
-    border: 1px solid rgba(235, 220, 185, 0.2);
-    padding: 25px 35px;
-    border-radius: 4px;
+    background-color: rgba(247, 244, 235, 0.03);
+    border: 1px solid rgba(235, 220, 185, 0.12);
+    padding: 30px 25px;
     text-decoration: none;
     color: #f7f4eb;
-    min-width: 220px;
-    transition: all 0.3s ease;
+    min-width: 230px;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Efecto elegante al pasar el cursor */
 .contact-card:hover {
     background-color: #f7f4eb;
     color: #095a35;
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    border-color: #f7f4eb;
 }
 
 .contact-icon {
-    font-size: 24px;
+    font-size: 22px;
     display: block;
-    margin-bottom: 12px;
+    margin-bottom: 15px;
 }
 
 .contact-card h4 {
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 2px;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 3px;
     text-transform: uppercase;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
 }
 
 .contact-card p {
     font-size: 11px;
-    font-weight: 300;
-    opacity: 0.8;
+    font-weight: 200;
+    opacity: 0.7;
 }
 
-/* Créditos del final */
 .footer-credits {
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 300;
-    letter-spacing: 2px;
-    opacity: 0.5;
+    letter-spacing: 3px;
+    opacity: 0.4;
     text-transform: uppercase;
-    border-top: 1px solid rgba(247, 244, 235, 0.1);
-    padding-top: 20px;
 }
 
-/* Ajuste móvil */
-@media (max-width: 480px) {
-    .contact-links {
-        flex-direction: column;
-        gap: 15px;
+/* DISPOSITIVOS MÓVILES (Responsivo impecable) */
+@media (max-width: 768px) {
+    .menu-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
     }
-    .contact-card {
-        width: 100%;
+    .kanji-background {
+        font-size: 60vw;
+        right: -20%;
+    }
+    .section-title {
+        font-size: 26px;
+    }
+    .brand-logo {
+        max-width: 170px;
     }
 }
