@@ -95,12 +95,12 @@ body {
    ========================================================================== */
 .hero-section {
     background-color: #095a35; 
-    min-height: auto;          /* Quitamos la altura forzada para que reduzca al mínimo */
+    min-height: auto;             /* Elimina cualquier altura forzada */
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 30px 20px 30px 20px; /* Reducimos el espacio a solo 30px arriba y abajo */
+    padding: 15px 20px;           /* Reduce el espacio vertical al mínimo absoluto */
     position: relative;
 }
 
