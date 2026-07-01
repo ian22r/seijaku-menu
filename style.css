@@ -352,3 +352,61 @@ body {
         max-width: 170px;
     }
 }
+/* ==========================================================================
+   ESTILO DE IMÁGENES GOURMET (PREMIUM)
+   ========================================================================== */
+
+/* Contenedor del platillo cuando lleva foto */
+.menu-item.item-with-image {
+    display: flex;
+    flex-direction: row; /* Foto a la izquierda, texto a la derecha */
+    gap: 25px;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.4); /* Fondo sutil para enmarcar */
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(225, 219, 207, 0.5);
+}
+
+/* Envoltorio de la foto para controlar proporciones exactas */
+.item-image-wrapper {
+    width: 110px;
+    height: 110px;
+    flex-shrink: 0; /* Evita que la foto se comprima */
+    overflow: hidden;
+    border-radius: 6px;
+    background-color: #ebdcb9; /* Fondo elegante mientras carga */
+}
+
+/* La foto en sí */
+.item-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Recorta la imagen perfectamente estilo Instagram sin deformarla */
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Efecto zen al pasar el mouse o tocar la pantalla */
+.menu-item.item-with-image:hover .item-photo {
+    transform: scale(1.06); /* Zoom ultra sutil elegante */
+}
+
+/* Contenedor del texto al lado de la foto */
+.item-details {
+    flex-grow: 1;
+}
+
+/* RESPONSIVO: En celulares la foto se acomoda arriba de forma estética */
+@media (max-width: 480px) {
+    .menu-item.item-with-image {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        padding: 12px;
+    }
+    
+    .item-image-wrapper {
+        width: 100%;
+        height: 180px; /* Foto horizontal elegante en celular */
+    }
+}
