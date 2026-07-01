@@ -410,3 +410,75 @@ body {
         height: 180px; /* Foto horizontal elegante en celular */
     }
 }
+/* Sección Horarios y Entrega */
+.info-delivery-section {
+    background-color: #fcfbf7; /* Mantiene el fondo claro y limpio de tu carta */
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.info-container {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.info-block {
+    flex: 1;
+    min-width: 250px;
+}
+
+.info-block h3 {
+    font-family: 'Playfair Display', serif; /* O la tipografía elegante que uses */
+    color: #095a35; /* Tu verde exacto corporativo */
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.info-block p {
+    margin: 5px 0;
+    color: #4a4a4a;
+    font-size: 1.1rem;
+}
+
+.info-block .days, .info-block .delivery-zone {
+    font-weight: bold;
+}
+
+.info-block .hours {
+    color: #bc9654; /* Un dorado o color secundario sutil si manejas, o déjalo en negro */
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.info-block .notes {
+    font-size: 0.9rem;
+    color: #8c8c8c;
+    font-style: italic;
+    margin-top: 8px;
+}
+
+.info-divider {
+    width: 1px;
+    height: 80px;
+    background-color: #095a35;
+    opacity: 0.2;
+}
+
+/* Ajuste para pantallas de celulares */
+@media (max-width: 768px) {
+    .info-container {
+        flex-direction: column;
+    }
+    .info-divider {
+        width: 50px;
+        height: 1px;
+        margin: 10px auto;
+    }
+}
