@@ -566,3 +566,75 @@ body {
         margin-top: 15px;
     }
 }
+/* ==========================================================================
+   CORRECCIÓN FINAL DE ALINEACIÓN Y DISEÑO MÓVIL SEIJAKU
+   ========================================================================== */
+
+/* Asegurar que el contenedor verde ordene sus elementos uno abajo del otro */
+.hero-section, .hero-container {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    width: 100% !important;
+    box-sizing: border-box;
+}
+
+/* Restablecer tamaño de la mascota en móviles para que no se corte */
+.hero-logo {
+    max-width: 140px; /* Ajusta según el tamaño original de tu diseño */
+    height: auto;
+    margin: 0 auto 15px auto !important;
+    display: block !important;
+}
+
+/* Nueva sección editorial sobre fondo crema */
+.brand-story-section {
+    background-color: #f7f4eb; /* Tu crema mate */
+    padding: 60px 24px;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.story-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.story-legend {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.9;
+    color: #333a35; /* Gris premium */
+    letter-spacing: 0.5px;
+    margin: 0;
+}
+
+.story-legend strong {
+    font-weight: 500;
+    color: #095a35; /* Tu verde matcha */
+    font-style: normal;
+}
+
+.story-dot-divider {
+    width: 5px;
+    height: 5px;
+    background-color: rgba(9, 90, 53, 0.25);
+    border-radius: 50%;
+    margin: 25px auto 0 auto;
+}
+
+/* Ajuste específico para pantallas muy pequeñas de celulares */
+@media (max-width: 480px) {
+    .brand-story-section {
+        padding: 45px 20px;
+    }
+    .story-legend {
+        font-size: 12.5px;
+        line-height: 1.8;
+    }
+}
