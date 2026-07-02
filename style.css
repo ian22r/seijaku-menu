@@ -95,35 +95,33 @@ body {
 }
 
 /* ==========================================================================
-   HERO / ENTRADA ZEN DE MARCA (REPARACIÓN DE BALANCE Y CENTRADO)
+   HERO / ENTRADA ZEN DE MARCA (DISEÑO ORIGINAL RECUPERADO)
    ========================================================================== */
 .hero-section {
     background-color: #095a35; 
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: center !important;
-    align-items: center !important;
-    text-align: center !important;
-    /* Espacio superior saludable para bajar al gato y evitar que se corte */
-    padding: 90px 24px 60px 24px !important; 
+    min-height: auto;             
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* Un colchón arriba de 100px para que el logo libre la barra fija perfectamente */
+    padding: 100px 20px 40px 20px;           
     position: relative;
     width: 100%;
-    box-sizing: border-box;
 }
 
-/* Contenedor del logo */
+/* Efecto contenedor flotante premium para el logo */
 .logo-wrapper {
     background-color: #095a35;
-    padding: 0;
-    display: block;
-    margin: 30px auto 20px auto !important; 
-    max-width: 320px;
-    width: 100%;
+    padding: 10px;
+    display: inline-block;
+    margin-bottom: 25px;
 }
 
 .brand-logo, .hero-logo {
-    width: 100%;      
     max-width: 320px; 
+    width: 100%;      
     height: auto;
     display: block;
     margin: 0 auto;
@@ -134,11 +132,11 @@ body {
     font-style: italic;
     font-size: 18px;
     letter-spacing: 3px;
-    color: #ebdcb9; /* Tono arena / bambú seco */
-    margin: 10px auto 25px auto;
+    color: #ebdcb9; /* Tono arena / bambú seco original restaurado */
+    margin-bottom: 25px;
 }
 
-/* Línea divisoria estilo arquitectura Shoji */
+/* Línea divisoria estilo arquitectura Shoji original */
 .shoji-divider-center {
     width: 60px;
     height: 1px;
@@ -157,17 +155,15 @@ body {
     transform: rotate(45deg);
 }
 
-/* ==========================================================================
-   LEYENDA EDITORIAL - HERO SEIJAKU
-   ========================================================================== */
+/* Leyenda editorial integrada correctamente en el bloque verde */
 .hero-legend {
     font-family: 'Montserrat', sans-serif;
-    font-size: 13.5px;
+    font-size: 13px;
     font-weight: 300;
     line-height: 1.8;
-    color: #f7f4eb; /* Tu crema mate identitario */
+    color: #f7f4eb; /* Crema mate */
     max-width: 580px;
-    margin: 20px auto 0 auto !important;
+    margin: 0 auto;
     text-align: center;
     letter-spacing: 0.5px;
     opacity: 0.95;
@@ -510,21 +506,16 @@ body {
 }
 
 /* ==========================================================================
-   MEDIA QUERIES / RESPONSIVO IMPECABLE STRICTU
+   MEDIA QUERIES / RESPONSIVO IMPECABLE
    ========================================================================== */
 @media (max-width: 768px) {
     .hero-section {
-        /* Reduce los espacios en móviles pero cuida que el logo no choque arriba */
-        padding: 70px 20px 45px 20px !important;
-    }
-    
-    .logo-wrapper {
-        max-width: 145px !important;
-        margin-top: 25px !important;
+        /* En móviles se mantiene arriba seguro libre del menú */
+        padding: 85px 20px 35px 20px;
     }
 
     .brand-logo, .hero-logo {
-        max-width: 145px !important;
+        max-width: 150px; /* Reducción proporcional perfecta para móviles */
     }
 
     .slogan {
@@ -537,7 +528,6 @@ body {
         font-size: 11.5px;
         line-height: 1.7;
         max-width: 90%;
-        margin-top: 15px;
     }
 
     .menu-grid {
@@ -582,6 +572,6 @@ body {
     
     .item-image-wrapper {
         width: 100%;
-        height: 180px; /* Foto horizontal elegante en celular */
+        height: 180px; 
     }
 }
