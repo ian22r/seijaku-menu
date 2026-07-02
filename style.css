@@ -34,6 +34,7 @@ body {
     z-index: -1;
     user-select: none;
 }
+
 /* ==========================================================================
    NAVBAR REFINADA E INVISIBLE (REPARACIÓN DEFINITIVA)
    ========================================================================== */
@@ -94,32 +95,38 @@ body {
 }
 
 /* ==========================================================================
-   HERO / ENTRADA ZEN DE MARCA
+   HERO / ENTRADA ZEN DE MARCA (REPARACIÓN DE BALANCE Y CENTRADO)
    ========================================================================== */
 .hero-section {
     background-color: #095a35; 
-    min-height: auto;             /* Elimina cualquier altura forzada */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 15px 20px;           /* Reduce el espacio vertical al mínimo absoluto */
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+    /* Espacio superior saludable para bajar al gato y evitar que se corte */
+    padding: 90px 24px 60px 24px !important; 
     position: relative;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-/* Efecto contenedor flotante premium para el logo */
+/* Contenedor del logo */
 .logo-wrapper {
     background-color: #095a35;
-    padding: 10px;
-    display: inline-block;
-    margin-bottom: 25px;
+    padding: 0;
+    display: block;
+    margin: 30px auto 20px auto !important; 
+    max-width: 320px;
+    width: 100%;
 }
 
-.brand-logo {
-    max-width: 320px; /* Incrementamos el tamaño aquí */
-    width: 100%;      /* Asegura que use el espacio disponible */
+.brand-logo, .hero-logo {
+    width: 100%;      
+    max-width: 320px; 
     height: auto;
     display: block;
+    margin: 0 auto;
 }
 
 .slogan {
@@ -128,7 +135,7 @@ body {
     font-size: 18px;
     letter-spacing: 3px;
     color: #ebdcb9; /* Tono arena / bambú seco */
-    margin-bottom: 25px;
+    margin: 10px auto 25px auto;
 }
 
 /* Línea divisoria estilo arquitectura Shoji */
@@ -136,7 +143,7 @@ body {
     width: 60px;
     height: 1px;
     background-color: #ebdcb9;
-    margin: 0 auto;
+    margin: 0 auto 25px auto;
     position: relative;
 }
 .shoji-divider-center::before {
@@ -148,6 +155,22 @@ body {
     height: 7px;
     background-color: #ebdcb9;
     transform: rotate(45deg);
+}
+
+/* ==========================================================================
+   LEYENDA EDITORIAL - HERO SEIJAKU
+   ========================================================================== */
+.hero-legend {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13.5px;
+    font-weight: 300;
+    line-height: 1.8;
+    color: #f7f4eb; /* Tu crema mate identitario */
+    max-width: 580px;
+    margin: 20px auto 0 auto !important;
+    text-align: center;
+    letter-spacing: 0.5px;
+    opacity: 0.95;
 }
 
 /* ==========================================================================
@@ -373,12 +396,6 @@ body {
     border-color: #f7f4eb;
 }
 
-.contact-icon {
-    font-size: 22px;
-    display: block;
-    margin-bottom: 15px;
-}
-
 .contact-card h4 {
     font-size: 12px;
     font-weight: 400;
@@ -446,47 +463,6 @@ body {
 }
 
 /* ==========================================================================
-   MEDIA QUERIES / RESPONSIVO IMPECABLE
-   ========================================================================== */
-@media (max-width: 768px) {
-    .menu-grid {
-        grid-template-columns: 1fr;
-        gap: 35px;
-    }
-    .kanji-background {
-        font-size: 60vw;
-        right: -20%;
-    }
-    .section-title {
-        font-size: 26px;
-    }
-    .brand-logo {
-        max-width: 170px;
-    }
-    .info-container {
-        flex-direction: column;
-    }
-    .info-divider {
-        width: 50px;
-        height: 1px;
-        margin: 10px auto;
-    }
-}
-
-@media (max-width: 480px) {
-    .menu-item.item-with-image {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
-        padding: 12px;
-    }
-    
-    .item-image-wrapper {
-        width: 100%;
-        height: 180px; /* Foto horizontal elegante en celular */
-    }
-}
-/* ==========================================================================
    BOTÓN FLOTANTE DE WHATSAPP (ESTILO MINI)
    ========================================================================== */
 .whatsapp-btn {
@@ -511,14 +487,6 @@ body {
     transform: scale(1.1) !important;
 }
 
-@media (max-width: 768px) {
-    .whatsapp-btn {
-        bottom: 20px !important;
-        right: 20px !important;
-        width: 50px !important;
-        height: 50px !important;
-    }
-}
 /* ==========================================================================
    ICONOS OFICIALES PARA LAS TARJETAS DE CONTACTO
    ========================================================================== */
@@ -542,99 +510,78 @@ body {
 }
 
 /* ==========================================================================
-   LEYENDA EDITORIAL - HERO SEIJAKU
+   MEDIA QUERIES / RESPONSIVO IMPECABLE STRICTU
    ========================================================================== */
-.hero-legend {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 13px;
-    font-weight: 300;
-    line-height: 1.8;
-    color: #f7f4eb; /* Tu crema mate identitario */
-    max-width: 580px;
-    margin: 20px auto 0 auto;
-    text-align: center;
-    letter-spacing: 0.5px;
-    opacity: 0.95;
-}
-
-/* Ajuste sutil para que en pantallas de celulares se lea impecable */
 @media (max-width: 768px) {
+    .hero-section {
+        /* Reduce los espacios en móviles pero cuida que el logo no choque arriba */
+        padding: 70px 20px 45px 20px !important;
+    }
+    
+    .logo-wrapper {
+        max-width: 145px !important;
+        margin-top: 25px !important;
+    }
+
+    .brand-logo, .hero-logo {
+        max-width: 145px !important;
+    }
+
+    .slogan {
+        font-size: 15px;
+        letter-spacing: 2px;
+        margin-bottom: 20px;
+    }
+
     .hero-legend {
         font-size: 11.5px;
         line-height: 1.7;
         max-width: 90%;
         margin-top: 15px;
     }
-}
-/* ==========================================================================
-   CORRECCIÓN FINAL DE ALINEACIÓN Y DISEÑO MÓVIL SEIJAKU
-   ========================================================================== */
 
-/* Asegurar que el contenedor verde ordene sus elementos uno abajo del otro */
-.hero-section, .hero-container {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    text-align: center !important;
-    width: 100% !important;
-    box-sizing: border-box;
-}
-
-/* Restablecer tamaño de la mascota en móviles para que no se corte */
-.hero-logo {
-    max-width: 140px; /* Ajusta según el tamaño original de tu diseño */
-    height: auto;
-    margin: 0 auto 15px auto !important;
-    display: block !important;
-}
-
-/* Nueva sección editorial sobre fondo crema */
-.brand-story-section {
-    background-color: #f7f4eb; /* Tu crema mate */
-    padding: 60px 24px;
-    text-align: center;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.story-container {
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.story-legend {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 14px;
-    font-style: italic;
-    font-weight: 300;
-    line-height: 1.9;
-    color: #333a35; /* Gris premium */
-    letter-spacing: 0.5px;
-    margin: 0;
-}
-
-.story-legend strong {
-    font-weight: 500;
-    color: #095a35; /* Tu verde matcha */
-    font-style: normal;
-}
-
-.story-dot-divider {
-    width: 5px;
-    height: 5px;
-    background-color: rgba(9, 90, 53, 0.25);
-    border-radius: 50%;
-    margin: 25px auto 0 auto;
-}
-
-/* Ajuste específico para pantallas muy pequeñas de celulares */
-@media (max-width: 480px) {
-    .brand-story-section {
-        padding: 45px 20px;
+    .menu-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
     }
-    .story-legend {
-        font-size: 12.5px;
-        line-height: 1.8;
+    
+    .kanji-background {
+        font-size: 60vw;
+        right: -20%;
+    }
+    
+    .section-title {
+        font-size: 26px;
+    }
+    
+    .info-container {
+        flex-direction: column;
+    }
+    
+    .info-divider {
+        width: 50px;
+        height: 1px;
+        margin: 10px auto;
+    }
+
+    .whatsapp-btn {
+        bottom: 20px !important;
+        right: 20px !important;
+        width: 50px !important;
+        height: 50px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .menu-item.item-with-image {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        padding: 12px;
+    }
+    
+    .item-image-wrapper {
+        width: 100%;
+        height: 180px; /* Foto horizontal elegante en celular */
     }
 }
