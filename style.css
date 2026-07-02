@@ -94,55 +94,50 @@ body {
     color: #095a35;
 }
 
-/* ==========================================================================
-   HERO / ENTRADA ZEN DE MARCA (DISEÑO ORIGINAL RECUPERADO)
-   ========================================================================== */
 .hero-section {
-    background-color: #095a35; 
-    min-height: auto;             
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    /* Un colchón arriba de 100px para que el logo libre la barra fija perfectamente */
-    padding: 100px 20px 40px 20px;           
+    background-color: #095a35 !important; /* Forzar el verde matcha */
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+    padding: 110px 20px 60px 20px !important; /* Espacio ideal en PC y libre de la barra */
     position: relative;
     width: 100%;
+    box-sizing: border-box;
 }
 
-/* Efecto contenedor flotante premium para el logo */
 .logo-wrapper {
-    background-color: #095a35;
-    padding: 10px;
+    background-color: transparent !important;
+    margin-bottom: 20px !important;
     display: inline-block;
-    margin-bottom: 25px;
 }
 
 .brand-logo, .hero-logo {
-    max-width: 320px; 
-    width: 100%;      
+    max-width: 320px;
+    width: 100%;
     height: auto;
     display: block;
     margin: 0 auto;
 }
 
 .slogan {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 18px;
-    letter-spacing: 3px;
-    color: #ebdcb9; /* Tono arena / bambú seco original restaurado */
-    margin-bottom: 25px;
+    font-family: 'Playfair Display', serif !important;
+    font-style: italic !important;
+    font-size: 20px !important;
+    letter-spacing: 3px !important;
+    color: #ebdcb9 !important; /* Forzar color arena original */
+    margin: 15px auto 25px auto !important;
+    display: block !important;
 }
 
-/* Línea divisoria estilo arquitectura Shoji original */
 .shoji-divider-center {
     width: 60px;
     height: 1px;
-    background-color: #ebdcb9;
-    margin: 0 auto 25px auto;
+    background-color: #ebdcb9 !important;
+    margin: 0 auto 30px auto !important;
     position: relative;
+    display: block;
 }
 .shoji-divider-center::before {
     content: '';
@@ -155,18 +150,35 @@ body {
     transform: rotate(45deg);
 }
 
-/* Leyenda editorial integrada correctamente en el bloque verde */
 .hero-legend {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 13px;
-    font-weight: 300;
-    line-height: 1.8;
-    color: #f7f4eb; /* Crema mate */
-    max-width: 580px;
-    margin: 0 auto;
-    text-align: center;
-    letter-spacing: 0.5px;
-    opacity: 0.95;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 300 !important;
+    line-height: 1.8 !important;
+    color: #f7f4eb !important; /* Forzar crema mate original */
+    max-width: 620px !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+    letter-spacing: 0.5px !important;
+    opacity: 0.95 !important;
+    display: block !important;
+}
+
+/* Ajuste móvil */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 95px 20px 45px 20px !important;
+    }
+    .brand-logo, .hero-logo {
+        max-width: 150px !important;
+    }
+    .slogan {
+        font-size: 16px !important;
+    }
+    .hero-legend {
+        font-size: 12px !important;
+        max-width: 90% !important;
+    }
 }
 
 /* ==========================================================================
