@@ -608,3 +608,37 @@ body {
     vertical-align: middle;
     border-radius: 2px;
 }
+.custom-roll-block {
+    grid-column: 1 / -1; /* Esto hace que la tarjeta ocupe todo el ancho disponible y no se aplaste */
+    border: 1px solid rgba(123, 133, 128, 0.2);
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.01);
+    border-radius: 4px;
+}
+
+.custom-steps {
+    margin-top: 15px;
+    font-size: 13px;
+    line-height: 1.6;
+    text-align: left;
+}
+
+.custom-steps .step {
+    margin-bottom: 8px;
+    color: #7b8580; /* El tono gris/verde elegante de tu paleta */
+}
+
+.custom-steps .step strong {
+    color: #111111; /* O el color oscuro principal de tus títulos */
+}
+
+.badge-new {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #c9a054; /* El dorado de Seijaku */
+    border: 1px solid rgba(201, 160, 84, 0.4);
+    padding: 2px 6px;
+    margin-left: 8px;
+    border-radius: 2px;
+}
