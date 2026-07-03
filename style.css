@@ -620,7 +620,6 @@ body {
         height: 180px; 
     }
 }
-
 /* ==========================================================================
    ESTILOS AGREGADOS: INTERACTIVIDAD DEL CARRITO & MODAL SEIJAKU
    ========================================================================== */
@@ -648,54 +647,52 @@ body {
     border-color: #095a35;
 }
 
-/* Barra flotante inferior */
-.cart-bar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #095a35;
-    color: #f7f4eb;
-    z-index: 9999;
-    box-shadow: 0 -5px 25px rgba(0,0,0,0.15);
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.cart-bar.hidden {
-    transform: translateY(100%);
-}
-
-.cart-bar-content {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 15px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.cart-bar-content p {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 13px;
-    letter-spacing: 1px;
-}
-
-#open-cart-btn {
-    background-color: #ebdcb9;
-    color: #095a35;
-    border: none;
-    padding: 8px 18px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 11px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+/* NUEVO: BOTÓN FLOTANTE CIRCULAR DEL CARRITO */
+.cart-floating-btn {
+    position: fixed !important;
+    bottom: 100px !important; /* Posicionado arriba del botón de WhatsApp para evitar colisiones */
+    right: 30px !important;
+    background-color: #095a35 !important; /* Verde Matcha Identitario */
+    color: #f7f4eb !important;
+    width: 55px !important;
+    height: 55px !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25) !important;
+    z-index: 99999 !important;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease !important;
 }
 
-#open-cart-btn:hover {
-    background-color: #f7f4eb;
+.cart-floating-btn:hover {
+    transform: scale(1.08) !important;
+}
+
+.cart-floating-btn.hidden {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: scale(0.8) translateY(20px) !important;
+}
+
+/* BADGE DORADO DE CONTADOR */
+.cart-count-badge {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    background-color: #c9a054; /* El dorado identitario de Seijaku */
+    color: #1e2923; /* Carbón vegetal para óptimo contraste */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Modal de Checkout */
@@ -710,12 +707,12 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 10000;
+    z-index: 100000; /* Un paso por encima de los botones flotantes */
     transition: opacity 0.3s ease;
 }
 
 .modal.hidden {
-    display: none;
+    display: none !important;
     opacity: 0;
 }
 
@@ -835,4 +832,14 @@ body {
 
 .submit-order-btn:hover {
     background-color: #123d28;
+}
+
+/* RESPONSIVO PARA DISEÑO MÓVIL DE LOS BOTONES */
+@media (max-width: 768px) {
+    .cart-floating-btn {
+        bottom: 85px !important;
+        right: 20px !important;
+        width: 50px !important;
+        height: 50px !important;
+    }
 }

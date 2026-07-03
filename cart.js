@@ -2,10 +2,9 @@
 let cart = [];
 const WHATSAPP_NUMBER = "5217721540533"; // Tu número de Seijaku
 
-// Elementos del DOM
-const cartFloatingBar = document.getElementById('cart-floating-bar');
-const cartCount = document.getElementById('cart-count');
-const openCartBtn = document.getElementById('open-cart-btn');
+// Elementos del DOM actualizados
+const cartFloatingBtn = document.getElementById('cart-floating-btn');
+const cartCountBadge = document.getElementById('cart-count-badge');
 const cartModal = document.getElementById('cart-modal');
 const closeModalBtn = document.getElementById('close-modal-btn');
 const cartItemsList = document.getElementById('cart-items-list');
@@ -34,21 +33,21 @@ function addToCart(name, price) {
     updateCartUI();
 }
 
-// Actualizar barras e indicadores en la pantalla
+// Actualizar el nuevo botón flotante circular e indicadores en la pantalla
 function updateCartUI() {
     const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
     
     if (totalItems > 0) {
-        cartCount.innerText = totalItems;
-        cartFloatingBar.classList.remove('hidden');
+        cartCountBadge.innerText = totalItems;
+        cartFloatingBtn.classList.remove('hidden');
     } else {
-        cartFloatingBar.classList.add('hidden');
+        cartFloatingBtn.classList.add('hidden');
         cartModal.classList.add('hidden');
     }
 }
 
-// Abrir y armar la lista visual del modal
-openCartBtn.addEventListener('click', () => {
+// Función centralizada para armar y renderizar la lista del modal
+function renderCartModal() {
     cartItemsList.innerHTML = '';
     let total = 0;
     
@@ -72,6 +71,11 @@ openCartBtn.addEventListener('click', () => {
     });
     
     cartTotalPrice.innerText = `$${total}`;
+}
+
+// Abrir el modal elegante al pulsar el botón circular flotante
+cartFloatingBtn.addEventListener('click', () => {
+    renderCartModal();
     cartModal.classList.remove('hidden');
 });
 
@@ -80,7 +84,7 @@ window.removeItemFromCart = function(index) {
     cart.splice(index, 1);
     updateCartUI();
     if (cart.length > 0) {
-        openCartBtn.click(); // Refresca visualmente la lista interna
+        renderCartModal(); // Refresca visualmente la lista interna si aún quedan productos
     }
 };
 
