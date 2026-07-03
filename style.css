@@ -587,3 +587,24 @@ body {
         height: 180px; 
     }
 }
+
+/* Estilo para platillos en desarrollo (Próximamente) */
+.menu-item.coming-soon {
+    opacity: 0.5; /* Lo vuelve grisáceo y sutil */
+    pointer-events: none; /* Evita interacciones si tuviera enlaces */
+    user-select: none;
+}
+
+.badge-soon {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #7b8580; /* Gris ceniza a juego con tu paleta */
+    border: 1px solid rgba(123, 133, 128, 0.4);
+    padding: 2px 6px;
+    margin-left: 8px;
+    vertical-align: middle;
+    border-radius: 2px;
+}
