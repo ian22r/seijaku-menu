@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seijaku — Menú Japonés</title>
-    <link rel="stylesheet" href="style.css?v=1.5">
-    <!-- Fuentes premium: Playfair Display para títulos elegantes y Montserrat para lectura limpia -->
+    <link rel="stylesheet" href="style.css?v=1.6">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -26,18 +25,11 @@
 
     <!-- ================= HERO / ENTRADA ZEN ================= -->
     <section class="hero-section">
-        <!-- Contenedor del Gato Mandilón -->
         <div class="logo-wrapper">
             <img src="logo.png" alt="Seijaku Logo" class="brand-logo">
         </div>
-
-        <!-- Eslogan en dorado arena -->
         <p class="slogan">Equilibrio para el alma</p>
-
-        <!-- Línea divisoria Shoji con el rombo -->
         <div class="shoji-divider-center"></div>
-
-        <!-- Leyenda Editorial dentro del bloque verde -->
         <p class="hero-legend">
             En la cultura japonesa, el término <strong>Seijaku</strong> evoca un estado de serenidad y calma en medio del movimiento. Para nosotros, ese concepto es el corazón de cada plato que sale de nuestra cocina.
         </p>
@@ -49,7 +41,7 @@
             
         <!-- CATEGORÍA: ROLLOS -->
         <section class="category-block">
-            <h3 class="category-title">Makimono 巻き物 & Special Rolls</h3>
+            <h3 class="category-title">Makimono 巻き물 & Special Rolls</h3>
             <div class="menu-grid">
                 
                 <!-- California -->
@@ -63,6 +55,7 @@
                             <span class="price">$110</span>
                         </div>
                         <p class="description">Fresco surimi balanceado con pepino crujiente y aguacate cremoso.</p>
+                        <button class="add-to-cart" data-name="California" data-price="110">Añadir al pedido</button>
                     </div>
                 </div>
 
@@ -77,6 +70,7 @@
                             <span class="price">$90</span>
                         </div>
                         <p class="description">Camarón empanizado, queso philadelphia y aguacate, envuelto en finas láminas de pepino y un toque de salsa tamarindo.</p>
+                        <button class="add-to-cart" data-name="Yasai Maki" data-price="90">Añadir al pedido</button>
                     </div>
                 </div>
 
@@ -91,6 +85,7 @@
                             <span class="price">$100</span>
                         </div>
                         <p class="description">Pollo teriyaki de la casa, fusión de queso manchego y philadelphia, coronado con kiwi fresco, fresa y destellos de salsa tamarindo.</p>
+                        <button class="add-to-cart" data-name="Amairo Roll" data-price="100">Añadir al pedido</button>
                     </div>
                 </div>
 
@@ -105,6 +100,7 @@
                             <span class="price">$130</span>
                         </div>
                         <p class="description">Rollo crujiente empanizado relleno de pollo teriyaki, camarón y arrachera; bañado en aderezo artesanal de chipotle o cilantro, cebollín y ajonjolí tostado.</p>
+                        <button class="add-to-cart" data-name="Mar y Tierra" data-price="130">Añadir al pedido</button>
                     </div>
                 </div>
 
@@ -119,6 +115,7 @@
                             <span class="price">$110</span>
                         </div>
                         <p class="description">Interior de camarón empanizado y aguacate, cubierto con una fina capa de kanikama, ajonjolí y nuestra reducción de salsa unagi.</p>
+                        <button class="add-to-cart" data-name="Kani Kani" data-price="110">Añadir al pedido</button>
                     </div>
                 </div>
 
@@ -133,6 +130,7 @@
                             <span class="price">$110</span>
                         </div>
                         <p class="description">Combinación de camarón crujiente, aguacate, queso philadelphia y cangrejo, cubierto de mango maduro y un toque de tamarindo.</p>
+                        <button class="add-to-cart" data-name="Tropical Roll" data-price="110">Añadir al pedido</button>
                     </div>
                 </div>
 
@@ -147,6 +145,7 @@
                             <span class="price">$120</span>
                         </div>
                         <p class="description">Arrachera marinada, queso philadelphia y aguacate, gratinado por fuera con queso manchego, chiles toreados y aderezo chipotle picante.</p>
+                        <button class="add-to-cart" data-name="Harami Roru" data-price="120">Añadir al pedido</button>
                     </div>
                 </div>
 
@@ -161,6 +160,7 @@
                             <span class="price">$110</span>
                         </div>
                         <p class="description">Rollo empanizado clásico con camarón selecto, queso philadelphia y aguacate, cubierto con nuestra icónica pasta tampico y ajonjolí.</p>
+                        <button class="add-to-cart" data-name="Tampico Roll" data-price="110">Añadir al pedido</button>
                     </div>
                 </div>
 
@@ -175,11 +175,12 @@
                             <span class="price">$125</span>
                         </div>
                         <p class="description">Jugoso pollo teriyaki, queso manchego y aguacate, envuelto en una suave capa de queso philadelphia, fresa natural y reducción de tamarindo.</p>
+                        <button class="add-to-cart" data-name="Toriniku Roll" data-price="125">Añadir al pedido</button>
                     </div>
                 </div>
 
-                <!-- Ebi crunch Roll -->
-                <div class="menu-item item-with-image">
+                <!-- Ebi crunch Roll (Próximamente) -->
+                <div class="menu-item item-with-image coming-soon">
                     <div class="item-image-wrapper">
                         <img src="ebi.png" alt="Ebi crunch Roll" class="item-photo">
                     </div>
@@ -203,9 +204,11 @@
                     </p>
                     <div class="custom-steps">
                         <div class="step"><strong>Paso 1 (Cubierta):</strong> Empanizado, Ajonjolí, Aguacate, Queso Cream, Mango, Fresa o Kiwi.</div>
-                        <div class="step"><strong>Paso 2 (Relleno - Elige 3):</strong> Queso Philadelphia, Pepino, Aguacate, Camarón, Kani (Cangrejo), Salmón, Atún, Pollo Teriyaki o arrachera.</div>
-                        <div class="step"><strong>Paso 3 (Toppings & Salsas):</strong> Tampico, Cebollín, Salsa Anguila, Salsa Teriyaki, Salsa tamarindo, Umai Chili Glaze, Aderezo chipotle, Sweet spicy o Aderezo chipotle.</div>
+                        <div class="step"><strong>Paso 2 (Relleno):</strong> Elige tus 3 variantes favoritas.</div>
+                        <div class="step"><strong>Paso 3 (Toppings & Salsas):</strong> Salsas y aderezos premium de la casa.</div>
                     </div>
+                    <!-- Nota: Se puede agregar como item base, el cliente especifica detalles por mensaje -->
+                    <button class="add-to-cart" data-name="Arma tu Rollo Personalizado" data-price="145" style="margin-top: 15px;">Añadir Rollo Personalizado</button>
                 </div>
             </div>
         </section>
@@ -226,6 +229,7 @@
                             <span class="price">$55</span>
                         </div>
                         <p class="description">Empanadillas japonesas doradas a la plancha, rellenas de carne de cerdo seleccionada y vegetales finos con soya sazonada.</p>
+                        <button class="add-to-cart" data-name="Gyozas (5 pzas)" data-price="55">Añadir al pedido</button>
                     </div>
                 </div>
 
@@ -240,10 +244,11 @@
                             <span class="price">$75</span>
                         </div>
                         <p class="description">Brochetas tradicionales de muslo de pollo glaseadas en salsa tare dulce, intercaladas con cebollín asado.</p>
+                        <button class="add-to-cart" data-name="Yakitoris (3 pzas)" data-price="75">Añadir al pedido</button>
                     </div>
                 </div>
 
-                <!-- Kushiages -->
+                <!-- Kushiages (Precios base individuales para automatización limpia) -->
                 <div class="menu-item item-with-image">
                     <div class="item-image-wrapper">
                         <img src="kushiagues.png" alt="Kushiages" class="item-photo">
@@ -251,9 +256,15 @@
                     <div class="item-details">
                         <div class="item-header">
                             <h4>Kushiages <span class="detail-count">(3 pzas.)</span></h4>
-                            <span class="price">Varía</span>
+                            <span class="price">Desde $55</span>
                         </div>
-                        <p class="description">Brochetas empanizadas en panko crujiente. Opciones: Plátano ($55) • Queso ($65) • Camarón ($70) • Combinado ($60).</p>
+                        <p class="description">Brochetas empanizadas en panko crujiente. Selecciona tu favorita:</p>
+                        <div style="display:flex; flex-wrap:wrap; gap:5px; margin-top:8px;">
+                            <button class="add-to-cart-variant" data-name="Kushiages Plátano" data-price="55">Plátano $55</button>
+                            <button class="add-to-cart-variant" data-name="Kushiages Queso" data-price="65">Queso $65</button>
+                            <button class="add-to-cart-variant" data-name="Kushiages Camarón" data-price="70">Camarón $70</button>
+                            <button class="add-to-cart-variant" data-name="Kushiages Combinado" data-price="60">Mixto $60</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -275,10 +286,11 @@
                             <span class="price">$120</span>
                         </div>
                         <p class="description">Caldo artesanal profundo servido con panceta de cerdo braseada (chashu), huevo tierno marinado ajitsuke tamago, setas shiitake y cebollín.</p>
+                        <button class="add-to-cart" data-name="Tonkotsu Ramen" data-price="120">Añadir al pedido</button>
                     </div>
                 </div>
 
-                <!-- Yakimeshi Tradicional -->
+                <!-- Yakimeshi -->
                 <div class="menu-item item-with-image">
                     <div class="item-image-wrapper">
                         <img src="yakimeshi.png" alt="Yakimeshi" class="item-photo">
@@ -286,9 +298,15 @@
                     <div class="item-details">
                         <div class="item-header">
                             <h4>Yakimeshi Tradicional</h4>
-                            <span class="price">Varía</span>
+                            <span class="price">Desde $80</span>
                         </div>
-                        <p class="description">Arroz gohan salteado al wok con verduras selectas. Proteínas: Pollo ($80) • Camarón ($90) • Arrachera ($90) • Mixto ($100).</p>
+                        <p class="description">Arroz gohan salteado al wok con verduras selectas. Elige proteína:</p>
+                        <div style="display:flex; flex-wrap:wrap; gap:5px; margin-top:8px;">
+                            <button class="add-to-cart-variant" data-name="Yakimeshi Pollo" data-price="80">Pollo $80</button>
+                            <button class="add-to-cart-variant" data-name="Yakimeshi Camarón" data-price="90">Camarón $90</button>
+                            <button class="add-to-cart-variant" data-name="Yakimeshi Arrachera" data-price="90">Arrachera $90</button>
+                            <button class="add-to-cart-variant" data-name="Yakimeshi Mixto" data-price="100">Mixto $100</button>
+                        </div>
                     </div>
                 </div>
 
@@ -303,6 +321,7 @@
                             <span class="price">$110</span>
                         </div>
                         <p class="description">Cortes finos de res preparados a la plancha de alta temperatura, acompañados de vegetales crujientes texturizados y base de arroz gohan natural.</p>
+                        <button class="add-to-cart" data-name="Teppanyaki de Res" data-price="110">Añadir al pedido</button>
                     </div>
                 </div>
             </div>
@@ -324,6 +343,7 @@
                             <span class="price">$60</span>
                         </div>
                         <p class="description">Pasteles de arroz glutinoso de textura sedosa y elástica, rellenos de helado premium: Fresa o Mango.</p>
+                        <button class="add-to-cart" data-name="Mochis Artesanales" data-price="60">Añadir al pedido</button>
                     </div>
                 </div>
 
@@ -338,37 +358,65 @@
                             <span class="price">$70</span>
                         </div>
                         <p class="description">Bebida láctica tradicional japonesa, refrescante y ligera, infusionada con concentrados naturales: Mora Azul, Fresa o Kiwi.</p>
+                        <button class="add-to-cart" data-name="Calpis de la Casa" data-price="70">Añadir al pedido</button>
                     </div>
                 </div>
 
-                <!-- Boba de Taro (Próximamente) -->
+                <!-- Boba de Taro -->
                 <div class="menu-item coming-soon">
                     <div class="item-header">
                         <h4>Ice Blended Taro Boba <span class="badge-soon">Próximamente</span></h4>
                         <span class="price">$--</span>
                     </div>
-                    <p class="description">
-                        Nuestra versión frappé de taro premium: una mezcla cremosa y helada con sutiles matices de vainilla, combinada con la textura única de perlas de tapioca endulzadas con jarabe natural.
-                    </p>
+                    <p class="description">Nuestra versión frappé de taro premium.</p>
                 </div>
             </div>
         </section>
     </main>
 
+    <!-- BARRA FLOTANTE DEL CARRITO (EMERGE CUANDO HAY ELEMENTOS) -->
+    <div id="cart-floating-bar" class="cart-bar hidden">
+        <div class="cart-bar-content">
+            <p><i class="fas fa-shopping-basket"></i> <span id="cart-count">0</span> productos añadidos</p>
+            <button id="open-cart-btn">Ver mi pedido</button>
+        </div>
+    </div>
+
+    <!-- MODAL ELEGANTE DEL CARRITO & FORMULARIO -->
+    <div id="cart-modal" class="modal hidden">
+        <div class="modal-content">
+            <span id="close-modal-btn" class="close-modal">&times;</span>
+            <h3 class="modal-title">Tu Pedido Seijaku</h3>
+            <div id="cart-items-list" class="cart-items-list">
+                <!-- Se llena dinámicamente con JS -->
+            </div>
+            <div class="cart-total-block">
+                <span>Total estimado:</span>
+                <span id="cart-total-price" class="total-price">$0</span>
+            </div>
+            
+            <div class="shoji-divider-center" style="margin: 20px auto 15px auto;"></div>
+            
+            <h4 class="form-title">Datos de Entrega (Ixmiquilpan)</h4>
+            <form id="checkout-form" class="checkout-form">
+                <input type="text" id="client-name" placeholder="Tu Nombre Completo" required>
+                <input type="tel" id="client-phone" placeholder="Número de Teléfono (WhatsApp)" required>
+                <textarea id="client-address" placeholder="Dirección Exacta de Entrega (Calle, Colonia, Referencias)" rows="3" required></textarea>
+                <button type="submit" class="submit-order-btn">Confirmar y enviar por WhatsApp</button>
+            </form>
+        </div>
+    </div>
+
     <!-- SECCIÓN DE HORARIOS Y REPARTO -->
     <section class="info-delivery-section">
         <div class="info-container">
-            <!-- Bloque de Horarios -->
             <div class="info-block" id="horarios">
                 <h3>Horario de Servicio</h3>
                 <p class="days">Miércoles a Lunes</p>
                 <p class="hours">1:00 PM – 10:00 PM</p>
                 <p class="notes">Martes: Cerrado</p>
             </div>
-            
             <div class="info-divider"></div>
-            
-            <!-- Bloque de Reparto -->
             <div class="info-block" id="reparto">
                 <h3>Zona de Reparto</h3>
                 <p class="delivery-zone">Ixmiquilpan</p>
@@ -383,7 +431,6 @@
         <div class="contact-container">
             <h3 class="contact-title">Contacto &amp; Pedidos</h3>
             <p class="contact-subtitle">Elige tu canal preferido para ordenar o seguir nuestro viaje gastronómico</p>
-            
             <div class="contact-links">
                 <a href="https://wa.me/5217721540533" target="_blank" class="contact-card">
                     <i class="fab fa-whatsapp contact-icon" style="font-size: 28px; margin-bottom: 15px; display: inline-block;"></i>
@@ -406,16 +453,17 @@
                     <p>Consultas y eventos</p>
                 </a>
             </div>
-
             <div class="shoji-divider-center" style="opacity: 0.2; margin-bottom: 20px;"></div>
             <p class="footer-credits">© 2026 Seijaku • Gastronomía Japonesa Balanceada</p>
         </div>
     </footer>
 
-    <!-- Botón Flotante de WhatsApp con Icono Oficial -->
+    <!-- Botón Flotante de WhatsApp -->
     <a href="https://wa.me/5217721540533" class="whatsapp-btn" target="_blank" rel="noopener noreferrer">
         <i class="fab fa-whatsapp" style="font-size: 28px;"></i>
     </a>
 
+    <!-- LÓGICA DE PROGRAMACIÓN DEL CARRITO -->
+    <script src="cart.js"></script>
 </body>
 </html>
