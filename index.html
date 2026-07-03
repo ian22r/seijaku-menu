@@ -192,48 +192,64 @@
                         <p class="description">Relleno de camarón empanizado y aguacate, cubierto por fuera con láminas de salmón fresco, coronado con hilos de surimi crujiente y un hilo de salsa Umai Chili Glaze.</p>
                     </div>
                 </div>
+<!-- Arma tu rollo -->
+<div class="menu-item custom-roll-block">
+    <div class="item-header">
+        <h4>Arma tu rollo <span class="badge-new">Personalizado</span></h4>
+        <span class="price">$145</span>
+    </div>
+    <p class="description">
+        Diseña tu combinación perfecta seleccionando tus ingredientes favoritos basándote en nuestra barra de especialidades.
+    </p>
+    
+    <!-- Selectores minimalistas integrados -->
+    <div class="custom-roll-selectors" style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+        <div>
+            <label style="font-size: 11px; letter-spacing: 1px; color: #095a35; display:block; margin-bottom:4px;">1. CUBIERTA / EXTERIOR:</label>
+            <select id="custom-cover" onchange="updateCustomRollData()" style="width:100%; padding: 8px; background: rgba(255,255,255,0.8); border: 1px solid rgba(140, 150, 144, 0.4); font-family: 'Montserrat'; font-size: 12px;">
+                <option value="Empanizado">Empanizado tradicional</option>
+                <option value="Ajonjolí">Ajonjolí tostado</option>
+                <option value="Aguacate">Láminas de Aguacate</option>
+                <option value="Queso Cream">Queso Philadelphia</option>
+                <option value="Queso Manchego Flameado">Queso manchego flameado</option>
+                <option value="Mango">Mango</option>
+                <option value="Fresa">Fresa</option>
+                <option value="Kiwi">Kiwi</option>
+                <option value="Surimi Tempurizado">Tiras de surimi tempurizado</option>
+            </select>
+        </div>
+        <div>
+            <label style="font-size: 11px; letter-spacing: 1px; color: #095a35; display:block; margin-bottom:4px;">2. RELLENOS (Escribe tus 3 favoritos):</label>
+            <input type="text" id="custom-fillings" oninput="updateCustomRollData()" placeholder="Ej. Camarón, Arrachera, Queso Manchego" style="width:100%; padding: 8px; background: rgba(255,255,255,0.8); border: 1px solid rgba(140, 150, 144, 0.4); font-family: 'Montserrat'; font-size: 12px; outline:none;">
+        </div>
+        <div>
+            <label style="font-size: 11px; letter-spacing: 1px; color: #095a35; display:block; margin-bottom:4px;">3. TOPPINGS & SALSAS:</label>
+            <input type="text" id="custom-sauces" oninput="updateCustomRollData()" placeholder="Ej. Salsa Unagi, Pasta Tampico, Chipotle" style="width:100%; padding: 8px; background: rgba(255,255,255,0.8); border: 1px solid rgba(140, 150, 144, 0.4); font-family: 'Montserrat'; font-size: 12px; outline:none;">
+        </div>
+    </div>
 
-                <!-- Arma tu rollo -->
-            <div class="menu-item custom-roll-block">
-                <div class="item-header">
-                    <h4>Arma tu rollo <span class="badge-new">Personalizado</span></h4>
-                    <span class="price">$145</span>
-                </div>
-                <p class="description">
-                    Diseña tu combinación perfecta seleccionando tus ingredientes favoritos basándote en nuestra barra de especialidades.
-                </p>
-                
-                <!-- NUEVO: Selectores minimalistas integrados -->
-                <div class="custom-roll-selectors" style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
-                    <div>
-                        <label style="font-size: 11px; letter-spacing: 1px; color: #095a35; display:block; margin-bottom:4px;">1. CUBIERTA / EXTERIOR:</label>
-                        <select id="custom-cover" style="width:100%; padding: 8px; background: rgba(255,255,255,0.8); border: 1px solid rgba(140, 150, 144, 0.4); font-family: 'Montserrat'; font-size: 12px;">
-                            <option value="Empanizado">Empanizado tradicional</option>
-                            <option value="Ajonjolí">Ajonjolí tostado</option>
-                            <option value="Aguacate">Láminas de Aguacate</option>
-                            <option value="Queso Cream">Queso Philadelphia</option>
-                            <option value="Queso Cream">Queso manchego flameado</option>
-                            <option value="Mango">Mango</option>
-                            <option value="Fresa">Fresa</option>
-                            <option value="Kiwi">Kiwi</option>
-                            <option value="Fresa">Tiras de surimi tempurizado</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label style="font-size: 11px; letter-spacing: 1px; color: #095a35; display:block; margin-bottom:4px;">2. RELLENOS (Escribe tus 3 favoritos):</label>
-                        <input type="text" id="custom-fillings" placeholder="Ej. Camarón, Arrachera, Queso Manchego" style="width:100%; padding: 8px; background: rgba(255,255,255,0.8); border: 1px solid rgba(140, 150, 144, 0.4); font-family: 'Montserrat'; font-size: 12px; outline:none;">
-                    </div>
-                    <div>
-                        <label style="font-size: 11px; letter-spacing: 1px; color: #095a35; display:block; margin-bottom:4px;">3. TOPPINGS & SALSAS:</label>
-                        <input type="text" id="custom-sauces" placeholder="Ej. Salsa Unagi, Pasta Tampico, Chipotle" style="width:100%; padding: 8px; background: rgba(255,255,255,0.8); border: 1px solid rgba(140, 150, 144, 0.4); font-family: 'Montserrat'; font-size: 12px; outline:none;">
-                    </div>
-                </div>
+    <!-- BOTÓN OPTIMIZADO (Con precio fijo y nombre dinámico inicializado) -->
+    <button id="add-custom-roll-btn" class="add-to-cart" data-name="Rollo Personalizado (Cubierta: Empanizado | Rellenos: Por especificar)" data-price="145" style="margin-top: 15px; width: 100%; text-align: center; justify-content: center; display: flex;">
+        Añadir Rollo Personalizado
+    </button>
+</div>
 
-                <!-- BOTÓN MODIFICADO (id único para controlarlo con JS) -->
-                <button id="add-custom-roll-btn" class="add-to-cart" style="margin-top: 15px; width: 100%; text-align: center; justify-content: center; display: flex;">
-                    Añadir Rollo Personalizado
-                </button>
-            </div>
+<!-- Función en línea para actualizar los ingredientes en el botón de forma automática -->
+<script>
+function updateCustomRollData() {
+    const cover = document.getElementById('custom-cover').value;
+    const fillings = document.getElementById('custom-fillings').value.trim() || 'Por especificar';
+    const sauces = document.getElementById('custom-sauces').value.trim();
+    const btn = document.getElementById('add-custom-roll-btn');
+    
+    let fullName = `Rollo Personalizado (Cubierta: ${cover} | Rellenos: ${fillings}`;
+    if(sauces) fullName += ` | Salsas: ${sauces}`;
+    fullName += `)`;
+    
+    // Le inyectamos el nombre detallado al atributo nativo que lee tu carrito
+    btn.setAttribute('data-name', fullName);
+}
+</script>
                         </div>
                     </section>
 
