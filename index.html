@@ -389,21 +389,32 @@
                 </div>
             </div>
 
-                <!-- Calpis de la Casa -->
-                <div class="menu-item item-with-image">
-                    <div class="item-image-wrapper">
-                        <img src="calpis.png" alt="Calpis de la Casa" class="item-photo">
-                    </div>
-                    <div class="item-details">
-                        <div class="item-header">
-                            <h4>Calpis de la Casa</h4>
-                            <span class="price">$70</span>
-                        </div>
-                        <p class="description">Bebida láctica tradicional japonesa, refrescante y ligera, infusionada con concentrados naturales: Mora Azul, Fresa, Kiwi, Frutos rojos, mango y durazno.</p>
-                        <button class="add-to-cart" data-name="Calpis de la Casa" data-price="70">Añadir al pedido</button>
-                    </div>
-                </div>
+               <!-- Calpis de la Casa -->
+<div class="menu-item item-with-image">
+    <div class="item-image-wrapper">
+        <img src="calpis.png" alt="Calpis de la Casa" class="item-photo">
+    </div>
+    <div class="item-details">
+        <div class="item-header">
+            <h4>Calpis de la Casa</h4>
+            <span class="price">$70</span>
+        </div>
+        <p class="description">Bebida láctica tradicional japonesa, refrescante y ligera, infusionada con concentrados naturales: Mora Azul, Fresa, Kiwi, Frutos rojos, mango y durazno.</p>
+        
+        <!-- Selector de sabor (Mantiene tu diseño limpio) -->
+        <select onchange="this.nextElementSibling.setAttribute('data-name', 'Calpis de la Casa (' + this.value + ')')" style="width: 100%; padding: 6px; margin-bottom: 10px; background: rgba(255,255,255,0.8); border: 1px solid rgba(140, 150, 144, 0.4); font-family: 'Montserrat', sans-serif; font-size: 12px; outline: none;">
+            <option value="Mora Azul">Mora Azul</option>
+            <option value="Fresa">Fresa</option>
+            <option value="Kiwi">Kiwi</option>
+            <option value="Frutos Rojos">Frutos rojos</option>
+            <option value="Mango">Mango</option>
+            <option value="Durazno">Durazno</option>
+        </select>
 
+        <!-- Tu botón original modificado únicamente con el valor inicial por defecto -->
+        <button class="add-to-cart" data-name="Calpis de la Casa (Mora Azul)" data-price="70">Añadir al pedido</button>
+    </div>
+</div>
                 <!-- Boba de Taro -->
                 <div class="menu-item coming-soon">
                     <div class="item-header">
