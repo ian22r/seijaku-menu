@@ -194,21 +194,44 @@
                 </div>
 
                 <!-- Arma tu rollo -->
-                <div class="menu-item custom-roll-block">
-                    <div class="item-header">
-                        <h4>Arma tu rollo <span class="badge-new">Personalizado</span></h4>
-                        <span class="price">$145</span>
-                    </div>
-                    <p class="description">
-                        Diseña tu combinación perfecta en 3 pasos, seleccionando tus ingredientes favoritos basándote en nuestra barra de especialidades.
-                    </p>
-                    <div class="custom-steps">
-                        <div class="step"><strong>Paso 1 (Cubierta):</strong> Empanizado, Ajonjolí, Aguacate, Queso Cream, Mango, Fresa o Kiwi.</div>
-                        <div class="step"><strong>Paso 2 (Relleno):</strong> Elige tus 3 variantes favoritas.</div>
-                        <div class="step"><strong>Paso 3 (Toppings & Salsas):</strong> Salsas y aderezos premium de la casa.</div>
-                    </div>
-                    <button class="add-to-cart" data-name="Arma tu Rollo Personalizado" data-price="145" style="margin-top: 15px;">Añadir Rollo Personalizado</button>
-                </div>
+<div class="menu-item custom-roll-block">
+    <div class="item-header">
+        <h4>Arma tu rollo <span class="badge-new">Personalizado</span></h4>
+        <span class="price">$145</span>
+    </div>
+    <p class="description">
+        Diseña tu combinación perfecta seleccionando tus ingredientes favoritos basándote en nuestra barra de especialidades.
+    </p>
+    
+    <!-- NUEVO: Selectores minimalistas integrados -->
+    <div class="custom-roll-selectors" style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+        <div>
+            <label style="font-size: 11px; letter-spacing: 1px; color: #095a35; display:block; margin-bottom:4px;">1. CUBIERTA / EXTERIOR:</label>
+            <select id="custom-cover" style="width:100%; padding: 8px; background: rgba(255,255,255,0.8); border: 1px solid rgba(140, 150, 144, 0.4); font-family: 'Montserrat'; font-size: 12px;">
+                <option value="Empanizado">Empanizado tradicional</option>
+                <option value="Ajonjolí">Ajonjolí tostado</option>
+                <option value="Aguacate">Láminas de Aguacate</option>
+                <option value="Queso Cream">Queso Philadelphia</option>
+                <option value="Mango">Mango Maduro</option>
+                <option value="Fresa">Fresa Natural</option>
+                <option value="Kiwi">Kiwi Fresco</option>
+            </select>
+        </div>
+        <div>
+            <label style="font-size: 11px; letter-spacing: 1px; color: #095a35; display:block; margin-bottom:4px;">2. RELLENOS (Escribe tus 3 favoritos):</label>
+            <input type="text" id="custom-fillings" placeholder="Ej. Camarón, Arrachera, Queso Manchego" style="width:100%; padding: 8px; background: rgba(255,255,255,0.8); border: 1px solid rgba(140, 150, 144, 0.4); font-family: 'Montserrat'; font-size: 12px; outline:none;">
+        </div>
+        <div>
+            <label style="font-size: 11px; letter-spacing: 1px; color: #095a35; display:block; margin-bottom:4px;">3. TOPPINGS & SALSAS:</label>
+            <input type="text" id="custom-sauces" placeholder="Ej. Salsa Unagi, Pasta Tampico, Chipotle" style="width:100%; padding: 8px; background: rgba(255,255,255,0.8); border: 1px solid rgba(140, 150, 144, 0.4); font-family: 'Montserrat'; font-size: 12px; outline:none;">
+        </div>
+    </div>
+
+    <!-- BOTÓN MODIFICADO (id único para controlarlo con JS) -->
+    <button id="add-custom-roll-btn" class="add-to-cart" style="margin-top: 15px; width: 100%; text-align: center; justify-content: center; display: flex;">
+        Añadir Rollo Personalizado
+    </button>
+</div>
             </div>
         </section>
 

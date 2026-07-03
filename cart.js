@@ -11,6 +11,40 @@ const cartItemsList = document.getElementById('cart-items-list');
 const cartTotalPrice = document.getElementById('cart-total-price');
 const checkoutForm = document.getElementById('checkout-form');
 
+// NUEVO: Manejador específico para el Rollo Personalizado
+const addCustomRollBtn = document.getElementById('add-custom-roll-btn');
+
+if (addCustomRollBtn) {
+    addCustomRollBtn.addEventListener('click', () => {
+        const cover = document.getElementById('custom-cover').value;
+        const fillings = document.getElementById('custom-fillings').value.trim();
+        const sauces = document.getElementById('custom-sauces').value.trim();
+        
+        // Validación rápida para que no lo agreguen completamente vacío
+        if (!fillings) {
+            alert("Por favor, escribe al menos un ingrediente para el relleno de tu rollo.");
+            return;
+        }
+        
+        // Estructuramos el nombre detallado que verá tanto el cliente como tú en WhatsApp
+        const customRollName = `Rollo Personalizado (Cubierta: ${cover} | Relleno: ${fillings} ${sauces ? '| Salsas: ' + sauces : ''})`;
+        const customRollPrice = 145;
+        
+        // Lo añadimos al carrito usando la función existente
+        addToCart(customRollName, customRollPrice);
+        
+        // Limpiamos los inputs de texto para que puedan armar otro si quieren
+        document.getElementById('custom-fillings').value = '';
+        document.getElementById('custom-sauces').value = '';
+        
+        // Efecto visual sutil de éxito
+        addCustomRollBtn.innerText = "¡Añadido con éxito! 🍱";
+        setTimeout(() => {
+            addCustomRollBtn.innerText = "Añadir Rollo Personalizado";
+        }, 1500);
+    });
+}
+
 // Escuchas para añadir elementos (General y Variantes)
 document.querySelectorAll('.add-to-cart, .add-to-cart-variant').forEach(button => {
     button.addEventListener('click', (e) => {
