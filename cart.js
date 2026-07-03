@@ -11,43 +11,41 @@ const cartItemsList = document.getElementById('cart-items-list');
 const cartTotalPrice = document.getElementById('cart-total-price');
 const checkoutForm = document.getElementById('checkout-form');
 
-// NUEVO: Manejador específico para el Rollo Personalizado
-const addCustomRollBtn = document.getElementById('add-custom-roll-btn');
-
-if (addCustomRollBtn) {
-    addCustomRollBtn.addEventListener('click', () => {
-        const cover = document.getElementById('custom-cover').value;
-        const fillings = document.getElementById('custom-fillings').value.trim();
-        const sauces = document.getElementById('custom-sauces').value.trim();
-        
-        // Validación rápida para que no lo agreguen completamente vacío
-        if (!fillings) {
-            alert("Por favor, escribe al menos un ingrediente para el relleno de tu rollo.");
-            return;
-        }
-        
-        // Estructuramos el nombre detallado que verá tanto el cliente como tú en WhatsApp
-        const customRollName = `Rollo Personalizado (Cubierta: ${cover} | Relleno: ${fillings} ${sauces ? '| Salsas: ' + sauces : ''})`;
-        const customRollPrice = 145;
-        
-        // Lo añadimos al carrito usando la función existente
-        addToCart(customRollName, customRollPrice);
-        
-        // Limpiamos los inputs de texto para que puedan armar otro si quieren
-        document.getElementById('custom-fillings').value = '';
-        document.getElementById('custom-sauces').value = '';
-        
-        // Efecto visual sutil de éxito
-        addCustomRollBtn.innerText = "¡Añadido con éxito! 🍱";
-        setTimeout(() => {
-            addCustomRollBtn.innerText = "Añadir Rollo Personalizado";
-        }, 1500);
-    });
-}
-
 // Escuchas para añadir elementos (General y Variantes)
 document.querySelectorAll('.add-to-cart, .add-to-cart-variant').forEach(button => {
     button.addEventListener('click', (e) => {
+        // Si es el botón del rollo personalizado, manejamos su propia lógica limpia
+        if (button.id === 'add-custom-roll-btn') {
+            const cover = document.getElementById('custom-cover').value;
+            const fillings = document.getElementById('custom-fillings').value.trim();
+            const sauces = document.getElementById('custom-sauces').value.trim();
+            
+            // Validación para que no lo agreguen completamente vacío
+            if (!fillings) {
+                alert("Por favor, escribe al menos un ingrediente para el relleno de tu rollo.");
+                return;
+            }
+            
+            // Estructuramos el nombre detallado para el carrito y WhatsApp
+            const customRollName = `Rollo Personalizado (Cubierta: ${cover} | Relleno: ${fillings} ${sauces ? '| Salsas: ' + sauces : ''})`;
+            const customRollPrice = 145;
+            
+            addToCart(customRollName, customRollPrice);
+            
+            // Limpiamos los inputs de texto para el siguiente rollo
+            document.getElementById('custom-fillings').value = '';
+            document.getElementById('custom-sauces').value = '';
+            
+            // Efecto visual de éxito
+            button.innerText = "¡Añadido con éxito! 🍱";
+            setTimeout(() => {
+                button.innerText = "Añadir Rollo Personalizado";
+            }, 1500);
+            
+            return; // Detiene la ejecución para que no se duplique
+        }
+
+        // Lógica normal para el resto de los productos de la carta
         const name = button.getAttribute('data-name');
         const price = parseInt(button.getAttribute('data-price'));
         
@@ -136,7 +134,7 @@ checkoutForm.addEventListener('submit', (e) => {
     let total = 0;
     
     // Formateo del mensaje con estilo limpio e inteligible
-    let message = `*✨ NUEVO PEDIDO — SEIJAKU ✨*\n\n`;
+    let message = `*✨ NUEVO PEDIDO — SEIJAKU ✨*\n\n`; //
     message += `*👤 Cliente:* ${name}\n`;
     message += `*📞 Teléfono:* ${phone}\n`;
     message += `*📍 Dirección:* ${address}\n\n`;
