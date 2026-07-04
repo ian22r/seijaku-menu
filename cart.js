@@ -16,25 +16,22 @@ document.querySelectorAll('.add-to-cart, .add-to-cart-variant').forEach(button =
     button.addEventListener('click', (e) => {
         // Si es el botón del rollo personalizado, manejamos su propia lógica limpia
         if (button.id === 'add-custom-roll-btn') {
-            const cover = document.getElementById('custom-cover').value;
-            const fillings = document.getElementById('custom-fillings').value.trim();
-            const sauces = document.getElementById('custom-sauces').value.trim();
+            const name = button.getAttribute('data-name');
+            const price = parseInt(button.getAttribute('data-price'));
             
-            // Validación para que no lo agreguen completamente vacío
-            if (!fillings) {
-                alert("Por favor, escribe al menos un ingrediente para el relleno de tu rollo.");
+            // Validación: Si el data-name tiene el valor por defecto (no han seleccionado nada)
+            if (name === "Rollo Personalizado (Por armar)" || name.includes("Fuera: Ninguna | Dentro: Ninguno | Salsas: Ninguno")) {
+                alert("Por favor, selecciona al menos un ingrediente para armar tu rollo personalizado.");
                 return;
             }
             
-            // Estructuramos el nombre detallado para el carrito y WhatsApp
-            const customRollName = `Rollo Personalizado (Cubierta: ${cover} | Relleno: ${fillings} ${sauces ? '| Salsas: ' + sauces : ''})`;
-            const customRollPrice = 145;
+            addToCart(name, price);
             
-            addToCart(customRollName, customRollPrice);
+            // NUEVO: Desmarcar automáticamente todos los checkboxes del bloque del rollo personalizado
+            document.querySelectorAll('.custom-roll-block input[type="checkbox"]').forEach(cb => cb.checked = false);
             
-            // Limpiamos los inputs de texto para el siguiente rollo
-            document.getElementById('custom-fillings').value = '';
-            document.getElementById('custom-sauces').value = '';
+            // Restaurar el atributo data-name al estado inicial vacío
+            button.setAttribute('data-name', 'Rollo Personalizado (Por armar)');
             
             // Efecto visual de éxito
             button.innerText = "¡Añadido con éxito! 🍱";
@@ -134,7 +131,7 @@ checkoutForm.addEventListener('submit', (e) => {
     let total = 0;
     
     // Formateo del mensaje con estilo limpio e inteligible
-    let message = `*✨ NUEVO PEDIDO — SEIJAKU ✨*\n\n`; //
+    let message = `*✨ NUEVO PEDIDO — SEIJAKU ✨*\n\n`;
     message += `*👤 Cliente:* ${name}\n`;
     message += `*📞 Teléfono:* ${phone}\n`;
     message += `*📍 Dirección:* ${address}\n\n`;
