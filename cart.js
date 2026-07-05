@@ -6,16 +6,16 @@ const WHATSAPP_NUMBER = "5217721540533";
 let cart = [];
 
 // Referencias DOM
-const cartFloatingBtn  = document.getElementById('cart-floating-btn');
-const cartCountBadge   = document.getElementById('cart-count-badge');
-const cartModal        = document.getElementById('cart-modal');
-const closeModalBtn    = document.getElementById('close-modal-btn');
-const cartItemsList    = document.getElementById('cart-items-list');
-const cartTotalPrice   = document.getElementById('cart-total-price');
-const checkoutForm     = document.getElementById('checkout-form');
-const customRollBtn    = document.getElementById('add-custom-roll-btn');
-const calpisSelect     = document.getElementById('calpis-flavor');
-const calpisBtn        = document.getElementById('calpis-btn');
+const cartFloatingBtn = document.getElementById('cart-floating-btn');
+const cartCountBadge  = document.getElementById('cart-count-badge');
+const cartModal       = document.getElementById('cart-modal');
+const closeModalBtn   = document.getElementById('close-modal-btn');
+const cartItemsList   = document.getElementById('cart-items-list');
+const cartTotalPrice  = document.getElementById('cart-total-price');
+const checkoutForm    = document.getElementById('checkout-form');
+const customRollBtn   = document.getElementById('add-custom-roll-btn');
+const calpisSelect    = document.getElementById('calpis-flavor');
+const calpisBtn       = document.getElementById('calpis-btn');
 
 /* ------------------------------------------------------------------
    ROLLO PERSONALIZADO — Validación y construcción del nombre
@@ -47,7 +47,7 @@ function updateCustomRollData() {
 }
 
 // Exponer para los onchange del HTML
-window.validateSection   = validateSection;
+window.validateSection      = validateSection;
 window.updateCustomRollData = updateCustomRollData;
 
 /* ------------------------------------------------------------------
@@ -81,6 +81,7 @@ function feedbackButton(btn, originalText) {
 
 document.querySelectorAll('.add-to-cart, .add-to-cart-variant').forEach(btn => {
     btn.addEventListener('click', () => {
+
         // Rollo personalizado
         if (btn.id === 'add-custom-roll-btn') {
             const name = btn.getAttribute('data-name');
@@ -89,7 +90,6 @@ document.querySelectorAll('.add-to-cart, .add-to-cart-variant').forEach(btn => {
                 return;
             }
             addToCart(name, parseInt(btn.getAttribute('data-price')));
-            // Limpiar checkboxes
             document.querySelectorAll('.custom-roll-block input[type="checkbox"]').forEach(cb => cb.checked = false);
             updateCustomRollData();
             feedbackButton(btn, 'Añadir al carrito');
@@ -120,7 +120,7 @@ function updateCartUI() {
 }
 
 /* ------------------------------------------------------------------
-   RENDERIZAR MODAL
+   RENDERIZAR MODAL — Sin innerHTML para evitar bugs de interpolación
 ------------------------------------------------------------------ */
 function renderCartModal() {
     cartItemsList.innerHTML = '';
@@ -132,34 +132,37 @@ function renderCartModal() {
 
         const row = document.createElement('div');
         row.className = 'cart-item-row';
-        row.innerHTML = `
-            <div>
-                <strong>${item.quantity}x</strong> \${item.name}
-                <span style="color:#7b8580; margin-left:5px;">($${item.price})</span>
-            </div>
-            <div>
-                <span>$${subtotal}</span>
-                <button class="remove-item" onclick="removeItemFromCart(${index})">
-                    <i class="far fa-trash-alt"></i>
-                </button>
-            </div>`;
+
+        // Columna izquierda: cantidad, nombre y precio unitario
+        const left = document.createElement('div');
+        left.innerHTML = `<strong>${item.quantity}x</strong> \${item.name} <span style="color:#7b8580; margin-left:5px;">($${item.price})</span>`;
+
+        // Columna derecha: subtotal + botón eliminar
+        const right = document.createElement('div');
+
+        const subtotalSpan = document.createElement('span');
+        subtotalSpan.textContent = `$${subtotal}`;
+
+        const removeBtn = document.createElement('button');
+        removeBtn.className = 'remove-item';
+        removeBtn.innerHTML = '<i class="far fa-trash-alt"></i>';
+        removeBtn.addEventListener('click', () => {
+            cart.splice(index, 1);
+            updateCartUI();
+            if (cart.length > 0) {
+                renderCartModal();
+            }
+        });
+
+        right.appendChild(subtotalSpan);
+        right.appendChild(removeBtn);
+        row.appendChild(left);
+        row.appendChild(right);
         cartItemsList.appendChild(row);
     });
 
     cartTotalPrice.textContent = `$${total}`;
 }
-
-/* ------------------------------------------------------------------
-   ELIMINAR ÍTEM
------------------------------------------------------------------- */
-window.removeItemFromCart = function(index) {
-    cart.splice(index, 1);
-    updateCartUI();
-    if (cart.length > 0) {
-        renderCartModal();
-    }
-    // Si el carrito queda vacío, updateCartUI() ya cierra el modal
-};
 
 /* ------------------------------------------------------------------
    ABRIR / CERRAR MODAL
