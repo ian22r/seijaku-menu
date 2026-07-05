@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seijaku — Menú </title>
-    <link rel="stylesheet" href="style.css?v=1.6">
+    <link rel="stylesheet" href="style.css?v=1.7">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
-    <!-- MARCA DE AGUA FLOTANTE (KANJI TRADICIONAL) -->
     <div class="kanji-background">静寂</div>
 
     <header class="navbar">
@@ -23,7 +22,7 @@
         </div>
     </header>
 
-    <!-- ================= HERO / ENTRADA ZEN ================= -->
+    <!-- HERO -->
     <section class="hero-section">
         <div class="logo-wrapper">
             <img src="logo.png" alt="Seijaku Logo" class="brand-logo">
@@ -35,16 +34,15 @@
         </p>
     </section>
 
-    <!-- CONTENIDOR PRINCIPAL DEL MENÚ -->
+    <!-- MENÚ PRINCIPAL -->
     <main class="menu-section" id="menu">
         <h2 class="section-title">お品書き <span class="title-sub">Nuestra Carta</span></h2>
-            
-        <!-- CATEGORÍA: ROLLOS -->
+
+        <!-- ROLLOS -->
         <section class="category-block">
-            <h3 class="category-title">Makimono 巻き물 & Special Rolls</h3>
+            <h3 class="category-title">Makimono 巻き物 & Special Rolls</h3>
             <div class="menu-grid">
-                
-                <!-- California -->
+
                 <div class="menu-item item-with-image">
                     <div class="item-image-wrapper">
                         <img src="california.png" alt="California" class="item-photo">
@@ -59,7 +57,6 @@
                     </div>
                 </div>
 
-                <!-- Yasai Maki -->
                 <div class="menu-item item-with-image">
                     <div class="item-image-wrapper">
                         <img src="yasaimaki.png" alt="Yasai Maki" class="item-photo">
@@ -74,7 +71,6 @@
                     </div>
                 </div>
 
-                <!-- Amairo Roll -->
                 <div class="menu-item item-with-image">
                     <div class="item-image-wrapper">
                         <img src="amairo.png" alt="Amairo Roll" class="item-photo">
@@ -89,7 +85,6 @@
                     </div>
                 </div>
 
-                <!-- Mar y Tierra -->
                 <div class="menu-item item-with-image">
                     <div class="item-image-wrapper">
                         <img src="marytierra.png" alt="Mar y Tierra" class="item-photo">
@@ -104,7 +99,6 @@
                     </div>
                 </div>
 
-                <!-- Kani Kani -->
                 <div class="menu-item item-with-image">
                     <div class="item-image-wrapper">
                         <img src="kanikani.png" alt="Kani Kani" class="item-photo">
@@ -119,7 +113,6 @@
                     </div>
                 </div>
 
-                <!-- Tropical Roll -->
                 <div class="menu-item item-with-image">
                     <div class="item-image-wrapper">
                         <img src="tropical.png" alt="Tropical Roll" class="item-photo">
@@ -134,7 +127,6 @@
                     </div>
                 </div>
 
-                <!-- Harami Roru -->
                 <div class="menu-item item-with-image">
                     <div class="item-image-wrapper">
                         <img src="harami.png" alt="Harami Roru" class="item-photo">
@@ -149,7 +141,6 @@
                     </div>
                 </div>
 
-                <!-- Tampico Roll -->
                 <div class="menu-item item-with-image">
                     <div class="item-image-wrapper">
                         <img src="tampico.png" alt="Tampico Roll" class="item-photo">
@@ -164,7 +155,6 @@
                     </div>
                 </div>
 
-                <!-- Toriniku Roll -->
                 <div class="menu-item item-with-image">
                     <div class="item-image-wrapper">
                         <img src="toriniku.png" alt="Toriniku Roll" class="item-photo">
@@ -186,114 +176,83 @@
                     </div>
                     <div class="item-details">
                         <div class="item-header">
-                            <h4>Ebi crunch Roll <span class="badge-soon">Próximamente</span> </h4>
+                            <h4>Ebi crunch Roll <span class="badge-soon">Próximamente</span></h4>
                             <span class="price">--</span>
                         </div>
                         <p class="description">Relleno de camarón empanizado y aguacate, cubierto por fuera con láminas de salmón fresco, coronado con hilos de surimi crujiente y un hilo de salsa Umai Chili Glaze.</p>
                     </div>
                 </div>
-<div class="menu-item custom-roll-block">
-    <div class="item-header">
-        <h4>Arma tu rollo <span class="badge-new">Personalizado</span></h4>
-        <span class="price">$145</span>
-    </div>
-    <p class="description">
-        Diseña tu combinación perfecta seleccionando tus ingredientes favoritos basándote en nuestra barra de especialidades (Máximo 3 por sección).
-    </p>
-    
-    <div class="custom-roll-selectors" style="margin-top: 15px; display: flex; flex-direction: column; gap: 15px;">
-        
-        <div>
-            <label style="font-size: 11px; letter-spacing: 1px; color: #095a35; display:block; margin-bottom:6px; font-weight: bold;">1. CUBIERTA / EXTERIOR (Máx. 3):</label>
-            <div id="cover-checkbox-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; background: rgba(255,255,255,0.5); padding: 10px; border: 1px solid rgba(140, 150, 144, 0.3);">
-                <label style="font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer;"><input type="checkbox" value="Empanizado" onchange="validateSection(this, '#cover-checkbox-group')"> Empanizado</label>
-                <label style="font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer;"><input type="checkbox" value="Ajonjolí" onchange="validateSection(this, '#cover-checkbox-group')"> Ajonjolí</label>
-                <label style="font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer;"><input type="checkbox" value="Aguacate" onchange="validateSection(this, '#cover-checkbox-group')"> Aguacate</label>
-                <label style="font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer;"><input type="checkbox" value="Queso Crema" onchange="validateSection(this, '#cover-checkbox-group')"> Queso Crema</label>
-                <label style="font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer;"><input type="checkbox" value="Manchego Flameado" onchange="validateSection(this, '#cover-checkbox-group')"> M. Flameado</label>
-                <label style="font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer;"><input type="checkbox" value="Mango" onchange="validateSection(this, '#cover-checkbox-group')"> Mango</label>
-                <label style="font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer;"><input type="checkbox" value="Fresa" onchange="validateSection(this, '#cover-checkbox-group')"> Fresa</label>
-                <label style="font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer;"><input type="checkbox" value="Kiwi" onchange="validateSection(this, '#cover-checkbox-group')"> Kiwi</label>
-                <label style="font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer;"><input type="checkbox" value="Surimi Tempura" onchange="validateSection(this, '#cover-checkbox-group')"> Surimi Tempura</label>
+
+                <!-- Arma tu Rollo -->
+                <div class="menu-item custom-roll-block">
+                    <div class="item-header">
+                        <h4>Arma tu rollo <span class="badge-new">Personalizado</span></h4>
+                        <span class="price">$145</span>
+                    </div>
+                    <p class="description">
+                        Diseña tu combinación perfecta seleccionando tus ingredientes favoritos basándote en nuestra barra de especialidades (Máximo 3 por sección).
+                    </p>
+
+                    <div class="custom-roll-selectors">
+
+                        <div class="custom-roll-group">
+                            <label class="custom-roll-label">1. CUBIERTA / EXTERIOR (Máx. 3):</label>
+                            <div id="cover-checkbox-group" class="custom-checkbox-grid">
+                                <label class="custom-check"><input type="checkbox" value="Empanizado"> Empanizado</label>
+                                <label class="custom-check"><input type="checkbox" value="Ajonjolí"> Ajonjolí</label>
+                                <label class="custom-check"><input type="checkbox" value="Aguacate"> Aguacate</label>
+                                <label class="custom-check"><input type="checkbox" value="Queso Crema"> Queso Crema</label>
+                                <label class="custom-check"><input type="checkbox" value="Manchego Flameado"> M. Flameado</label>
+                                <label class="custom-check"><input type="checkbox" value="Mango"> Mango</label>
+                                <label class="custom-check"><input type="checkbox" value="Fresa"> Fresa</label>
+                                <label class="custom-check"><input type="checkbox" value="Kiwi"> Kiwi</label>
+                                <label class="custom-check"><input type="checkbox" value="Surimi Tempura"> Surimi Tempura</label>
+                            </div>
+                        </div>
+
+                        <div class="custom-roll-group">
+                            <label class="custom-roll-label">2. RELLENOS (Máx. 3):</label>
+                            <div id="fillings-checkbox-group" class="custom-checkbox-grid">
+                                <label class="custom-check"><input type="checkbox" value="Camarón"> Camarón</label>
+                                <label class="custom-check"><input type="checkbox" value="Arrachera"> Arrachera</label>
+                                <label class="custom-check"><input type="checkbox" value="Salmón"> Salmón</label>
+                                <label class="custom-check"><input type="checkbox" value="Surimi"> Surimi</label>
+                                <label class="custom-check"><input type="checkbox" value="Pollo"> Pollo</label>
+                                <label class="custom-check"><input type="checkbox" value="Queso Crema"> Queso Crema</label>
+                                <label class="custom-check"><input type="checkbox" value="Queso Manchego"> Q. Manchego</label>
+                                <label class="custom-check"><input type="checkbox" value="Aguacate"> Aguacate</label>
+                                <label class="custom-check"><input type="checkbox" value="Pepino"> Pepino</label>
+                                <label class="custom-check"><input type="checkbox" value="Chiles Toreados"> Chiles Toreados</label>
+                            </div>
+                        </div>
+
+                        <div class="custom-roll-group">
+                            <label class="custom-roll-label">3. TOPPINGS & SALSAS (Máx. 3):</label>
+                            <div id="sauces-checkbox-group" class="custom-checkbox-grid">
+                                <label class="custom-check"><input type="checkbox" value="Salsa Unagi"> Salsa Unagi</label>
+                                <label class="custom-check"><input type="checkbox" value="Pasta Tampico"> Pasta Tampico</label>
+                                <label class="custom-check"><input type="checkbox" value="Sriracha"> Sriracha</label>
+                                <label class="custom-check"><input type="checkbox" value="Chipotle Cream"> Chipotle Cream</label>
+                                <label class="custom-check"><input type="checkbox" value="Ajonjolí Negro"> Ajonjolí Negro</label>
+                                <label class="custom-check"><input type="checkbox" value="Cebollín"> Cebollín</label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <button id="add-custom-roll-btn" class="add-to-cart custom-roll-submit" data-name="Rollo Personalizado (Por armar)" data-price="145">
+                        Añadir al carrito
+                    </button>
+                </div>
+
             </div>
-        </div>
+        </section>
 
-        <div>
-            <label style="font-size: 11px; letter-spacing: 1px; color: #095a35; display:block; margin-bottom:6px; font-weight: bold;">2. RELLENOS (Máx. 3):</label>
-            <div id="fillings-checkbox-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; background: rgba(255,255,255,0.5); padding: 10px; border: 1px solid rgba(140, 150, 144, 0.3);">
-                <label style="font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer;"><input type="checkbox" value="Camarón" onchange="validateSection(this, '#fillings-checkbox-group')"> Camarón</label>
-                <label style="font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer;"><input type="checkbox" value="Arrachera" onchange="validateSection(this, '#fillings-checkbox-group')"> Arrachera</label>
-                <label style="font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer;"><input type="checkbox" value="Salmón" onchange="validateSection(this, '#fillings-checkbox-group')"> Salmón</label>
-                <label style="font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer;"><input type="checkbox" value="Surimi" onchange="validateSection(this, '#fillings-checkbox-group')"> Surimi</label>
-                <label style="font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer;"><input type="checkbox" value="Pollo" onchange="validateSection(this, '#fillings-checkbox-group')"> Pollo</label>
-                <label style="font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer;"><input type="checkbox" value="Queso Crema" onchange="validateSection(this, '#fillings-checkbox-group')"> Queso Crema</label>
-                <label style="font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer;"><input type="checkbox" value="Queso Manchego" onchange="validateSection(this, '#fillings-checkbox-group')"> Q. Manchego</label>
-                <label style="font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer;"><input type="checkbox" value="Aguacate" onchange="validateSection(this, '#fillings-checkbox-group')"> Aguacate</label>
-                <label style="font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer;"><input type="checkbox" value="Pepino" onchange="validateSection(this, '#fillings-checkbox-group')"> Pepino</label>
-                <label style="font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer;"><input type="checkbox" value="Chiles Toreados" onchange="validateSection(this, '#fillings-checkbox-group')"> Chiles Toreados</label>
-            </div>
-        </div>
-
-        <div>
-            <label style="font-size: 11px; letter-spacing: 1px; color: #095a35; display:block; margin-bottom:6px; font-weight: bold;">3. TOPPINGS & SALSAS (Máx. 3):</label>
-            <div id="sauces-checkbox-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; background: rgba(255,255,255,0.5); padding: 10px; border: 1px solid rgba(140, 150, 144, 0.3);">
-                <label style="font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer;"><input type="checkbox" value="Salsa Unagi" onchange="validateSection(this, '#sauces-checkbox-group')"> Salsa Unagi</label>
-                <label style="font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer;"><input type="checkbox" value="Pasta Tampico" onchange="validateSection(this, '#sauces-checkbox-group')"> Pasta Tampico</label>
-                <label style="font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer;"><input type="checkbox" value="Sriracha" onchange="validateSection(this, '#sauces-checkbox-group')"> Sriracha</label>
-                <label style="font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer;"><input type="checkbox" value="Chipotle Cream" onchange="validateSection(this, '#sauces-checkbox-group')"> Chipotle Cream</label>
-                <label style="font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer;"><input type="checkbox" value="Ajonjolí Negro" onchange="validateSection(this, '#sauces-checkbox-group')"> Ajonjolí Negro</label>
-                <label style="font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer;"><input type="checkbox" value="Cebollín" onchange="validateSection(this, '#sauces-checkbox-group')"> Cebollín</label>
-            </div>
-        </div>
-
-    </div>
-
-    <button id="add-custom-roll-btn" class="add-to-cart" data-name="Rollo Personalizado (Por armar)" data-price="145" style="margin-top: 20px; width: 100%; text-align: center; justify-content: center; display: flex;">
-        Añadir al carrito
-    </button>
-</div>
-
-<script>
-function validateSection(checkbox, groupSelector) {
-    const checkedBoxes = document.querySelectorAll(`${groupSelector} input[type="checkbox"]:checked`);
-    
-    // Si excede el máximo de 3 de esa sección en específico
-    if (checkedBoxes.length > 3) {
-        checkbox.checked = false;
-        alert("Solo puedes seleccionar un máximo de 3 ingredientes por sección.");
-        return;
-    }
-    
-    // Cada vez que cambia un checkbox, rearmamos el string de datos para el botón
-    updateCustomRollData();
-}
-
-function updateCustomRollData() {
-    const btn = document.getElementById('add-custom-roll-btn');
-    
-    // 1. Obtener cubiertas marcadas
-    const covers = Array.from(document.querySelectorAll('#cover-checkbox-group input[type="checkbox"]:checked')).map(cb => cb.value).join(', ') || 'Ninguna';
-    
-    // 2. Obtener rellenos marcados
-    const fillings = Array.from(document.querySelectorAll('#fillings-checkbox-group input[type="checkbox"]:checked')).map(cb => cb.value).join(', ') || 'Ninguno';
-    
-    // 3. Obtener toppings/salsas marcados
-    const sauces = Array.from(document.querySelectorAll('#sauces-checkbox-group input[type="checkbox"]:checked')).map(cb => cb.value).join(', ') || 'Ninguno';
-    
-    // Construimos la línea de texto que va para el carrito/WhatsApp de Seijaku
-    const fullName = `Rollo Personalizado (Fuera: ${covers} | Dentro: ${fillings} | Salsas: ${sauces})`;
-    
-    btn.setAttribute('data-name', fullName);
-}
-</script>
-                    </section>
-
-        <!-- CATEGORÍA: ANTESMESA -->
+        <!-- ANTESMESA -->
         <section class="category-block">
             <h3 class="category-title">Otsumami おつまみ entradas o aperitivos</h3>
             <div class="menu-grid">
-                
-                <!-- Gyozas -->
+
                 <div class="menu-item item-with-image">
                     <div class="item-image-wrapper">
                         <img src="gyozas.png" alt="Gyozas" class="item-photo">
@@ -308,7 +267,6 @@ function updateCustomRollData() {
                     </div>
                 </div>
 
-                <!-- Yakitoris -->
                 <div class="menu-item item-with-image">
                     <div class="item-image-wrapper">
                         <img src="yakitoris.png" alt="Yakitoris" class="item-photo">
@@ -323,7 +281,6 @@ function updateCustomRollData() {
                     </div>
                 </div>
 
-                <!-- Kushiages -->
                 <div class="menu-item item-with-image">
                     <div class="item-image-wrapper">
                         <img src="kushiagues.png" alt="Kushiages" class="item-photo">
@@ -331,26 +288,26 @@ function updateCustomRollData() {
                     <div class="item-details">
                         <div class="item-header">
                             <h4>Kushiages <span class="detail-count">(3 pzas.)</span></h4>
-                            <span class="price">Desde $55</span>
+                            <span class="price">Desde \$55</span>
                         </div>
                         <p class="description">Brochetas empanizadas en panko crujiente. Selecciona tu favorita:</p>
-                        <div style="display:flex; flex-wrap:wrap; gap:5px; margin-top:8px;">
-                            <button class="add-to-cart-variant" data-name="Kushiages Plátano" data-price="55">Plátano $55</button>
-                            <button class="add-to-cart-variant" data-name="Kushiages Queso" data-price="65">Queso $65</button>
-                            <button class="add-to-cart-variant" data-name="Kushiages Camarón" data-price="70">Camarón $70</button>
-                            <button class="add-to-cart-variant" data-name="Kushiages Combinado" data-price="60">Platano con queso $60</button>
+                        <div class="variant-btn-group">
+                            <button class="add-to-cart-variant" data-name="Kushiages Plátano" data-price="55">Plátano \$55</button>
+                            <button class="add-to-cart-variant" data-name="Kushiages Queso" data-price="65">Queso \$65</button>
+                            <button class="add-to-cart-variant" data-name="Kushiages Camarón" data-price="70">Camarón \$70</button>
+                            <button class="add-to-cart-variant" data-name="Kushiages Combinado" data-price="60">Platano con queso \$60</button>
                         </div>
                     </div>
                 </div>
+
             </div>
         </section>
 
-        <!-- CATEGORÍA: TRADICIÓN DE LA COCINA -->
+        <!-- RAMEN & BOWLS -->
         <section class="category-block">
             <h3 class="category-title">Ramen & Bowls <span class="title-sub">Especialidades Calientes</span></h3>
             <div class="menu-grid">
-                
-                <!-- Tonkotsu Ramen -->
+
                 <div class="menu-item item-with-image">
                     <div class="item-image-wrapper">
                         <img src="ramen.png" alt="Tonkotsu Ramen" class="item-photo">
@@ -365,7 +322,6 @@ function updateCustomRollData() {
                     </div>
                 </div>
 
-                <!-- Yakimeshi -->
                 <div class="menu-item item-with-image">
                     <div class="item-image-wrapper">
                         <img src="yakimeshi.png" alt="Yakimeshi" class="item-photo">
@@ -373,19 +329,18 @@ function updateCustomRollData() {
                     <div class="item-details">
                         <div class="item-header">
                             <h4>Yakimeshi Tradicional</h4>
-                            <span class="price">Desde $80</span>
+                            <span class="price">Desde \$80</span>
                         </div>
                         <p class="description">Arroz gohan salteado al wok con verduras selectas. Elige proteína:</p>
-                        <div style="display:flex; flex-wrap:wrap; gap:5px; margin-top:8px;">
-                            <button class="add-to-cart-variant" data-name="Yakimeshi Pollo" data-price="80">Pollo $80</button>
-                            <button class="add-to-cart-variant" data-name="Yakimeshi Camarón" data-price="90">Camarón $90</button>
-                            <button class="add-to-cart-variant" data-name="Yakimeshi Arrachera" data-price="90">Arrachera $90</button>
-                            <button class="add-to-cart-variant" data-name="Yakimeshi Mixto" data-price="100">Mixto $100</button>
+                        <div class="variant-btn-group">
+                            <button class="add-to-cart-variant" data-name="Yakimeshi Pollo" data-price="80">Pollo \$80</button>
+                            <button class="add-to-cart-variant" data-name="Yakimeshi Camarón" data-price="90">Camarón \$90</button>
+                            <button class="add-to-cart-variant" data-name="Yakimeshi Arrachera" data-price="90">Arrachera \$90</button>
+                            <button class="add-to-cart-variant" data-name="Yakimeshi Mixto" data-price="100">Mixto \$100</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Teppanyaki de Res -->
                 <div class="menu-item item-with-image">
                     <div class="item-image-wrapper">
                         <img src="teppanyaki.png" alt="Teppanyaki de Res" class="item-photo">
@@ -399,15 +354,15 @@ function updateCustomRollData() {
                         <button class="add-to-cart" data-name="Teppanyaki de Res" data-price="110">Añadir al carrito</button>
                     </div>
                 </div>
+
             </div>
         </section>
 
-        <!-- CATEGORÍA: DULCE & REFRESCANTE -->
+        <!-- POSTRES Y BEBIDAS -->
         <section class="category-block">
             <h3 class="category-title">Kanmi 甘味 Postres y bebidas</h3>
             <div class="menu-grid">
-                
-                <!-- Mochis Artesanales -->
+
                 <div class="menu-item item-with-image">
                     <div class="item-image-wrapper">
                         <img src="mochis.png" alt="Mochis Artesanales" class="item-photo">
@@ -418,56 +373,48 @@ function updateCustomRollData() {
                             <span class="price">$60</span>
                         </div>
                         <p class="description">Pasteles de arroz glutinoso de textura sedosa y elástica, rellenos de helado premium: Fresa o Mango.</p>
-                        <button class="add-to-cart variant" data-name="Mochi de fresa" data-price="60">Mochi de fresa $60</button>
-                        <button class="add-to-cart variant" data-name="Mochi de mango" data-price="60">Mochi de mango $60</button>
+                        <button class="add-to-cart variant" data-name="Mochi de fresa" data-price="60">Mochi de fresa \$60</button>
+                        <button class="add-to-cart variant" data-name="Mochi de mango" data-price="60">Mochi de mango \$60</button>
                     </div>
                 </div>
 
-
-                <!-- Purín Japonés -->
-            <div class="menu-item item-with-image coming-soon">
-                <div class="item-image-wrapper">
-                    <img src="purin.png" alt="Purín Japonés" class="item-photo">
-                </div>
-                <div class="item-details">
-                    <div class="item-header">
-                        <h4>Purín Japonés <span class="badge-new">Proximamente</span></h4>
-                        <span class="price">$--</span>
+                <!-- Purín: corregido, fuera de coming-soon para que el botón funcione -->
+                <div class="menu-item item-with-image coming-soon-visual">
+                    <div class="item-image-wrapper">
+                        <img src="purin.png" alt="Purín Japonés" class="item-photo">
                     </div>
-                    <p class="description">El tradicional y sedoso flan de vainilla japonés de textura firme y cremosa, coronado con una capa intensa de caramelo sutilmente amargo y un toque de crema batida.</p>
-                    
-                    <!-- Botón corregido con tus atributos data-name y data-price -->
-                    <button class="add-to-cart" data-name="Purín Japonés" data-price="65">Añadir al carrito</button>
+                    <div class="item-details">
+                        <div class="item-header">
+                            <h4>Purín Japonés <span class="badge-new">Proximamente</span></h4>
+                            <span class="price">$--</span>
+                        </div>
+                        <p class="description">El tradicional y sedoso flan de vainilla japonés de textura firme y cremosa, coronado con una capa intensa de caramelo sutilmente amargo y un toque de crema batida.</p>
+                    </div>
                 </div>
-            </div>
 
-               <!-- Calpis de la Casa -->
-<div class="menu-item item-with-image">
-    <div class="item-image-wrapper">
-        <img src="calpis.png" alt="Calpis de la Casa" class="item-photo">
-    </div>
-    <div class="item-details">
-        <div class="item-header">
-            <h4>Calpis de la Casa</h4>
-            <span class="price">$70</span>
-        </div>
-        <p class="description">Bebida láctica tradicional japonesa, refrescante y ligera, infusionada con concentrados naturales: Mora Azul, Fresa, Kiwi, Frutos rojos, mango y durazno.</p>
-        
-        <!-- Selector de sabor (Mantiene tu diseño limpio) -->
-        <select onchange="this.nextElementSibling.setAttribute('data-name', 'Calpis de la Casa (' + this.value + ')')" style="width: 100%; padding: 6px; margin-bottom: 10px; background: rgba(255,255,255,0.8); border: 1px solid rgba(140, 150, 144, 0.4); font-family: 'Montserrat', sans-serif; font-size: 12px; outline: none;">
-            <option value="Mora Azul">Mora Azul</option>
-            <option value="Fresa">Fresa</option>
-            <option value="Kiwi">Kiwi</option>
-            <option value="Frutos Rojos">Frutos rojos</option>
-            <option value="Mango">Mango</option>
-            <option value="Durazno">Durazno</option>
-        </select>
+                <!-- Calpis: selector limpio sin onchange inline -->
+                <div class="menu-item item-with-image">
+                    <div class="item-image-wrapper">
+                        <img src="calpis.png" alt="Calpis de la Casa" class="item-photo">
+                    </div>
+                    <div class="item-details">
+                        <div class="item-header">
+                            <h4>Calpis de la Casa</h4>
+                            <span class="price">$70</span>
+                        </div>
+                        <p class="description">Bebida láctica tradicional japonesa, refrescante y ligera, infusionada con concentrados naturales: Mora Azul, Fresa, Kiwi, Frutos rojos, mango y durazno.</p>
+                        <select id="calpis-flavor" class="flavor-select">
+                            <option value="Mora Azul">Mora Azul</option>
+                            <option value="Fresa">Fresa</option>
+                            <option value="Kiwi">Kiwi</option>
+                            <option value="Frutos Rojos">Frutos rojos</option>
+                            <option value="Mango">Mango</option>
+                            <option value="Durazno">Durazno</option>
+                        </select>
+                        <button class="add-to-cart" id="calpis-btn" data-name="Calpis de la Casa (Mora Azul)" data-price="70">Añadir al carrito</button>
+                    </div>
+                </div>
 
-        <!-- Tu botón original modificado únicamente con el valor inicial por defecto -->
-        <button class="add-to-cart" data-name="Calpis de la Casa (Mora Azul)" data-price="70">Añadir al carrito</button>
-    </div>
-</div>
-                <!-- Boba de Taro -->
                 <div class="menu-item coming-soon">
                     <div class="item-header">
                         <h4>Ice Blended Taro Boba <span class="badge-soon">Próximamente</span></h4>
@@ -475,25 +422,22 @@ function updateCustomRollData() {
                     </div>
                     <p class="description">Nuestra versión frappé de taro premium. Una mezcla cremosa y helada con sutiles matices de vainilla, combinada con la textura de perlas de tapioca.</p>
                 </div>
+
             </div>
         </section>
     </main>
 
-    <!-- MODAL ELEGANTE DEL CARRITO & FORMULARIO -->
+    <!-- MODAL CARRITO -->
     <div id="cart-modal" class="modal hidden">
         <div class="modal-content">
             <span id="close-modal-btn" class="close-modal">&times;</span>
             <h3 class="modal-title">Tu Pedido Seijaku</h3>
-            <div id="cart-items-list" class="cart-items-list">
-                <!-- Se llena dinámicamente con JS -->
-            </div>
+            <div id="cart-items-list" class="cart-items-list"></div>
             <div class="cart-total-block">
                 <span>Total estimado:</span>
                 <span id="cart-total-price" class="total-price">$0</span>
             </div>
-            
             <div class="shoji-divider-center" style="margin: 20px auto 15px auto;"></div>
-            
             <h4 class="form-title">Datos de Entrega (Ixmiquilpan)</h4>
             <form id="checkout-form" class="checkout-form">
                 <input type="text" id="client-name" placeholder="Tu Nombre Completo" required>
@@ -504,7 +448,7 @@ function updateCustomRollData() {
         </div>
     </div>
 
-    <!-- SECCIÓN DE HORARIOS Y REPARTO -->
+    <!-- HORARIOS Y REPARTO -->
     <section class="info-delivery-section">
         <div class="info-container">
             <div class="info-block" id="horarios">
@@ -523,7 +467,7 @@ function updateCustomRollData() {
         </div>
     </section>
 
-    <!-- PIE DE PÁGINA / CONTACTO ESTILO PREMIUM -->
+    <!-- FOOTER -->
     <footer id="contacto" class="contact-section">
         <div class="contact-container">
             <h3 class="contact-title">Contacto &amp; Pedidos</h3>
@@ -555,7 +499,7 @@ function updateCustomRollData() {
         </div>
     </footer>
 
-    <!-- BOTÓN CIRCULAR FLOTANTE DEL CARRITO (NUEVA EXPERIENCIA AUTOMÁTICA) -->
+    <!-- BOTÓN FLOTANTE CARRITO -->
     <button id="cart-floating-btn" class="cart-floating-btn hidden" aria-label="Ver carrito">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cart-icon-svg">
             <circle cx="9" cy="21" r="1"></circle>
@@ -565,7 +509,6 @@ function updateCustomRollData() {
         <span id="cart-count-badge" class="cart-badge">0</span>
     </button>
 
-    <!-- LÓGICA DE PROGRAMACIÓN DEL CARRITO -->
     <script src="cart.js"></script>
 </body>
 </html>

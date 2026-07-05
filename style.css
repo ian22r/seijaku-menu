@@ -12,8 +12,8 @@ html {
 }
 
 body {
-    background-color: #f7f4eb; /* Crema mate orgánico de la marca */
-    color: #1e2923; /* Carbón vegetal con matiz verde muy suave */
+    background-color: #f7f4eb;
+    color: #1e2923;
     font-family: 'Montserrat', sans-serif;
     font-weight: 300;
     line-height: 1.7;
@@ -21,14 +21,13 @@ body {
     overflow-x: hidden;
 }
 
-/* KANJI FLOTANTE DE TRASFONDO (Sello de autenticidad Zen) */
 .kanji-background {
     position: fixed;
     top: 20%;
     right: -5%;
     font-family: 'Playfair Display', serif;
     font-size: 32vw;
-    color: rgba(9, 90, 53, 0.025); /* Súper sutil, casi imperceptible */
+    color: rgba(9, 90, 53, 0.025);
     font-weight: 500;
     pointer-events: none;
     z-index: -1;
@@ -36,7 +35,7 @@ body {
 }
 
 /* ==========================================================================
-   NAVBAR REFINADA E INVISIBLE
+   NAVBAR
    ========================================================================== */
 .navbar {
     position: fixed;
@@ -56,7 +55,6 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
 }
 
 .logo-text {
@@ -64,15 +62,13 @@ body {
     font-weight: 400;
     letter-spacing: 7px;
     text-decoration: none;
-    color: #095a35; /* Verde Matcha Identitario */
+    color: #095a35;
     text-transform: uppercase;
 }
 
 .nav-links {
     display: flex;
     list-style: none;
-    margin: 0;
-    padding: 0;
 }
 
 .nav-links li {
@@ -95,28 +91,24 @@ body {
 }
 
 /* ==========================================================================
-   HERO / ENTRADA ZEN
+   HERO
    ========================================================================== */
 .hero-section {
-    background-color: #095a35 !important; /* Forzar el verde matcha */
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: center !important;
-    align-items: center !important;
-    text-align: center !important;
-    padding: 110px 20px 60px 20px !important; /* Espacio ideal en PC y libre de la barra */
-    position: relative;
+    background-color: #095a35;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 110px 20px 60px;
     width: 100%;
-    box-sizing: border-box;
 }
 
 .logo-wrapper {
-    background-color: transparent !important;
-    margin-bottom: 20px !important;
-    display: inline-block;
+    margin-bottom: 20px;
 }
 
-.brand-logo, .hero-logo {
+.brand-logo {
     max-width: 320px;
     width: 100%;
     height: auto;
@@ -125,20 +117,19 @@ body {
 }
 
 .slogan {
-    font-family: 'Playfair Display', serif !important;
-    font-style: italic !important;
-    font-size: 20px !important;
-    letter-spacing: 3px !important;
-    color: #ebdcb9 !important; /* Forzar color arena original */
-    margin: 15px auto 25px auto !important;
-    display: block !important;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 20px;
+    letter-spacing: 3px;
+    color: #ebdcb9;
+    margin: 15px auto 25px;
 }
 
 .shoji-divider-center {
     width: 60px;
     height: 1px;
-    background-color: #ebdcb9 !important;
-    margin: 0 auto 30px auto !important;
+    background-color: #ebdcb9;
+    margin: 0 auto 30px;
     position: relative;
     display: block;
 }
@@ -155,21 +146,19 @@ body {
 }
 
 .hero-legend {
-    font-family: 'Montserrat', sans-serif !important;
-    font-size: 14px !important;
-    font-weight: 300 !important;
-    line-height: 1.8 !important;
-    color: #f7f4eb !important; /* Forzar crema mate original */
-    max-width: 620px !important;
-    margin: 0 auto !important;
-    text-align: center !important;
-    letter-spacing: 0.5px !important;
-    opacity: 0.95 !important;
-    display: block !important;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.8;
+    color: #f7f4eb;
+    max-width: 620px;
+    margin: 0 auto;
+    text-align: center;
+    letter-spacing: 0.5px;
+    opacity: 0.95;
 }
 
 /* ==========================================================================
-   CARTA MENÚ (Estilo Editorial Premium)
+   MENÚ
    ========================================================================== */
 .menu-section {
     max-width: 1100px;
@@ -212,7 +201,6 @@ body {
     padding-bottom: 15px;
     margin-bottom: 45px;
     border-bottom: 1px solid rgba(9, 90, 53, 0.15);
-    position: relative;
 }
 
 .menu-grid {
@@ -232,7 +220,7 @@ body {
     justify-content: space-between;
     align-items: baseline;
     margin-bottom: 10px;
-    border-bottom: 1px dashed rgba(140, 150, 144, 0.3); /* Línea punteada fina japonesa */
+    border-bottom: 1px dashed rgba(140, 150, 144, 0.3);
     padding-bottom: 6px;
 }
 
@@ -255,11 +243,12 @@ body {
     font-family: 'Montserrat', sans-serif;
     font-size: 14px;
     font-weight: 400;
-    color: #a83232; /* Rojo laca tradicional controlado, no chillante */
+    color: #a83232;
     letter-spacing: 1px;
     background-color: rgba(168, 50, 50, 0.05);
     padding: 2px 8px;
     border-radius: 2px;
+    white-space: nowrap;
 }
 
 .description {
@@ -271,14 +260,13 @@ body {
 }
 
 /* ==========================================================================
-   ESTILO DE IMÁGENES GOURMET (PREMIUM)
+   IMÁGENES
    ========================================================================== */
 .menu-item.item-with-image {
-    display: flex;
-    flex-direction: row; /* Foto a la izquierda, texto a la derecha */
+    flex-direction: row;
     gap: 25px;
     align-items: center;
-    background-color: rgba(255, 255, 255, 0.4); /* Fondo sutil para enmarcar */
+    background-color: rgba(255, 255, 255, 0.4);
     padding: 15px;
     border-radius: 8px;
     border: 1px solid rgba(225, 219, 207, 0.5);
@@ -287,21 +275,21 @@ body {
 .item-image-wrapper {
     width: 110px;
     height: 110px;
-    flex-shrink: 0; /* Evita que la foto se comprima */
+    flex-shrink: 0;
     overflow: hidden;
     border-radius: 6px;
-    background-color: #ebdcb9; /* Fondo elegante mientras carga */
+    background-color: #ebdcb9;
 }
 
 .item-photo {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Recorta la imagen perfectamente estilo Instagram sin deformarla */
+    object-fit: cover;
     transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .menu-item.item-with-image:hover .item-photo {
-    transform: scale(1.06); /* Zoom ultra sutil elegante */
+    transform: scale(1.06);
 }
 
 .item-details {
@@ -309,47 +297,90 @@ body {
 }
 
 /* ==========================================================================
-   ESTILOS ESPECIALES (ARMA TU ROLLO Y PRÓXIMAMENTE)
+   ARMA TU ROLLO
    ========================================================================== */
 .custom-roll-block {
-    grid-column: 1 / -1; /* Ocupa todo el ancho disponible */
+    grid-column: 1 / -1;
     border: 1px solid rgba(123, 133, 128, 0.2);
     padding: 20px;
-    background: rgba(255, 255, 255, 0.01);
     border-radius: 4px;
 }
 
-.custom-steps {
+.custom-roll-selectors {
     margin-top: 15px;
-    font-size: 13px;
-    line-height: 1.6;
-    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
-.custom-steps .step {
-    margin-bottom: 8px;
-    color: #7b8580; /* El tono gris/verde elegante de tu paleta */
+.custom-roll-label {
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: #095a35;
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
 }
 
-.custom-steps .step strong {
-    color: #111111;
+.custom-checkbox-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.5);
+    padding: 10px;
+    border: 1px solid rgba(140, 150, 144, 0.3);
 }
 
+.custom-check {
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.custom-roll-submit {
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+}
+
+/* ==========================================================================
+   VARIANTES Y SABORES
+   ========================================================================== */
+.variant-btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 8px;
+}
+
+.flavor-select {
+    width: 100%;
+    padding: 6px;
+    margin-bottom: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(140, 150, 144, 0.4);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    outline: none;
+    cursor: pointer;
+}
+
+/* ==========================================================================
+   BADGES Y ESTADOS
+   ========================================================================== */
 .badge-new {
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: #c9a054; /* El dorado de Seijaku */
+    color: #c9a054;
     border: 1px solid rgba(201, 160, 84, 0.4);
     padding: 2px 6px;
     margin-left: 8px;
     border-radius: 2px;
-}
-
-.menu-item.coming-soon {
-    opacity: 0.5; /* Lo vuelve grisáceo y sutil */
-    pointer-events: none;
-    user-select: none;
 }
 
 .badge-soon {
@@ -358,7 +389,7 @@ body {
     font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: #7b8580; /* Gris ceniza a juego con tu paleta */
+    color: #7b8580;
     border: 1px solid rgba(123, 133, 128, 0.4);
     padding: 2px 6px;
     margin-left: 8px;
@@ -366,11 +397,23 @@ body {
     border-radius: 2px;
 }
 
+.menu-item.coming-soon {
+    opacity: 0.5;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* Próximamente visual (sin deshabilitar interacción) */
+.menu-item.coming-soon-visual {
+    opacity: 0.5;
+    user-select: none;
+}
+
 /* ==========================================================================
-   SECCIÓN SEPARADA: HORARIOS Y REPARTO
+   HORARIOS Y REPARTO
    ========================================================================== */
 .info-delivery-section {
-    background-color: #fcfbf7; /* Fondo claro y limpio */
+    background-color: #fcfbf7;
     padding: 60px 20px;
     text-align: center;
 }
@@ -392,7 +435,7 @@ body {
 
 .info-block h3 {
     font-family: 'Playfair Display', serif;
-    color: #095a35; /* Verde Matcha Identitario */
+    color: #095a35;
     font-size: 1.5rem;
     margin-bottom: 15px;
     text-transform: uppercase;
@@ -405,12 +448,13 @@ body {
     font-size: 1.1rem;
 }
 
-.info-block .days, .info-block .delivery-zone {
+.info-block .days,
+.info-block .delivery-zone {
     font-weight: bold;
 }
 
 .info-block .hours {
-    color: #bc9654; /* Tono arena / bambú secundario sutil */
+    color: #bc9654;
     font-size: 1.2rem;
     font-weight: 600;
 }
@@ -430,7 +474,7 @@ body {
 }
 
 /* ==========================================================================
-   CONTACTO / FOOTER DE LUJO MATTE
+   FOOTER / CONTACTO
    ========================================================================== */
 .contact-section {
     background-color: #095a35;
@@ -508,124 +552,11 @@ body {
     text-transform: uppercase;
 }
 
-/* Iconos de contacto */
-.contacto-icon {
-    font-size: 32px;
-    margin-bottom: 15px;
-    display: inline-block;
-    transition: transform 0.3s ease;
-}
-
-.contacto-card .contacto-icon {
-    color: #f7f4eb;
-}
-
-.contacto-card.active .contacto-icon,
-.contacto-card:hover .contacto-icon {
-    color: #095a35;
-    transform: scale(1.05);
-}
-
 /* ==========================================================================
-   BOTÓN FLOTANTE DE WHATSAPP
+   BOTONES DEL CARRITO
    ========================================================================== */
-.whatsapp-btn {
-    position: fixed !important;
-    bottom: 30px !important;
-    right: 30px !important;
-    background-color: #095a35 !important; /* Verde Matcha Identitario */
-    color: #f7f4eb !important;
-    width: 55px !important;
-    height: 55px !important;
-    border-radius: 50% !important;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
-    z-index: 999999 !important;
-    text-decoration: none !important;
-    transition: transform 0.3s ease !important;
-}
-
-.whatsapp-btn:hover {
-    transform: scale(1.1) !important;
-}
-
-/* ==========================================================================
-   MEDIA QUERIES / RESPONSIVO IMPECABLE (UNIFICADO)
-   ========================================================================== */
-@media (max-width: 768px) {
-    .hero-section {
-        padding: 85px 20px 35px 20px !important;
-    }
-
-    .brand-logo, .hero-logo {
-        max-width: 150px !important;
-    }
-
-    .slogan {
-        font-size: 15px !important;
-        letter-spacing: 2px !important;
-        margin-bottom: 20px !important;
-    }
-
-    .hero-legend {
-        font-size: 11.5px !important;
-        line-height: 1.7 !important;
-        max-width: 90% !important;
-    }
-
-    .menu-grid {
-        grid-template-columns: 1fr;
-        gap: 35px;
-    }
-    
-    .kanji-background {
-        font-size: 60vw;
-        right: -20%;
-    }
-    
-    .section-title {
-        font-size: 26px;
-    }
-    
-    .info-container {
-        flex-direction: column;
-    }
-    
-    .info-divider {
-        width: 50px;
-        height: 1px;
-        margin: 10px auto;
-    }
-
-    .whatsapp-btn {
-        bottom: 20px !important;
-        right: 20px !important;
-        width: 50px !important;
-        height: 50px !important;
-    }
-}
-
-@media (max-width: 480px) {
-    .menu-item.item-with-image {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
-        padding: 12px;
-    }
-    
-    .item-image-wrapper {
-        width: 100%;
-        height: 180px; 
-    }
-}
-/* ==========================================================================
-   ESTILOS AGREGADOS: INTERACTIVIDAD DEL CARRITO & MODAL SEIJAKU
-   ========================================================================== */
-
-/* Botones de añadir al pedido */
-.add-to-cart, .add-to-cart-variant {
+.add-to-cart,
+.add-to-cart-variant {
     background-color: transparent;
     border: 1px solid rgba(9, 90, 53, 0.4);
     color: #095a35;
@@ -641,48 +572,49 @@ body {
     align-self: flex-start;
 }
 
-.add-to-cart:hover, .add-to-cart-variant:hover {
+.add-to-cart:hover,
+.add-to-cart-variant:hover {
     background-color: #095a35;
     color: #f7f4eb;
     border-color: #095a35;
 }
 
-/* NUEVO: BOTÓN FLOTANTE CIRCULAR DEL CARRITO */
+/* Botón flotante del carrito */
 .cart-floating-btn {
-    position: fixed !important;
-    bottom: 100px !important; /* Posicionado arriba del botón de WhatsApp para evitar colisiones */
-    right: 30px !important;
-    background-color: #095a35 !important; /* Verde Matcha Identitario */
-    color: #f7f4eb !important;
-    width: 55px !important;
-    height: 55px !important;
-    border-radius: 50% !important;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25) !important;
-    z-index: 99999 !important;
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    background-color: #095a35;
+    color: #f7f4eb;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    z-index: 99999;
     cursor: pointer;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease !important;
+    border: none;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
 }
 
 .cart-floating-btn:hover {
-    transform: scale(1.08) !important;
+    transform: scale(1.08);
 }
 
 .cart-floating-btn.hidden {
-    opacity: 0 !important;
-    pointer-events: none !important;
-    transform: scale(0.8) translateY(20px) !important;
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.8) translateY(20px);
 }
 
-/* BADGE DORADO DE CONTADOR */
-.cart-count-badge {
+.cart-badge {
     position: absolute;
     top: -2px;
     right: -2px;
-    background-color: #c9a054; /* El dorado identitario de Seijaku */
-    color: #1e2923; /* Carbón vegetal para óptimo contraste */
+    background-color: #c9a054;
+    color: #1e2923;
     font-family: 'Montserrat', sans-serif;
     font-size: 10px;
     font-weight: 600;
@@ -695,7 +627,9 @@ body {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Modal de Checkout */
+/* ==========================================================================
+   MODAL
+   ========================================================================== */
 .modal {
     position: fixed;
     top: 0;
@@ -707,13 +641,12 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 100000; /* Un paso por encima de los botones flotantes */
+    z-index: 100000;
     transition: opacity 0.3s ease;
 }
 
 .modal.hidden {
-    display: none !important;
-    opacity: 0;
+    display: none;
 }
 
 .modal-content {
@@ -725,7 +658,7 @@ body {
     overflow-y: auto;
     padding: 40px 30px;
     position: relative;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
 }
 
 .close-modal {
@@ -746,7 +679,6 @@ body {
     letter-spacing: 1px;
 }
 
-/* Lista de productos dentro del modal */
 .cart-items-list {
     margin-bottom: 20px;
 }
@@ -783,7 +715,6 @@ body {
     font-weight: 500;
 }
 
-/* Formulario */
 .form-title {
     font-family: 'Montserrat', sans-serif;
     font-size: 12px;
@@ -800,7 +731,8 @@ body {
     gap: 12px;
 }
 
-.checkout-form input, .checkout-form textarea {
+.checkout-form input,
+.checkout-form textarea {
     background-color: rgba(255, 255, 255, 0.6);
     border: 1px solid rgba(140, 150, 144, 0.4);
     padding: 10px 14px;
@@ -811,7 +743,8 @@ body {
     width: 100%;
 }
 
-.checkout-form input:focus, .checkout-form textarea:focus {
+.checkout-form input:focus,
+.checkout-form textarea:focus {
     border-color: #095a35;
 }
 
@@ -827,19 +760,79 @@ body {
     letter-spacing: 2px;
     cursor: pointer;
     margin-top: 10px;
-    transition: background 0.3s;
+    transition: background 0.3s ease;
 }
 
 .submit-order-btn:hover {
     background-color: #123d28;
 }
 
-/* RESPONSIVO PARA DISEÑO MÓVIL DE LOS BOTONES */
+/* ==========================================================================
+   RESPONSIVO
+   ========================================================================== */
 @media (max-width: 768px) {
+    .hero-section {
+        padding: 85px 20px 35px;
+    }
+
+    .brand-logo {
+        max-width: 150px;
+    }
+
+    .slogan {
+        font-size: 15px;
+        letter-spacing: 2px;
+        margin-bottom: 20px;
+    }
+
+    .hero-legend {
+        font-size: 11.5px;
+        line-height: 1.7;
+        max-width: 90%;
+    }
+
+    .menu-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .kanji-background {
+        font-size: 60vw;
+        right: -20%;
+    }
+
+    .section-title {
+        font-size: 26px;
+    }
+
+    .info-container {
+        flex-direction: column;
+    }
+
+    .info-divider {
+        width: 50px;
+        height: 1px;
+        margin: 10px auto;
+    }
+
     .cart-floating-btn {
-        bottom: 85px !important;
-        right: 20px !important;
-        width: 50px !important;
-        height: 50px !important;
+        bottom: 85px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    .menu-item.item-with-image {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        padding: 12px;
+    }
+
+    .item-image-wrapper {
+        width: 100%;
+        height: 180px;
     }
 }

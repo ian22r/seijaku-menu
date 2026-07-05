@@ -1,73 +1,117 @@
-// Configuración inicial del carrito vacio
+/* ==========================================================================
+   CARRITO SEIJAKU — Lógica completa optimizada
+   ========================================================================== */
+
+const WHATSAPP_NUMBER = "5217721540533";
 let cart = [];
-const WHATSAPP_NUMBER = "5217721540533"; // Tu número de Seijaku
 
-// Elementos del DOM actualizados
-const cartFloatingBtn = document.getElementById('cart-floating-btn');
-const cartCountBadge = document.getElementById('cart-count-badge');
-const cartModal = document.getElementById('cart-modal');
-const closeModalBtn = document.getElementById('close-modal-btn');
-const cartItemsList = document.getElementById('cart-items-list');
-const cartTotalPrice = document.getElementById('cart-total-price');
-const checkoutForm = document.getElementById('checkout-form');
+// Referencias DOM
+const cartFloatingBtn  = document.getElementById('cart-floating-btn');
+const cartCountBadge   = document.getElementById('cart-count-badge');
+const cartModal        = document.getElementById('cart-modal');
+const closeModalBtn    = document.getElementById('close-modal-btn');
+const cartItemsList    = document.getElementById('cart-items-list');
+const cartTotalPrice   = document.getElementById('cart-total-price');
+const checkoutForm     = document.getElementById('checkout-form');
+const customRollBtn    = document.getElementById('add-custom-roll-btn');
+const calpisSelect     = document.getElementById('calpis-flavor');
+const calpisBtn        = document.getElementById('calpis-btn');
 
-// Escuchas para añadir elementos (General y Variantes)
-document.querySelectorAll('.add-to-cart, .add-to-cart-variant').forEach(button => {
-    button.addEventListener('click', (e) => {
-        // Si es el botón del rollo personalizado, manejamos su propia lógica limpia
-        if (button.id === 'add-custom-roll-btn') {
-            const name = button.getAttribute('data-name');
-            const price = parseInt(button.getAttribute('data-price'));
-            
-            // Validación: Si el data-name tiene el valor por defecto (no han seleccionado nada)
-            if (name === "Rollo Personalizado (Por armar)" || name.includes("Fuera: Ninguna | Dentro: Ninguno | Salsas: Ninguno")) {
-                alert("Por favor, selecciona al menos un ingrediente para armar tu rollo personalizado.");
-                return;
-            }
-            
-            addToCart(name, price);
-            
-            // NUEVO: Desmarcar automáticamente todos los checkboxes del bloque del rollo personalizado
-            document.querySelectorAll('.custom-roll-block input[type="checkbox"]').forEach(cb => cb.checked = false);
-            
-            // Restaurar el atributo data-name al estado inicial vacío
-            button.setAttribute('data-name', 'Rollo Personalizado (Por armar)');
-            
-            // Efecto visual de éxito
-            button.innerText = "¡Añadido con éxito! 🍱";
-            setTimeout(() => {
-                button.innerText = "Añadir Rollo Personalizado";
-            }, 1500);
-            
-            return; // Detiene la ejecución para que no se duplique
-        }
+/* ------------------------------------------------------------------
+   ROLLO PERSONALIZADO — Validación y construcción del nombre
+------------------------------------------------------------------ */
+function validateSection(checkbox, groupSelector) {
+    const checked = document.querySelectorAll(`${groupSelector} input[type="checkbox"]:checked`);
+    if (checked.length > 3) {
+        checkbox.checked = false;
+        alert("Solo puedes seleccionar un máximo de 3 ingredientes por sección.");
+        return;
+    }
+    updateCustomRollData();
+}
 
-        // Lógica normal para el resto de los productos de la carta
-        const name = button.getAttribute('data-name');
-        const price = parseInt(button.getAttribute('data-price'));
-        
-        addToCart(name, price);
-    });
+function updateCustomRollData() {
+    const get = (sel) =>
+        Array.from(document.querySelectorAll(`${sel} input[type="checkbox"]:checked`))
+             .map(cb => cb.value).join(', ') || null;
+
+    const covers   = get('#cover-checkbox-group');
+    const fillings = get('#fillings-checkbox-group');
+    const sauces   = get('#sauces-checkbox-group');
+
+    const fullName = covers || fillings || sauces
+        ? `Rollo Personalizado (Fuera: \${covers ?? 'Ninguna'} | Dentro: \${fillings ?? 'Ninguno'} | Salsas: \${sauces ?? 'Ninguno'})`
+        : 'Rollo Personalizado (Por armar)';
+
+    customRollBtn.setAttribute('data-name', fullName);
+}
+
+// Exponer para los onchange del HTML
+window.validateSection   = validateSection;
+window.updateCustomRollData = updateCustomRollData;
+
+/* ------------------------------------------------------------------
+   CALPIS — Sincronizar sabor con el botón
+------------------------------------------------------------------ */
+calpisSelect.addEventListener('change', () => {
+    calpisBtn.setAttribute('data-name', `Calpis de la Casa (${calpisSelect.value})`);
 });
 
-// Función para añadir al arreglo del carrito
+/* ------------------------------------------------------------------
+   AÑADIR AL CARRITO
+------------------------------------------------------------------ */
 function addToCart(name, price) {
-    // Validar si el elemento ya existe para sumar cantidad
-    const existingItem = cart.find(item => item.name === name);
-    if (existingItem) {
-        existingItem.quantity += 1;
+    const existing = cart.find(item => item.name === name);
+    if (existing) {
+        existing.quantity += 1;
     } else {
         cart.push({ name, price, quantity: 1 });
     }
     updateCartUI();
 }
 
-// Actualizar el nuevo botón flotante circular e indicadores en la pantalla
+function feedbackButton(btn, originalText) {
+    btn.textContent = '¡Añadido! ✓';
+    btn.disabled = true;
+    setTimeout(() => {
+        btn.textContent = originalText;
+        btn.disabled = false;
+    }, 1200);
+}
+
+document.querySelectorAll('.add-to-cart, .add-to-cart-variant').forEach(btn => {
+    btn.addEventListener('click', () => {
+        // Rollo personalizado
+        if (btn.id === 'add-custom-roll-btn') {
+            const name = btn.getAttribute('data-name');
+            if (name === 'Rollo Personalizado (Por armar)') {
+                alert("Por favor, selecciona al menos un ingrediente para armar tu rollo personalizado.");
+                return;
+            }
+            addToCart(name, parseInt(btn.getAttribute('data-price')));
+            // Limpiar checkboxes
+            document.querySelectorAll('.custom-roll-block input[type="checkbox"]').forEach(cb => cb.checked = false);
+            updateCustomRollData();
+            feedbackButton(btn, 'Añadir al carrito');
+            return;
+        }
+
+        // Productos normales
+        const name  = btn.getAttribute('data-name');
+        const price = parseInt(btn.getAttribute('data-price'));
+        addToCart(name, price);
+        feedbackButton(btn, btn.textContent);
+    });
+});
+
+/* ------------------------------------------------------------------
+   ACTUALIZAR UI
+------------------------------------------------------------------ */
 function updateCartUI() {
-    const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
-    
-    if (totalItems > 0) {
-        cartCountBadge.innerText = totalItems;
+    const total = cart.reduce((acc, item) => acc + item.quantity, 0);
+    cartCountBadge.textContent = total;
+
+    if (total > 0) {
         cartFloatingBtn.classList.remove('hidden');
     } else {
         cartFloatingBtn.classList.add('hidden');
@@ -75,86 +119,92 @@ function updateCartUI() {
     }
 }
 
-// Función centralizada para armar y renderizar la lista del modal
+/* ------------------------------------------------------------------
+   RENDERIZAR MODAL
+------------------------------------------------------------------ */
 function renderCartModal() {
     cartItemsList.innerHTML = '';
     let total = 0;
-    
+
     cart.forEach((item, index) => {
-        const itemSubtotal = item.price * item.quantity;
-        total += itemSubtotal;
-        
+        const subtotal = item.price * item.quantity;
+        total += subtotal;
+
         const row = document.createElement('div');
         row.className = 'cart-item-row';
         row.innerHTML = `
             <div>
-                <strong>${item.quantity}x</strong> ${item.name} 
-                <span style="color: #7b8580; margin-left: 5px;">($${item.price})</span>
+                <strong>${item.quantity}x</strong> \${item.name}
+                <span style="color:#7b8580; margin-left:5px;">($${item.price})</span>
             </div>
             <div>
-                <span>$${itemSubtotal}</span>
-                <button class="remove-item" onclick="removeItemFromCart(${index})"><i class="far fa-trash-alt"></i></button>
-            </div>
-        `;
+                <span>$${subtotal}</span>
+                <button class="remove-item" onclick="removeItemFromCart(${index})">
+                    <i class="far fa-trash-alt"></i>
+                </button>
+            </div>`;
         cartItemsList.appendChild(row);
     });
-    
-    cartTotalPrice.innerText = `$${total}`;
+
+    cartTotalPrice.textContent = `$${total}`;
 }
 
-// Abrir el modal elegante al pulsar el botón circular flotante
+/* ------------------------------------------------------------------
+   ELIMINAR ÍTEM
+------------------------------------------------------------------ */
+window.removeItemFromCart = function(index) {
+    cart.splice(index, 1);
+    updateCartUI();
+    if (cart.length > 0) {
+        renderCartModal();
+    }
+    // Si el carrito queda vacío, updateCartUI() ya cierra el modal
+};
+
+/* ------------------------------------------------------------------
+   ABRIR / CERRAR MODAL
+------------------------------------------------------------------ */
 cartFloatingBtn.addEventListener('click', () => {
     renderCartModal();
     cartModal.classList.remove('hidden');
 });
 
-// Remover elementos individualmente dentro del modal
-window.removeItemFromCart = function(index) {
-    cart.splice(index, 1);
-    updateCartUI();
-    if (cart.length > 0) {
-        renderCartModal(); // Refresca visualmente la lista interna si aún quedan productos
-    }
-};
-
-// Cerrar Modal
 closeModalBtn.addEventListener('click', () => cartModal.classList.add('hidden'));
 
-// Procesar Formulario y despachar mensaje automatizado a WhatsApp
+// Cerrar al hacer clic fuera del contenido
+cartModal.addEventListener('click', (e) => {
+    if (e.target === cartModal) cartModal.classList.add('hidden');
+});
+
+/* ------------------------------------------------------------------
+   ENVÍO POR WHATSAPP
+------------------------------------------------------------------ */
 checkoutForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    
-    const name = document.getElementById('client-name').value.trim();
-    const phone = document.getElementById('client-phone').value.trim();
+
+    const name    = document.getElementById('client-name').value.trim();
+    const phone   = document.getElementById('client-phone').value.trim();
     const address = document.getElementById('client-address').value.trim();
-    
+
     let total = 0;
-    
-    // Formateo del mensaje con estilo limpio e inteligible
     let message = `*✨ NUEVO PEDIDO — SEIJAKU ✨*\n\n`;
-    message += `*👤 Cliente:* ${name}\n`;
-    message += `*📞 Teléfono:* ${phone}\n`;
-    message += `*📍 Dirección:* ${address}\n\n`;
+    message += `*👤 Cliente:* \${name}\n`;
+    message += `*📞 Teléfono:* \${phone}\n`;
+    message += `*📍 Dirección:* \${address}\n\n`;
     message += `*📋 Detalle del Pedido:*\n`;
-    
+
     cart.forEach(item => {
         const subtotal = item.price * item.quantity;
         total += subtotal;
-        message += `• ${item.quantity}x ${item.name} — $${subtotal}\n`;
+        message += `• \${item.quantity}x \${item.name} — \$${subtotal}\n`;
     });
-    
-    message += `\n*💰 Total Estimado:* $${total}\n`;
+
+    message += `\n*💰 Total Estimado:* \$${total}\n`;
     message += `\n_El pedido se confirmará respondiendo a este mensaje._`;
-    
-    // Codificación segura para URL
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
-    
-    // Limpiar carrito tras redirigir
+
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
+
     cart = [];
     updateCartUI();
     checkoutForm.reset();
-    
-    // Redirección al cliente
-    window.open(whatsappUrl, '_blank');
 });
