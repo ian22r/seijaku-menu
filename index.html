@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seijaku — Menú </title>
-    <link rel="stylesheet" href="style.css?v=1.8">
+    <link rel="stylesheet" href="style.css?v=1.9">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -169,7 +169,7 @@
                     </div>
                 </div>
 
-                <!-- Ebi crunch Roll (Próximamente) -->
+                <!-- Ebi crunch Roll -->
                 <div class="menu-item item-with-image coming-soon">
                     <div class="item-image-wrapper">
                         <img src="ebi.png" alt="Ebi crunch Roll" class="item-photo">
@@ -192,9 +192,7 @@
                     <p class="description">
                         Diseña tu combinación perfecta seleccionando tus ingredientes favoritos basándote en nuestra barra de especialidades (Máximo 3 por sección).
                     </p>
-
                     <div class="custom-roll-selectors">
-
                         <div class="custom-roll-group">
                             <label class="custom-roll-label">1. CUBIERTA / EXTERIOR (Máx. 3):</label>
                             <div id="cover-checkbox-group" class="custom-checkbox-grid">
@@ -209,7 +207,6 @@
                                 <label class="custom-check"><input type="checkbox" value="Surimi Tempura"> Surimi Tempura</label>
                             </div>
                         </div>
-
                         <div class="custom-roll-group">
                             <label class="custom-roll-label">2. RELLENOS (Máx. 3):</label>
                             <div id="fillings-checkbox-group" class="custom-checkbox-grid">
@@ -225,7 +222,6 @@
                                 <label class="custom-check"><input type="checkbox" value="Chiles Toreados"> Chiles Toreados</label>
                             </div>
                         </div>
-
                         <div class="custom-roll-group">
                             <label class="custom-roll-label">3. TOPPINGS & SALSAS (Máx. 3):</label>
                             <div id="sauces-checkbox-group" class="custom-checkbox-grid">
@@ -237,9 +233,7 @@
                                 <label class="custom-check"><input type="checkbox" value="Cebollín"> Cebollín</label>
                             </div>
                         </div>
-
                     </div>
-
                     <button id="add-custom-roll-btn" class="add-to-cart custom-roll-submit" data-name="Rollo Personalizado (Por armar)" data-price="145">
                         Añadir al carrito
                     </button>
@@ -443,7 +437,11 @@
             <form id="checkout-form" class="checkout-form">
                 <input type="text" id="client-name" placeholder="Tu Nombre Completo" required>
                 <input type="tel" id="client-phone" placeholder="Número de Teléfono (WhatsApp)" required>
-                <textarea id="client-address" placeholder="Dirección Exacta de Entrega (Calle, Colonia y Referencias o ubicacion por WhatsApp para facilitar el trabajo al repartidor)" rows="3" required></textarea>
+                <textarea id="client-address" placeholder="Dirección (Calle, Colonia y Referencias — opcional)" rows="3"></textarea>
+                <div class="location-note">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>También puedes compartir tu 📍 ubicación directamente en el chat de WhatsApp usando el clip 📎 → Ubicación.</span>
+                </div>
                 <button type="submit" class="submit-order-btn">Confirmar y enviar por WhatsApp</button>
             </form>
         </div>
@@ -510,6 +508,6 @@
         <span id="cart-count-badge" class="cart-badge">0</span>
     </button>
 
-    <script src="cart.js?v=2.0"></script>
+    <script src="cart.js?v=2.1"></script>
 </body>
 </html>

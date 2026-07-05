@@ -18,7 +18,7 @@ const calpisSelect    = document.getElementById('calpis-flavor');
 const calpisBtn       = document.getElementById('calpis-btn');
 
 /* ------------------------------------------------------------------
-   ROLLO PERSONALIZADO — Listeners en JS (sin onchange inline)
+   ROLLO PERSONALIZADO
 ------------------------------------------------------------------ */
 var checkboxGroups = [
     { selector: '#cover-checkbox-group',    max: 3 },
@@ -64,8 +64,6 @@ function updateCustomRollData() {
     customRollBtn.setAttribute('data-name', fullName);
 }
 
-// Ya no se necesitan en window porque no hay onchange inline
-window.validateSection      = function() {};
 window.updateCustomRollData = updateCustomRollData;
 
 /* ------------------------------------------------------------------
@@ -103,7 +101,6 @@ function feedbackButton(btn, originalText) {
 document.querySelectorAll('.add-to-cart, .add-to-cart-variant').forEach(function(btn) {
     btn.addEventListener('click', function() {
 
-        // Rollo personalizado
         if (btn.id === 'add-custom-roll-btn') {
             var name = btn.getAttribute('data-name');
             if (name === 'Rollo Personalizado (Por armar)') {
@@ -119,7 +116,6 @@ document.querySelectorAll('.add-to-cart, .add-to-cart-variant').forEach(function
             return;
         }
 
-        // Productos normales
         var name  = btn.getAttribute('data-name');
         var price = parseInt(btn.getAttribute('data-price'));
         var originalText = btn.textContent;
@@ -145,7 +141,7 @@ function updateCartUI() {
 }
 
 /* ------------------------------------------------------------------
-   RENDERIZAR MODAL — 100% createElement
+   RENDERIZAR MODAL
 ------------------------------------------------------------------ */
 function renderCartModal() {
     cartItemsList.innerHTML = '';
@@ -158,29 +154,21 @@ function renderCartModal() {
         var row = document.createElement('div');
         row.className = 'cart-item-row';
 
-        // Columna izquierda
         var left = document.createElement('div');
-
         var bold = document.createElement('strong');
         bold.textContent = item.quantity + 'x';
-
         var nameText = document.createTextNode(' ' + item.name + ' ');
-
         var priceSpan = document.createElement('span');
         priceSpan.style.color = '#7b8580';
         priceSpan.style.marginLeft = '5px';
         priceSpan.textContent = '($' + item.price + ')';
-
         left.appendChild(bold);
         left.appendChild(nameText);
         left.appendChild(priceSpan);
 
-        // Columna derecha
         var right = document.createElement('div');
-
         var subtotalSpan = document.createElement('span');
         subtotalSpan.textContent = '$' + subtotal;
-
         var removeBtn = document.createElement('button');
         removeBtn.className = 'remove-item';
         var icon = document.createElement('i');
@@ -237,8 +225,14 @@ checkoutForm.addEventListener('submit', function(e) {
     var message = '*✨ NUEVO PEDIDO — SEIJAKU ✨*\n\n';
     message += '*👤 Cliente:* ' + name + '\n';
     message += '*📞 Teléfono:* ' + phone + '\n';
-    message += '*📍 Dirección:* ' + address + '\n\n';
-    message += '*📋 Detalle del Pedido:*\n';
+
+    if (address) {
+        message += '*📍 Dirección:* ' + address + '\n';
+    } else {
+        message += '*📍 Dirección:* El cliente compartirá su ubicación en este chat 📍\n';
+    }
+
+    message += '\n*📋 Detalle del Pedido:*\n';
 
     cart.forEach(function(item) {
         var subtotal = item.price * item.quantity;
@@ -247,7 +241,7 @@ checkoutForm.addEventListener('submit', function(e) {
     });
 
     message += '\n*💰 Total Estimado:* \$' + total + '\n';
-    message += '\n_El pedido se confirmará respondiendo a este mensaje._';
+    message += '\n_Responde este mensaje para confirmar y si gustas comparte tu 📍 ubicación en tiempo real._';
 
     window.open('https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(message), '_blank');
 

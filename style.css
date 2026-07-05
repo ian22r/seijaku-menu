@@ -403,7 +403,6 @@ body {
     user-select: none;
 }
 
-/* Próximamente visual (sin deshabilitar interacción) */
 .menu-item.coming-soon-visual {
     opacity: 0.5;
     user-select: none;
@@ -579,7 +578,6 @@ body {
     border-color: #095a35;
 }
 
-/* Botón flotante del carrito */
 .cart-floating-btn {
     position: fixed;
     bottom: 100px;
@@ -765,6 +763,27 @@ body {
 
 .submit-order-btn:hover {
     background-color: #123d28;
+}
+
+/* Aviso de ubicación */
+.location-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background-color: rgba(9, 90, 53, 0.06);
+    border: 1px solid rgba(9, 90, 53, 0.15);
+    border-radius: 4px;
+    padding: 10px 14px;
+    font-size: 11px;
+    color: #5c6660;
+    line-height: 1.6;
+}
+
+.location-note i {
+    color: #095a35;
+    font-size: 13px;
+    margin-top: 2px;
+    flex-shrink: 0;
 }
 
 /* ==========================================================================
