@@ -1,5 +1,5 @@
 /* ==========================================================================
-   CARRITO SEIJAKU v2.0
+   CARRITO SEIJAKU v2.1
    ========================================================================== */
 
 const WHATSAPP_NUMBER = "5217721540533";
@@ -18,26 +18,36 @@ const calpisSelect    = document.getElementById('calpis-flavor');
 const calpisBtn       = document.getElementById('calpis-btn');
 
 /* ------------------------------------------------------------------
-   ROLLO PERSONALIZADO
+   ROLLO PERSONALIZADO — Listeners en JS (sin onchange inline)
 ------------------------------------------------------------------ */
-function validateSection(checkbox, groupSelector) {
-    const checked = document.querySelectorAll(groupSelector + ' input[type="checkbox"]:checked');
-    if (checked.length > 3) {
-        checkbox.checked = false;
-        alert("Solo puedes seleccionar un máximo de 3 ingredientes por sección.");
-        return;
-    }
-    updateCustomRollData();
+var checkboxGroups = [
+    { selector: '#cover-checkbox-group',    max: 3 },
+    { selector: '#fillings-checkbox-group', max: 3 },
+    { selector: '#sauces-checkbox-group',   max: 3 }
+];
+
+checkboxGroups.forEach(function(group) {
+    var boxes = document.querySelectorAll(group.selector + ' input[type="checkbox"]');
+    boxes.forEach(function(checkbox) {
+        checkbox.addEventListener('change', function() {
+            var checked = document.querySelectorAll(group.selector + ' input[type="checkbox"]:checked');
+            if (checked.length > group.max) {
+                checkbox.checked = false;
+                alert('Solo puedes seleccionar un máximo de ' + group.max + ' ingredientes por sección.');
+            }
+            updateCustomRollData();
+        });
+    });
+});
+
+function getValues(sel) {
+    var boxes = document.querySelectorAll(sel + ' input[type="checkbox"]:checked');
+    var vals = [];
+    boxes.forEach(function(cb) { vals.push(cb.value); });
+    return vals.length > 0 ? vals.join(', ') : null;
 }
 
 function updateCustomRollData() {
-    function getValues(sel) {
-        var boxes = document.querySelectorAll(sel + ' input[type="checkbox"]:checked');
-        var vals = [];
-        boxes.forEach(function(cb) { vals.push(cb.value); });
-        return vals.length > 0 ? vals.join(', ') : null;
-    }
-
     var covers   = getValues('#cover-checkbox-group');
     var fillings = getValues('#fillings-checkbox-group');
     var sauces   = getValues('#sauces-checkbox-group');
@@ -54,7 +64,8 @@ function updateCustomRollData() {
     customRollBtn.setAttribute('data-name', fullName);
 }
 
-window.validateSection      = validateSection;
+// Ya no se necesitan en window porque no hay onchange inline
+window.validateSection      = function() {};
 window.updateCustomRollData = updateCustomRollData;
 
 /* ------------------------------------------------------------------
@@ -134,7 +145,7 @@ function updateCartUI() {
 }
 
 /* ------------------------------------------------------------------
-   RENDERIZAR MODAL — 100% createElement, sin template literals
+   RENDERIZAR MODAL — 100% createElement
 ------------------------------------------------------------------ */
 function renderCartModal() {
     cartItemsList.innerHTML = '';
@@ -176,7 +187,6 @@ function renderCartModal() {
         icon.className = 'far fa-trash-alt';
         removeBtn.appendChild(icon);
 
-        // Capturar index correctamente
         (function(i) {
             removeBtn.addEventListener('click', function() {
                 cart.splice(i, 1);
@@ -189,7 +199,6 @@ function renderCartModal() {
 
         right.appendChild(subtotalSpan);
         right.appendChild(removeBtn);
-
         row.appendChild(left);
         row.appendChild(right);
         cartItemsList.appendChild(row);
