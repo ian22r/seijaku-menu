@@ -241,7 +241,7 @@ checkoutForm.addEventListener('submit', function(e) {
     });
 
     message += '\n*💰 Total Estimado:* \$' + total + '\n';
-    message += '\n_Responde este mensaje para confirmar y si gustas comparte tu 📍 ubicación en tiempo real._';
+    message += '\n_Responde este mensaje para confirmar y si gustas comparte tu 📍 ubicación para agilizar la entrega._';
 
     window.open('https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(message), '_blank');
 
