@@ -244,8 +244,8 @@ checkoutForm.addEventListener('submit', function(e) {
         message += '• ' + item.quantity + 'x ' + item.name + ' — \$' + subtotal + '\n';
     });
 
-    message += '\n*💰 Total Estimado:* \$' + total + '\n';
-    message += '\n_Responde este mensaje para confirmar y si gustas comparte tu 📍 ubicación para agilizar la entrega._';
+    message += '\n*💰 Total:* \$' + total + '\n';
+    message += '\n_Un miembro del equipo responderá este mensaje para confirmar y si gustas comparte tu 📍 ubicación para agilizar la entrega._';
 
     window.open('https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(message), '_blank');
 
