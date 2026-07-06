@@ -217,12 +217,16 @@ cartModal.addEventListener('click', function(e) {
 checkoutForm.addEventListener('submit', function(e) {
     e.preventDefault();
 
+    // Generar un folio único para el pedido
+    const folio = Math.floor(1000 + Math.random() * 9000); 
+
     var name    = document.getElementById('client-name').value.trim();
     var phone   = document.getElementById('client-phone').value.trim();
     var address = document.getElementById('client-address').value.trim();
 
     var total = 0;
-    var message = '*✨ NUEVO PEDIDO — SEIJAKU ✨*\n\n';
+    // Incluir el folio en el mensaje
+    var message = '*✨ PEDIDO SEIJAKU #' + folio + ' ✨*\n\n'; 
     message += '*👤 Cliente:* ' + name + '\n';
     message += '*📞 Teléfono:* ' + phone + '\n';
 
