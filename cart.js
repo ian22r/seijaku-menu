@@ -1,11 +1,13 @@
 /* ==========================================================================
-   CARRITO SEIJAKU v2.4 (TOLERANTE A ELEMENTOS FALTANTES)
+   CARRITO SEIJAKU v2.9 - COMPLETO Y BLINDADO
    ========================================================================== */
 
 const WHATSAPP_NUMBER = "5217721540533";
 let cart = [];
+let notificationTimeout = null; 
+let hasShownNotification = false; // Control para que la alerta solo salga una vez
 
-// Referencias DOM con protección de existencia
+// Referencias DOM
 const cartFloatingBtn = document.getElementById('cart-floating-btn');
 const cartCountBadge  = document.getElementById('cart-count-badge');
 const cartModal       = document.getElementById('cart-modal');
@@ -16,9 +18,10 @@ const checkoutForm    = document.getElementById('checkout-form');
 const customRollBtn   = document.getElementById('add-custom-roll-btn');
 const calpisSelect    = document.getElementById('calpis-flavor');
 const calpisBtn       = document.getElementById('calpis-btn');
+const notificationDiv = document.getElementById('notification');
 
 /* ------------------------------------------------------------------
-   ROLLO PERSONALIZADO
+   1. ROLLO PERSONALIZADO
 ------------------------------------------------------------------ */
 var checkboxGroups = [
     { selector: '#cover-checkbox-group',    max: 3 },
@@ -60,7 +63,7 @@ function updateCustomRollData() {
 }
 
 /* ------------------------------------------------------------------
-   MANEJO DE CALPIS DINÁMICO
+   2. MANEJO DE CALPIS DINÁMICO
 ------------------------------------------------------------------ */
 if (calpisSelect && calpisBtn) {
     calpisSelect.addEventListener('change', function() {
@@ -69,16 +72,15 @@ if (calpisSelect && calpisBtn) {
 }
 
 /* ------------------------------------------------------------------
-   AÑADIR AL CARRITO (ESCUCHA GLOBAL BLINDADA)
+   3. ESCUCHA GLOBAL DE EVENTOS (AÑADIR AL CARRITO)
 ------------------------------------------------------------------ */
 document.addEventListener('click', function(e) {
     var btn = e.target.closest('.add-to-cart, .add-to-cart-variant');
     if (!btn) return;
 
-    // Detener comportamiento por defecto si es un enlace o botón dentro de form
     e.preventDefault();
 
-    // Caso 1: Rollo Personalizado
+    // Caso A: Rollo Personalizado
     if (btn.id === 'add-custom-roll-btn') {
         var name = btn.getAttribute('data-name');
         if (!name || name === 'Rollo Personalizado (Por armar)') {
@@ -96,7 +98,7 @@ document.addEventListener('click', function(e) {
         return;
     }
 
-    // Caso 2: Calpis
+    // Caso B: Calpis
     if (btn.id === 'calpis-btn' && calpisSelect) {
         var currentFlavor = calpisSelect.value;
         var calpisPrice = parseInt(btn.getAttribute('data-price')) || 70;
@@ -105,7 +107,7 @@ document.addEventListener('click', function(e) {
         return;
     }
 
-    // Caso 3: Botones Generales y Variantes (Mochis, Kushiages, Yakimeshi, Sushi normal, Ramen)
+    // Caso C: Productos Generales (Sushi normal, Ramen, Kushiages, etc.)
     var name = btn.getAttribute('data-name');
     var priceAttr = btn.getAttribute('data-price');
     var price = 0;
@@ -114,13 +116,11 @@ document.addEventListener('click', function(e) {
         var cleanPrice = String(priceAttr).replace(/[^0-9]/g, '');
         price = parseInt(cleanPrice) || 0;
     } else {
-        // Respaldos automáticos por texto si faltan atributos en tu HTML
         if (name && name.toLowerCase().includes('mochi')) price = 60;
         if (name && name.toLowerCase().includes('kushiage')) price = 55;
         if (name && name.toLowerCase().includes('yakimeshi')) price = 80;
     }
 
-    // Si por alguna razón sigue dando 0, intentamos extraerlo del texto del propio botón
     if (price === 0 && btn.textContent) {
         var match = btn.textContent.match(/\d+/);
         if (match) price = parseInt(match[0]);
@@ -131,20 +131,21 @@ document.addEventListener('click', function(e) {
     if (name && price > 0) {
         addToCart(name, price);
         feedbackButton(btn, originalText);
-    } else {
-        console.error("Faltan datos críticos en el botón. Asegúrate de tener data-name y un precio visible.");
     }
 });
 
 function addToCart(name, price) {
     cart.push({ name: name, price: price });
     updateCartUI();
+    
+    // Disparar la notificación push temporal SÓLO en el primer artículo
+    if (cart.length === 1 && !hasShownNotification) {
+        showFlashNotification();
+    }
 }
 
 function feedbackButton(btn, originalText) {
-    // Si el texto original ya dice "¡Añadido!", evitamos bucles de texto
     if (originalText.includes("¡Añadido!")) return;
-
     btn.textContent = "¡Añadido!";
     btn.style.backgroundColor = "#095a35";
     btn.style.color = "#ffffff";
@@ -158,18 +159,44 @@ function feedbackButton(btn, originalText) {
 }
 
 /* ------------------------------------------------------------------
-   INTERFAZ DE USUARIO (UI) CON VERIFICACIONES
+   4. NOTIFICACIÓN PUSH TEMPORAL (UNA SOLA VEZ)
+------------------------------------------------------------------ */
+function showFlashNotification() {
+    if (!notificationDiv) return;
+
+    hasShownNotification = true; // Bloquea futuras apariciones inmediatamente
+
+    var currentTotal = 0;
+    cart.forEach(function(item) { currentTotal += item.price; });
+
+    // Si por alguna razón el primer artículo ya supera los $200, no avisa
+    if (currentTotal >= 200) return;
+
+    if (notificationTimeout) clearTimeout(notificationTimeout);
+
+    // Muestra la barra push bajando desde arriba
+    notificationDiv.classList.add('show');
+
+    // La esconde automáticamente a los 3.5 segundos
+    notificationTimeout = setTimeout(function() {
+        notificationDiv.classList.remove('show');
+    }, 3500);
+}
+
+/* ------------------------------------------------------------------
+   5. INTERFAZ DE USUARIO (Muestra bolsa flotante)
 ------------------------------------------------------------------ */
 function updateCartUI() {
     if (cartCountBadge) {
         cartCountBadge.textContent = cart.length;
     }
-    
+
     if (cart.length > 0) {
         if (cartFloatingBtn) cartFloatingBtn.classList.remove('hidden');
     } else {
         if (cartFloatingBtn) cartFloatingBtn.classList.add('hidden');
         if (cartModal) cartModal.classList.add('hidden');
+        if (notificationDiv) notificationDiv.classList.remove('show');
     }
 }
 
@@ -238,7 +265,7 @@ function renderCartModal() {
 }
 
 /* ------------------------------------------------------------------
-   ABRIR / CERRAR MODAL
+   6. CONTROLES DEL MODAL
 ------------------------------------------------------------------ */
 if (cartFloatingBtn) {
     cartFloatingBtn.addEventListener('click', function() {
@@ -260,11 +287,19 @@ if (cartModal) {
 }
 
 /* ------------------------------------------------------------------
-   ENVÍO DE PEDIDO A WHATSAPP
+   7. ENVÍO DE PEDIDO FINAL A WHATSAPP
 ------------------------------------------------------------------ */
 if (checkoutForm) {
     checkoutForm.addEventListener('submit', function(e) {
         e.preventDefault();
+
+        // Bloqueo estricto al dar enviar si el total final sigue abajo de $200
+        var currentTotal = 0;
+        cart.forEach(function(item) { currentTotal += item.price; });
+        if (currentTotal < 200) {
+            alert("El monto mínimo para procesar tu pedido es de $200. Por favor, añade más productos.");
+            return;
+        }
 
         var nameInput = document.getElementById('client-name');
         var phoneInput = document.getElementById('client-phone');
