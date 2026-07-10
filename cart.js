@@ -339,7 +339,7 @@ function checkAutomaticDarkMode() {
     const currentHour = new Date().getHours();
     
     // Si la hora es igual o mayor a las 19 (7:00 PM) o antes de las 6 AM, activa el modo oscuro
-    if (currentHour >= 19 || currentHour < 6) {
+    if (currentHour >= 18 || currentHour < 6) {
         document.body.classList.add('dark-mode');
     } else {
         document.body.classList.remove('dark-mode');
