@@ -1057,3 +1057,45 @@ button {
         color: initial !important;
     }
 }
+/* ==========================================================================
+   MODO OSCURO PREMIUM - SEIJAKU (AUTOMÁTICO NOTURNO)
+   ========================================================================== */
+body.dark-mode {
+    background-color: #0d0d0d !important; /* Fondo carbón profundo */
+    color: #f5f5f5 !important; /* Texto claro suave para que no lastime los ojos */
+}
+
+/* Ajuste para las tarjetas del menú en modo oscuro */
+body.dark-mode .menu-item, 
+body.dark-mode .card,
+body.dark-mode .product-card {
+    background-color: #161616 !important;
+    border-color: #222222 !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Mantener legibles las descripciones de los platillos */
+body.dark-mode p, 
+body.dark-mode .product-description,
+body.dark-mode .item-description {
+    color: #b3b3b3 !important;
+}
+
+/* Resaltar los títulos de los sushis en color blanco limpio */
+body.dark-mode h1, 
+body.dark-mode h2, 
+body.dark-mode h3, 
+body.dark-mode .product-title {
+    color: #ffffff !important;
+}
+
+/* Modales del carrito en modo oscuro */
+body.dark-mode .modal-content,
+body.dark-mode #cart-modal .modal-body {
+    background-color: #141414 !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode .cart-item-row span {
+    color: #cccccc !important;
+}
