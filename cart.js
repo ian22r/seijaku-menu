@@ -100,7 +100,6 @@ function feedbackButton(btn, originalText) {
 
 document.querySelectorAll('.add-to-cart, .add-to-cart-variant').forEach(function(btn) {
     btn.addEventListener('click', function() {
-
         if (btn.id === 'add-custom-roll-btn') {
             var name = btn.getAttribute('data-name');
             if (name === 'Rollo Personalizado (Por armar)') {
@@ -128,11 +127,11 @@ document.querySelectorAll('.add-to-cart, .add-to-cart-variant').forEach(function
    ACTUALIZAR UI
 ------------------------------------------------------------------ */
 function updateCartUI() {
-    var total = 0;
-    cart.forEach(function(item) { total += item.quantity; });
-    cartCountBadge.textContent = total;
+    var totalQuantity = 0;
+    cart.forEach(function(item) { totalQuantity += item.quantity; });
+    cartCountBadge.textContent = totalQuantity;
 
-    if (total > 0) {
+    if (totalQuantity > 0) {
         cartFloatingBtn.classList.remove('hidden');
     } else {
         cartFloatingBtn.classList.add('hidden');
@@ -211,50 +210,4 @@ cartModal.addEventListener('click', function(e) {
     if (e.target === cartModal) cartModal.classList.add('hidden');
 });
 
-/* ------------------------------------------------------------------
-   ENVÍO POR WHATSAPP
------------------------------------------------------------------- */
-checkoutForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    // Generar un folio único para el pedido
-    const folio = Math.floor(1000 + Math.random() * 9000); 
-
-    var name    = document.getElementById('client-name').value.trim();
-    var phone   = document.getElementById('client-phone').value.trim();
-    var address = document.getElementById('client-address').value.trim();
-
-    var total = 0;
-    // Incluir el folio en el mensaje
-    var message = '*✨ PEDIDO SEIJAKU #' + folio + ' ✨*\n\n'; 
-    message += '*👤 Cliente:* ' + name + '\n';
-    message += '*📞 Teléfono:* ' + phone + '\n';
-
-    if (address) {
-        message += '*📍 Dirección:* ' + address + '\n';
-    } else {
-        message += '*📍 Dirección:* El cliente compartirá su ubicación en este chat 📍\n';
-    }
-
-    message += '\n*📋 Detalle del Pedido:*\n';
-
-    cart.forEach(function(item) {
-        var subtotal = item.price * item.quantity;
-        total += subtotal;
-        message += '• ' + item.quantity + 'x ' + item.name + ' — \$' + subtotal + '\n';
-    });
-
-    message += '\n*💰 Total:* \$' + total + '\n';
-    message += '\n_Un miembro del equipo responderá este mensaje para confirmar y si gustas comparte tu 📍 ubicación para agilizar la entrega._';
-
-    // Aquí se verifica si el total es menor a 200 y se muestra una alerta
-    if (total < 200) {
-        alert("El monto mínimo de compra es de \$200. Tu total actual es de: \$" + total);
-    }
-
-    window.open('https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(message), '_blank');
-
-    cart = [];
-    updateCartUI();
-    checkoutForm.reset();
-});
+/*
