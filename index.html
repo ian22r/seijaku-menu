@@ -495,24 +495,48 @@
             <p class="footer-credits">© 2026 Seijaku • Gastronomía Japonesa Balanceada</p>
         </div>
     </footer>
-       <button id="cart-floating-btn" class="cart-floating-btn hidden" aria-label="Ver carrito">
-       <svg xmlns="http://www.w3.org/2000/svg" 
-     viewBox="0 0 24 24" 
-     fill="none" 
-     stroke="currentColor" 
-     stroke-width="1.5" 
-     stroke-linecap="round" 
-     stroke-linejoin="round">
-    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-    <line x1="3" y1="6" x2="21" y2="6"></line>
-    <path d="M16 10a4 4 0 0 1-8 0"></path>
-</svg>
+  <button id="cart-floating-btn" class="cart-floating-btn hidden" aria-label="Ver carrito">
+        <svg xmlns="http://www.w3.org/2000/svg" 
+             viewBox="0 0 24 24" 
+             fill="none" 
+             stroke="currentColor" 
+             stroke-width="1.5" 
+             stroke-linecap="round" 
+             stroke-linejoin="round"
+             style="width: 24px; height: 24px; display: inline-block; vertical-align: middle;">
+            <rect x="3" y="8" width="18" height="12" rx="2" ry="2"></rect>
+            <path d="M12 2v6"></path>
+            <path d="M3 8h18"></path>
+            <path d="M8 2h8"></path>
+        </svg>
         <span id="cart-count-badge" class="cart-badge">0</span>
     </button>
+
     <div id="notification" class="notification">
         El monto mínimo de compra es de <strong>$200</strong>.
     </div>
     
-    <script src="cart.js?v=2.2"></script>
+    <script src="cart.js?v=2.4"></script><button id="cart-floating-btn" class="cart-floating-btn hidden" aria-label="Ver carrito">
+        <svg xmlns="http://www.w3.org/2000/svg" 
+             viewBox="0 0 24 24" 
+             fill="none" 
+             stroke="currentColor" 
+             stroke-width="1.5" 
+             stroke-linecap="round" 
+             stroke-linejoin="round"
+             style="width: 24px; height: 24px; display: inline-block; vertical-align: middle;">
+            <rect x="3" y="8" width="18" height="12" rx="2" ry="2"></rect>
+            <path d="M12 2v6"></path>
+            <path d="M3 8h18"></path>
+            <path d="M8 2h8"></path>
+        </svg>
+        <span id="cart-count-badge" class="cart-badge">0</span>
+    </button>
+
+    <div id="notification" class="notification">
+        El monto mínimo de compra es de <strong>$200</strong>.
+    </div>
+    
+    <script src="cart.js?v=2.4"></script>
 </body>
 </html>
