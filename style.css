@@ -954,4 +954,64 @@ body {
     height: 24px !important;
     color: #ffffff !important; /* Si tu botón es blanco, cambia #ffffff por #000000 */
     display: block !important;
+}\/* ==========================================================================
+   LIMPIEZA DE ENFOQUE RESIDUAL EN MÓVILES (BOTONES DE COMPRA)
+   ========================================================================== */
+
+/* 1. Quita el recuadro/destello amarillo o azul nativo al hacer tap en celulares */
+.add-to-cart, 
+.add-to-cart-variant,
+#calpis-btn,
+#add-custom-roll-btn {
+    -webkit-tap-highlight-color: transparent !important;
+}
+
+/* 2. Evita que el botón se quede con un fondo extraño después de ser pulsado en el teléfono */
+.add-to-cart:focus,
+.add-to-cart-variant:focus,
+#calpis-btn:focus,
+#add-custom-roll-btn:focus,
+.add-to-cart:active,
+.add-to-cart-variant:active {
+    outline: none !important;
+    background-color: initial; /* O pon aquí el color base de tus botones si usas uno fijo */
+    box-shadow: none !important;
+}
+
+/* 3. Asegura que cuando cambie a "¡Añadido!" mantenga el verde correcto y no se mezcle */
+.add-to-cart:disabled,
+.add-to-cart-variant:disabled {
+    background-color: #095a35 !important;
+    color: #ffffff !important;
+    opacity: 1 !important; /* Evita que el celular lo ponga grisáceo por estar disabled */
+}/* ==========================================================================
+   LIMPIEZA DE ENFOQUE RESIDUAL EN MÓVILES (BOTONES DE COMPRA)
+   ========================================================================== */
+
+/* 1. Quita el recuadro/destello amarillo o azul nativo al hacer tap en celulares */
+.add-to-cart, 
+.add-to-cart-variant,
+#calpis-btn,
+#add-custom-roll-btn {
+    -webkit-tap-highlight-color: transparent !important;
+}
+
+/* 2. Evita que el botón se quede con un fondo extraño después de ser pulsado en el teléfono */
+.add-to-cart:focus,
+.add-to-cart-variant:focus,
+#calpis-btn:focus,
+#add-custom-roll-btn:focus,
+.add-to-cart:active,
+.add-to-cart-variant:active {
+    outline: none !important;
+    background-color: initial; /* O pon aquí el color base de tus botones si usas uno fijo */
+    box-shadow: none !important;
+}
+
+/* 3. Asegura que cuando cambie a "¡Añadido!" mantenga el verde correcto y no se mezcle */
+.add-to-cart:disabled,
+.add-to-cart-variant:disabled {
+    background-color: #095a35 !important;
+    color: #ffffff !important;
+    opacity: 1 !important; /* Evita que el celular lo ponga grisáceo por estar disabled */
 }
