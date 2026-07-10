@@ -889,3 +889,69 @@ body {
     opacity: 1;
     transform: translateY(0);
 }
+
+/* ==========================================================================
+   KILL OLD CART ICON & FORCE BENTO BOX (PEGAR AL FINAL EN LA LÍNEA 800)
+   ========================================================================== */
+
+/* 1. Borra por completo cualquier icono viejo inyectado en el botón */
+.cart-floating-btn::before, 
+.cart-floating-btn::after,
+.cart-floating-btn i,
+#cart-floating-btn::before,
+#cart-floating-btn::after,
+#cart-floating-btn i {
+    display: none !important;
+    content: "" !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+/* 2. Forzar contenedor limpio para el nuevo SVG */
+.cart-icon-container {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* 3. Darle tamaño y color al Bento Box */
+.bento-svg {
+    width: 24px !important;
+    height: 24px !important;
+    color: #ffffff !important; /* Si tu botón es blanco, cambia #ffffff por #000000 */
+    display: block !important;
+}/* ==========================================================================
+   KILL OLD CART ICON & FORCE BENTO BOX (PEGAR AL FINAL EN LA LÍNEA 800)
+   ========================================================================== */
+
+/* 1. Borra por completo cualquier icono viejo inyectado en el botón */
+.cart-floating-btn::before, 
+.cart-floating-btn::after,
+.cart-floating-btn i,
+#cart-floating-btn::before,
+#cart-floating-btn::after,
+#cart-floating-btn i {
+    display: none !important;
+    content: "" !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+/* 2. Forzar contenedor limpio para el nuevo SVG */
+.cart-icon-container {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* 3. Darle tamaño y color al Bento Box */
+.bento-svg {
+    width: 24px !important;
+    height: 24px !important;
+    color: #ffffff !important; /* Si tu botón es blanco, cambia #ffffff por #000000 */
+    display: block !important;
+}
