@@ -1015,3 +1015,45 @@ body {
     color: #ffffff !important;
     opacity: 1 !important; /* Evita que el celular lo ponga grisáceo por estar disabled */
 }
+/* ==========================================================================
+   PARCHE ESPECÍFICO PARA IPHONE (ELIMINAR ENFOQUE AMARILLO/AZUL EN iOS)
+   ========================================================================== */
+
+/* 1. Desactivar el sombreado y bordes de enfoque que iOS impone en botones y elementos activos */
+.add-to-cart, 
+.add-to-cart-variant,
+#calpis-btn,
+#add-custom-roll-btn,
+#cart-floating-btn,
+button {
+    -webkit-tap-highlight-color: rgba(0,0,0,0) !important; /* Desactiva el flash de tap en iOS */
+    -webkit-appearance: none !important; /* Elimina estilos heredados de botones en Safari */
+}
+
+/* 2. Matar el estado de foco y foco-visible en iPhone para que no retenga el color amarillo */
+.add-to-cart:focus,
+.add-to-cart-variant:focus,
+#calpis-btn:focus,
+#add-custom-roll-btn:focus,
+.add-to-cart:focus-visible,
+.add-to-cart-variant:focus-visible,
+#calpis-btn:focus-visible,
+#add-custom-roll-btn:focus-visible,
+.add-to-cart:active,
+.add-to-cart-variant:active {
+    outline: none !important;
+    outline-offset: 0 !important;
+    box-shadow: none !important;
+    background-color: initial !important; /* Fuerza a regresar a su color base */
+}
+
+/* 3. Evitar el molesto efecto de "hover" falso que se queda pegado en iOS tras hacer tap */
+@media (hover: none) {
+    .add-to-cart:hover,
+    .add-to-cart-variant:hover,
+    #calpis-btn:hover,
+    #add-custom-roll-btn:hover {
+        background-color: initial !important; /* Evita que el botón cambie de color tras soltar el tap */
+        color: initial !important;
+    }
+}
