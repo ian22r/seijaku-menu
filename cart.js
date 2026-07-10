@@ -1,11 +1,11 @@
 /* ==========================================================================
-   CARRITO SEIJAKU v2.9 - COMPLETO Y BLINDADO
+   CARRITO SEIJAKU v3.0 - CATEGORÍAS Y TICKET PROFESIONAL
    ========================================================================== */
 
 const WHATSAPP_NUMBER = "5217721540533";
 let cart = [];
 let notificationTimeout = null; 
-let hasShownNotification = false; // Control para que la alerta solo salga una vez
+let hasShownNotification = false; 
 
 // Referencias DOM
 const cartFloatingBtn = document.getElementById('cart-floating-btn');
@@ -80,7 +80,6 @@ document.addEventListener('click', function(e) {
 
     e.preventDefault();
 
-    // Caso A: Rollo Personalizado
     if (btn.id === 'add-custom-roll-btn') {
         var name = btn.getAttribute('data-name');
         if (!name || name === 'Rollo Personalizado (Por armar)') {
@@ -98,7 +97,6 @@ document.addEventListener('click', function(e) {
         return;
     }
 
-    // Caso B: Calpis
     if (btn.id === 'calpis-btn' && calpisSelect) {
         var currentFlavor = calpisSelect.value;
         var calpisPrice = parseInt(btn.getAttribute('data-price')) || 70;
@@ -107,7 +105,6 @@ document.addEventListener('click', function(e) {
         return;
     }
 
-    // Caso C: Productos Generales (Sushi normal, Ramen, Kushiages, etc.)
     var name = btn.getAttribute('data-name');
     var priceAttr = btn.getAttribute('data-price');
     var price = 0;
@@ -138,7 +135,6 @@ function addToCart(name, price) {
     cart.push({ name: name, price: price });
     updateCartUI();
     
-    // Disparar la notificación push temporal SÓLO en el primer artículo
     if (cart.length === 1 && !hasShownNotification) {
         showFlashNotification();
     }
@@ -163,40 +159,30 @@ function feedbackButton(btn, originalText) {
 ------------------------------------------------------------------ */
 function showFlashNotification() {
     if (!notificationDiv) return;
-
-    hasShownNotification = true; // Bloquea futuras apariciones inmediatamente
+    hasShownNotification = true;
 
     var currentTotal = 0;
     cart.forEach(function(item) { currentTotal += item.price; });
-
-    // Si por alguna razón el primer artículo ya supera los $200, no avisa
     if (currentTotal >= 200) return;
 
     if (notificationTimeout) clearTimeout(notificationTimeout);
-
-    // Muestra la barra push bajando desde arriba
     notificationDiv.classList.add('show');
-
-    // La esconde automáticamente a los 3.5 segundos
     notificationTimeout = setTimeout(function() {
         notificationDiv.classList.remove('show');
     }, 3500);
 }
 
 /* ------------------------------------------------------------------
-   5. INTERFAZ DE USUARIO (Muestra bolsa flotante)
+   5. INTERFAZ DE USUARIO (Bolsa flotante)
 ------------------------------------------------------------------ */
 function updateCartUI() {
-    if (cartCountBadge) {
-        cartCountBadge.textContent = cart.length;
-    }
+    if (cartCountBadge) cartCountBadge.textContent = cart.length;
 
     if (cart.length > 0) {
         if (cartFloatingBtn) cartFloatingBtn.classList.remove('hidden');
     } else {
         if (cartFloatingBtn) cartFloatingBtn.classList.add('hidden');
         if (cartModal) cartModal.classList.add('hidden');
-        if (notificationDiv) notificationDiv.classList.remove('show');
     }
 }
 
@@ -246,9 +232,7 @@ function renderCartModal() {
             removeBtn.addEventListener('click', function() {
                 cart.splice(i, 1);
                 updateCartUI();
-                if (cart.length > 0) {
-                    renderCartModal();
-                }
+                if (cart.length > 0) renderCartModal();
             });
         })(index);
 
@@ -259,41 +243,41 @@ function renderCartModal() {
         cartItemsList.appendChild(row);
     });
 
-    if (cartTotalPrice) {
-        cartTotalPrice.textContent = '$' + total;
-    }
+    if (cartTotalPrice) cartTotalPrice.textContent = '$' + total;
 }
 
-/* ------------------------------------------------------------------
-   6. CONTROLES DEL MODAL
------------------------------------------------------------------- */
 if (cartFloatingBtn) {
     cartFloatingBtn.addEventListener('click', function() {
         renderCartModal();
         if (cartModal) cartModal.classList.remove('hidden');
     });
 }
-
 if (closeModalBtn) {
     closeModalBtn.addEventListener('click', function() {
         if (cartModal) cartModal.classList.add('hidden');
     });
 }
 
-if (cartModal) {
-    cartModal.addEventListener('click', function(e) {
-        if (e.target === cartModal) cartModal.classList.add('hidden');
-    });
+/* ------------------------------------------------------------------
+   6. MODO OSCURO PREMIUM AUTOMÁTICO
+------------------------------------------------------------------ */
+function checkAutomaticDarkMode() {
+    const currentHour = new Date().getHours();
+    if (currentHour >= 19 || currentHour < 6) {
+        document.body.classList.add('dark-mode');
+    } else {
+        document.body.classList.remove('dark-mode');
+    }
 }
+document.addEventListener('DOMContentLoaded', checkAutomaticDarkMode);
 
 /* ------------------------------------------------------------------
-   7. ENVÍO DE PEDIDO FINAL A WHATSAPP
+   7. FORMATO TICKET DE WHATSAPP (SÚPER DETALLADO)
 ------------------------------------------------------------------ */
 if (checkoutForm) {
     checkoutForm.addEventListener('submit', function(e) {
         e.preventDefault();
 
-        // Bloqueo estricto al dar enviar si el total final sigue abajo de $200
         var currentTotal = 0;
         cart.forEach(function(item) { currentTotal += item.price; });
         if (currentTotal < 200) {
@@ -309,20 +293,36 @@ if (checkoutForm) {
         var clientPhone = phoneInput ? phoneInput.value : "No provisto";
         var clientAddress = addressInput ? addressInput.value : "No provisto";
 
-        var message = "*NUEVO PEDIDO - SEIJAKU*\n\n";
-        message += "*Cliente:* " + clientName + "\n";
-        message += "*Teléfono:* " + clientPhone + "\n";
-        message += "*Dirección:* " + clientAddress + "\n\n";
-        message += "--- *DETALLE DEL PEDIDO* ---\n";
+        // CONSTRUCCIÓN DEL TICKET ELEGANTE
+        var message = "🍣 *SEIJAKU FUSIÓN - PEDIDO* 🍣\n";
+        message += "──────────────────────────\n";
+        message += "👤 *Cliente:* " + clientName + "\n";
+        message += "📞 *Teléfono:* " + clientPhone + "\n";
+        message += "📍 *Entrega:* " + clientAddress + "\n";
+        message += "──────────────────────────\n";
+        message += "🛍️ *DETALLE DEL PEDIDO:*\n\n";
 
-        var total = 0;
+        // Contar y agrupar productos repetidos
+        var counts = {};
         cart.forEach(function(item) {
-            message += "• " + item.name + " - $" + item.price + "\n";
-            total += item.price;
+            counts[item.name] = (counts[item.name] || 0) + 1;
         });
 
-        message += "\n*Total a Pagar:* $" + total + "\n\n";
-        message += "_Pedido enviado automáticamente desde el menú digital._";
+        var total = 0;
+        for (var itemName in counts) {
+            var quantity = counts[itemName];
+            // Buscar precio unitario
+            var unitPrice = cart.find(i => i.name === itemName).price;
+            var itemSubtotal = unitPrice * quantity;
+            total += itemSubtotal;
+
+            message += "• *" + quantity + "x* " + itemName + " _($" + itemSubtotal + ")_\n";
+        }
+
+        message += "──────────────────────────\n";
+        message += "💰 *TOTAL A PAGAR:* $" + total + "\n";
+        message += "──────────────────────────\n";
+        message += "🛵 _Pedido enviado desde el menú digital. ¡Gracias!_";
 
         var whatsappUrl = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message);
         window.open(whatsappUrl, '_blank');
@@ -331,20 +331,3 @@ if (checkoutForm) {
         updateCartUI();
     });
 }
-
-/* ------------------------------------------------------------------
-   8. MODO OSCURO PREMIUM AUTOMÁTICO (A PARTIR DE LAS 7:00 PM)
------------------------------------------------------------------- */
-function checkAutomaticDarkMode() {
-    const currentHour = new Date().getHours();
-    
-    // Si la hora es igual o mayor a las 19 (7:00 PM) o antes de las 6 AM, activa el modo oscuro
-    if (currentHour >= 18 || currentHour < 6) {
-        document.body.classList.add('dark-mode');
-    } else {
-        document.body.classList.remove('dark-mode');
-    }
-}
-
-// Ejecutar la comprobación inmediatamente cuando carga la página
-document.addEventListener('DOMContentLoaded', checkAutomaticDarkMode);
