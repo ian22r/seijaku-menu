@@ -247,6 +247,11 @@ checkoutForm.addEventListener('submit', function(e) {
     message += '\n*💰 Total:* \$' + total + '\n';
     message += '\n_Un miembro del equipo responderá este mensaje para confirmar y si gustas comparte tu 📍 ubicación para agilizar la entrega._';
 
+    // Aquí se verifica si el total es menor a 200 y se muestra una alerta
+    if (total < 200) {
+        alert("El monto mínimo de compra es de \$200. Tu total actual es de: \$" + total);
+    }
+
     window.open('https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(message), '_blank');
 
     cart = [];
