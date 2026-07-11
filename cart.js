@@ -180,6 +180,11 @@ function updateCartUI() {
 
     if (cart.length > 0) {
         if (cartFloatingBtn) cartFloatingBtn.classList.remove('hidden');
+        
+        // 🚀 ¡AQUÍ ESTÁ EL TRUCO! 
+        // En cuanto detecta que hay productos en la bolsa, manda llamar la alerta
+        showFlashNotification();
+        
     } else {
         if (cartFloatingBtn) cartFloatingBtn.classList.add('hidden');
         if (cartModal) cartModal.classList.add('hidden');
