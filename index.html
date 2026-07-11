@@ -476,7 +476,7 @@
 
         </section>
     </main>
-    <div id="cart-modal" class="modal hidden">
+   <div id="cart-modal" class="modal hidden">
         <div class="modal-content">
             <span id="close-modal-btn" class="close-modal">&times;</span>
             <h3 class="modal-title">Tu Pedido Seijaku</h3>
@@ -485,17 +485,33 @@
                 <span>Total estimado:</span>
                 <span id="cart-total-price" class="total-price">$0</span>
             </div>
+            
             <div class="shoji-divider-center" style="margin: 20px auto 15px auto;"></div>
+            
             <h4 class="form-title">Datos de Entrega (Ixmiquilpan)</h4>
             <form id="checkout-form" class="checkout-form">
                 <input type="text" id="client-name" placeholder="Tu Nombre Completo" required>
-                <input type="tel" id="client-phone" placeholder="Número de Teléfono (WhatsApp)" required>
+                
+                <!-- INPUT DE TELÉFONO OPTIMIZADO Y CONFIGURADO A 10 DÍGITOS -->
+                <input 
+                    type="tel" 
+                    id="client-phone" 
+                    placeholder="Número de Teléfono (10 dígitos)" 
+                    inputmode="numeric" 
+                    pattern="[0-9]{10}" 
+                    maxlength="10" 
+                    oninput="this.value = this.value.replace(/[^0-9]/g, '');" 
+                    required
+                >
+                
                 <textarea id="client-address" placeholder="Dirección (Calle, Colonia y Referencias — opcional)" rows="3"></textarea>
-                <div class="location-note">
-                    <i class="fas fa-map-marker-alt"></i>
+                
+                <div class="location-note" style="margin-top: 10px; font-size: 12px; color: #555; display: flex; align-items: start; gap: 8px; line-height: 1.4;">
+                    <i class="fas fa-map-marker-alt" style="color: #095a35; margin-top: 3px;"></i>
                     <span>También puedes compartir tu 📍 ubicación directamente en el chat de WhatsApp usando el clip 📎 → Ubicación.</span>
                 </div>
-                <button type="submit" class="submit-order-btn">Confirmar y enviar por WhatsApp</button>
+                
+                <button type="submit" class="submit-order-btn" style="margin-top: 15px;">Confirmar y enviar por WhatsApp</button>
             </form>
         </div>
     </div>

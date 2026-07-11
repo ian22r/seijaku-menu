@@ -293,8 +293,11 @@ if (checkoutForm) {
         var clientPhone = phoneInput ? phoneInput.value : "No provisto";
         var clientAddress = addressInput ? addressInput.value : "No provisto";
 
+        // GENERACIÓN DEL NÚMERO DE PEDIDO (Aleatorio de 4 dígitos)
+        var numeroPedido = Math.floor(1000 + Math.random() * 9000);
+
         // CONSTRUCCIÓN DEL TICKET ELEGANTE
-        var message = "🍣 *SEIJAKU FUSIÓN - PEDIDO* 🍣\n";
+        var message = "🍣 *SEIJAKU - PEDIDO #" + numeroPedido + "* 🍣\n"; // <- ¡Aquí ya sale el número!
         message += "──────────────────────────\n";
         message += "👤 *Cliente:* " + clientName + "\n";
         message += "📞 *Teléfono:* " + clientPhone + "\n";
@@ -320,9 +323,9 @@ if (checkoutForm) {
         }
 
         message += "──────────────────────────\n";
-        message += "💰 *TOTAL A PAGAR:* $" + total + "\n";
+        message += "💰 *TOTAL A PAGAR:* $" + total + " MXN\n";
         message += "──────────────────────────\n";
-        message += "🛵 _Pedido enviado desde el menú digital. ¡Gracias!_";
+        message += "🛵 _Pedido enviado desde el menú digital. ¡Gracias!_\nUn miembro del equipo responderá a este mensaje."; // <- Corregido aquí
 
         var whatsappUrl = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message);
         window.open(whatsappUrl, '_blank');
