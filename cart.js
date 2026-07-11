@@ -157,23 +157,38 @@ function feedbackButton(btn, originalText) {
 /* ------------------------------------------------------------------
    4. NOTIFICACIÓN PUSH TEMPORAL (UNA SOLA VEZ)
 ------------------------------------------------------------------ */
+// Asegúrate de que esta variable exista arriba en tu archivo, si no, el código la creará automáticamente.
+if (typeof hasShownNotification === 'undefined') {
+    var hasShownNotification = false;
+}
+
 function showFlashNotification() {
     if (!notificationDiv) return;
-    hasShownNotification = true;
+    
+    // 🛑 TRUCO 1: Si ya se mostró una vez, salimos de la función de inmediato y no vuelve a aparecer
+    if (hasShownNotification) return; 
 
     var currentTotal = 0;
     cart.forEach(function(item) { currentTotal += item.price; });
     if (currentTotal >= 200) return;
 
+    // Marcamos que ya se mostró para bloquear futuros clics
+    hasShownNotification = true;
+
     if (notificationTimeout) clearTimeout(notificationTimeout);
     
-    // Forzamos los estilos directamente en el elemento para ganarle al HTML
+    // 📱 TRUCO 2: Ajustamos el tamaño para que sea compacta y NO tape toda la pantalla
+    notificationDiv.style.setProperty('width', 'auto', 'important');
+    notificationDiv.style.setProperty('max-width', '320px', 'important');
+    notificationDiv.style.setProperty('border-radius', '12px', 'important'); // Bordes un poco más limpios
+    
+    // La hacemos bajar e iluminarse
     notificationDiv.style.setProperty('top', '20px', 'important');
     notificationDiv.style.setProperty('opacity', '1', 'important');
     notificationDiv.style.setProperty('visibility', 'visible', 'important');
 
     notificationTimeout = setTimeout(function() {
-        // Los regresamos a su estado original para ocultarla después de 3.5 segundos
+        // La escondemos a los 3.5 segundos
         notificationDiv.style.setProperty('top', '-100px', 'important');
         notificationDiv.style.setProperty('opacity', '0', 'important');
         notificationDiv.style.setProperty('visibility', 'hidden', 'important');
