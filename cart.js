@@ -157,41 +157,44 @@ function feedbackButton(btn, originalText) {
 /* ------------------------------------------------------------------
    4. NOTIFICACIÓN PUSH TEMPORAL (UNA SOLA VEZ)
 ------------------------------------------------------------------ */
-// Asegúrate de que esta variable exista arriba en tu archivo, si no, el código la creará automáticamente.
-if (typeof hasShownNotification === 'undefined') {
-    var hasShownNotification = false;
+// Usamos una propiedad en la ventana (window) para que recuerde si ya se mostró sin romper el archivo
+if (typeof window.seijakuNotifMostrada === 'undefined') {
+    window.seijakuNotifMostrada = false;
 }
 
 function showFlashNotification() {
-    if (!notificationDiv) return;
+    // Buscamos el elemento directamente por su ID de tu HTML
+    var notif = document.getElementById('notification');
+    if (!notif) return;
     
-    // 🛑 TRUCO 1: Si ya se mostró una vez, salimos de la función de inmediato y no vuelve a aparecer
-    if (hasShownNotification) return; 
+    // 1. Si ya se mostró una vez en esta sesión, no hace nada más
+    if (window.seijakuNotifMostrada) return; 
 
+    // 2. Calculamos el total actual del carrito
     var currentTotal = 0;
-    cart.forEach(function(item) { currentTotal += item.price; });
+    if (typeof cart !== 'undefined' && cart.forEach) {
+        cart.forEach(function(item) { currentTotal += item.price; });
+    }
     if (currentTotal >= 200) return;
 
-    // Marcamos que ya se mostró para bloquear futuros clics
-    hasShownNotification = true;
-
-    if (notificationTimeout) clearTimeout(notificationTimeout);
+    // Marcamos que ya se cumplió la primera vez
+    window.seijakuNotifMostrada = true;
     
-    // 📱 TRUCO 2: Ajustamos el tamaño para que sea compacta y NO tape toda la pantalla
-    notificationDiv.style.setProperty('width', 'auto', 'important');
-    notificationDiv.style.setProperty('max-width', '320px', 'important');
-    notificationDiv.style.setProperty('border-radius', '12px', 'important'); // Bordes un poco más limpios
+    // 3. Ajustamos el tamaño para que sea una alerta flotante compacta y elegante arriba
+    notif.style.setProperty('width', '90%', 'important');
+    notif.style.setProperty('max-width', '320px', 'important');
+    notif.style.setProperty('border-radius', '12px', 'important');
     
-    // La hacemos bajar e iluminarse
-    notificationDiv.style.setProperty('top', '20px', 'important');
-    notificationDiv.style.setProperty('opacity', '1', 'important');
-    notificationDiv.style.setProperty('visibility', 'visible', 'important');
+    // La mostramos bajándola un poco
+    notif.style.setProperty('top', '20px', 'important');
+    notif.style.setProperty('opacity', '1', 'important');
+    notif.style.setProperty('visibility', 'visible', 'important');
 
-    notificationTimeout = setTimeout(function() {
-        // La escondemos a los 3.5 segundos
-        notificationDiv.style.setProperty('top', '-100px', 'important');
-        notificationDiv.style.setProperty('opacity', '0', 'important');
-        notificationDiv.style.setProperty('visibility', 'hidden', 'important');
+    // 4. La escondemos solita a los 3.5 segundos
+    setTimeout(function() {
+        notif.style.setProperty('top', '-100px', 'important');
+        notif.style.setProperty('opacity', '0', 'important');
+        notif.style.setProperty('visibility', 'hidden', 'important');
     }, 3500);
 }
 
