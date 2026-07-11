@@ -155,46 +155,52 @@ function feedbackButton(btn, originalText) {
 }
 
 /* ------------------------------------------------------------------
-   4. NOTIFICACIÓN PUSH TEMPORAL (UNA SOLA VEZ)
+   4. NOTIFICACIÓN PUSH TEMPORAL (UNA SOLA VEZ - TAMAÑO CORREGIDO)
 ------------------------------------------------------------------ */
-// Usamos una propiedad en la ventana (window) para que recuerde si ya se mostró sin romper el archivo
 if (typeof window.seijakuNotifMostrada === 'undefined') {
     window.seijakuNotifMostrada = false;
 }
 
 function showFlashNotification() {
-    // Buscamos el elemento directamente por su ID de tu HTML
     var notif = document.getElementById('notification');
     if (!notif) return;
     
-    // 1. Si ya se mostró una vez en esta sesión, no hace nada más
+    // Si ya se mostró una vez, no hace nada
     if (window.seijakuNotifMostrada) return; 
 
-    // 2. Calculamos el total actual del carrito
     var currentTotal = 0;
     if (typeof cart !== 'undefined' && cart.forEach) {
         cart.forEach(function(item) { currentTotal += item.price; });
     }
     if (currentTotal >= 200) return;
 
-    // Marcamos que ya se cumplió la primera vez
     window.seijakuNotifMostrada = true;
     
-    // 3. Ajustamos el tamaño para que sea una alerta flotante compacta y elegante arriba
-    notif.style.setProperty('width', '90%', 'important');
-    notif.style.setProperty('max-width', '320px', 'important');
-    notif.style.setProperty('border-radius', '12px', 'important');
+    /* 🛠️ APANADO DE ESTILOS PARA EVITAR QUE SE ESTIRE */
+    notif.style.setProperty('height', 'auto', 'important');        // ¡Esto evita que tape toda la pantalla!
+    notif.style.setProperty('min-height', 'auto', 'important');    // Resetea mínimos
+    notif.style.setProperty('width', '90%', 'important');          // Ancho responsivo
+    notif.style.setProperty('max-width', '360px', 'important');    // Ancho máximo tipo celular
+    notif.style.setProperty('padding', '14px 24px', 'important');  // Relleno interno compacto
+    notif.style.setProperty('border-radius', '30px', 'important'); // Bordes redondeados tipo píldora
     
-    // La mostramos bajándola un poco
+    // Posicionamiento correcto arriba
+    notif.style.setProperty('left', '50%', 'important');
+    notif.style.setProperty('transform', 'translateX(-50%)', 'important');
+    notif.style.setProperty('bottom', 'auto', 'important');        // Desactivar si el CSS usa bottom
+
+    // Animación de entrada (Baja elegantemente)
     notif.style.setProperty('top', '20px', 'important');
     notif.style.setProperty('opacity', '1', 'important');
     notif.style.setProperty('visibility', 'visible', 'important');
 
-    // 4. La escondemos solita a los 3.5 segundos
+    // Se oculta automáticamente a los 3.5 segundos
     setTimeout(function() {
         notif.style.setProperty('top', '-100px', 'important');
         notif.style.setProperty('opacity', '0', 'important');
-        notif.style.setProperty('visibility', 'hidden', 'important');
+        setTimeout(function() {
+            notif.style.setProperty('visibility', 'hidden', 'important');
+        }, 400);
     }, 3500);
 }
 
