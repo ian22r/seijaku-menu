@@ -166,9 +166,17 @@ function showFlashNotification() {
     if (currentTotal >= 200) return;
 
     if (notificationTimeout) clearTimeout(notificationTimeout);
-    notificationDiv.classList.add('show');
+    
+    // Forzamos los estilos directamente en el elemento para ganarle al HTML
+    notificationDiv.style.setProperty('top', '20px', 'important');
+    notificationDiv.style.setProperty('opacity', '1', 'important');
+    notificationDiv.style.setProperty('visibility', 'visible', 'important');
+
     notificationTimeout = setTimeout(function() {
-        notificationDiv.classList.remove('show');
+        // Los regresamos a su estado original para ocultarla después de 3.5 segundos
+        notificationDiv.style.setProperty('top', '-100px', 'important');
+        notificationDiv.style.setProperty('opacity', '0', 'important');
+        notificationDiv.style.setProperty('visibility', 'hidden', 'important');
     }, 3500);
 }
 
