@@ -954,7 +954,8 @@ body {
     height: 24px !important;
     color: #ffffff !important; /* Si tu botón es blanco, cambia #ffffff por #000000 */
     display: block !important;
-}\/* ==========================================================================
+}
+/* ==========================================================================
    LIMPIEZA DE ENFOQUE RESIDUAL EN MÓVILES (BOTONES DE COMPRA)
    ========================================================================== */
 
@@ -1028,6 +1029,7 @@ body {
 button {
     -webkit-tap-highlight-color: rgba(0,0,0,0) !important; /* Desactiva el flash de tap en iOS */
     -webkit-appearance: none !important; /* Elimina estilos heredados de botones en Safari */
+    appearance: none !important; /* Compatibilidad estándar para otros navegadores */
 }
 
 /* 2. Matar el estado de foco y foco-visible en iPhone para que no retenga el color amarillo */
