@@ -1154,3 +1154,44 @@ body.dark-mode .category-btn {
     background-color: #1a1a1a;
     color: #cccccc;
 }
+
+/* --- BADGES Y ETIQUETAS PREMIUM SEIJAKU --- */
+.product-card {
+    position: relative; /* Obligatorio para que la etiqueta flote dentro de la tarjeta */
+}
+
+.badge-seijaku {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 10;
+    padding: 5px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* Variante: Más Vendido / Favorito (Dorado/Premium) */
+.badge-favorito {
+    background-color: #d4af37 !important;
+    color: #111111 !important;
+}
+
+/* Variante: Picante (Rojo Seijaku) */
+.badge-picante {
+    background-color: #c0392b !important;
+    color: #ffffff !important;
+}
+
+/* Variante: Nuevo Platillo o Recomendación del Chef (Negro/Gris) */
+.badge-nuevo {
+    background-color: #111111 !important;
+    color: #ffffff !important;
+    border: 1px solid #c0392b !important;
+}
