@@ -1195,3 +1195,7 @@ body.dark-mode .category-btn {
     color: #ffffff !important;
     border: 1px solid #c0392b !important;
 }
+.menu-item {
+    position: relative; /* 📌 Esto es vital para que la etiqueta "Picante" se quede fija dentro de este cuadro */
+    /* ... tus otros estilos actuales de .menu-item ... */
+}
