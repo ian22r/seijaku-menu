@@ -138,6 +138,16 @@ function addToCart(name, price) {
     if (cart.length === 1 && !hasShownNotification) {
         showFlashNotification();
     }
+
+    // 🛍️ ANIMACIÓN DE SACUDIDA EN LA BOLSA FLOTANTE SEIJAKU
+    if (cartFloatingBtn) {
+        cartFloatingBtn.classList.add('shake-cart');
+        
+        // Removemos la clase después de 500ms para que pueda volver a agitarse en el siguiente clic
+        setTimeout(function() {
+            cartFloatingBtn.classList.remove('shake-cart');
+        }, 500);
+    }
 }
 
 function feedbackButton(btn, originalText) {
@@ -176,18 +186,18 @@ function showFlashNotification() {
 
     window.seijakuNotifMostrada = true;
     
-    /* 🛠️ APANADO DE ESTILOS PARA EVITAR QUE SE ESTIRE */
-    notif.style.setProperty('height', 'auto', 'important');        // ¡Esto evita que tape toda la pantalla!
-    notif.style.setProperty('min-height', 'auto', 'important');    // Resetea mínimos
-    notif.style.setProperty('width', '90%', 'important');          // Ancho responsivo
-    notif.style.setProperty('max-width', '360px', 'important');    // Ancho máximo tipo celular
-    notif.style.setProperty('padding', '14px 24px', 'important');  // Relleno interno compacto
-    notif.style.setProperty('border-radius', '30px', 'important'); // Bordes redondeados tipo píldora
+    /* 🛠  APANADO DE ESTILOS PARA EVITAR QUE SE ESTIRE */
+    notif.style.setProperty('height', 'auto', 'important');        
+    notif.style.setProperty('min-height', 'auto', 'important');    
+    notif.style.setProperty('width', '90%', 'important');          
+    notif.style.setProperty('max-width', '360px', 'important');    
+    notif.style.setProperty('padding', '14px 24px', 'important');  
+    notif.style.setProperty('border-radius', '30px', 'important'); 
     
     // Posicionamiento correcto arriba
     notif.style.setProperty('left', '50%', 'important');
     notif.style.setProperty('transform', 'translateX(-50%)', 'important');
-    notif.style.setProperty('bottom', 'auto', 'important');        // Desactivar si el CSS usa bottom
+    notif.style.setProperty('bottom', 'auto', 'important');        
 
     // Animación de entrada (Baja elegantemente)
     notif.style.setProperty('top', '20px', 'important');
@@ -213,7 +223,6 @@ function updateCartUI() {
     if (cart.length > 0) {
         if (cartFloatingBtn) cartFloatingBtn.classList.remove('hidden');
         
-        // 🚀 ¡AQUÍ ESTÁ EL TRUCO! 
         // En cuanto detecta que hay productos en la bolsa, manda llamar la alerta
         showFlashNotification();
         
@@ -334,7 +343,7 @@ if (checkoutForm) {
         var numeroPedido = Math.floor(1000 + Math.random() * 9000);
 
         // CONSTRUCCIÓN DEL TICKET ELEGANTE
-        var message = "🍣 *SEIJAKU - PEDIDO #" + numeroPedido + "* 🍣\n"; // <- ¡Aquí ya sale el número!
+        var message = "🍣 *SEIJAKU - PEDIDO #" + numeroPedido + "* 🍣\n"; 
         message += "──────────────────────────\n";
         message += "👤 *Cliente:* " + clientName + "\n";
         message += "📞 *Teléfono:* " + clientPhone + "\n";
@@ -351,7 +360,6 @@ if (checkoutForm) {
         var total = 0;
         for (var itemName in counts) {
             var quantity = counts[itemName];
-            // Buscar precio unitario
             var unitPrice = cart.find(i => i.name === itemName).price;
             var itemSubtotal = unitPrice * quantity;
             total += itemSubtotal;
@@ -362,7 +370,7 @@ if (checkoutForm) {
         message += "──────────────────────────\n";
         message += "💰 *TOTAL A PAGAR:* $" + total + " MXN\n";
         message += "──────────────────────────\n";
-        message += "🛵 _Pedido enviado desde el menú digital. ¡Gracias!_\nUn miembro del equipo responderá a este mensaje."; // <- Corregido aquí
+        message += "🛵 _Pedido enviado desde el menú digital. ¡Gracias!_\nUn miembro del equipo responderá a este mensaje."; 
 
         var whatsappUrl = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message);
         window.open(whatsappUrl, '_blank');
