@@ -368,8 +368,29 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 /* ------------------------------------------------------------------
-   7. FORMATO TICKET DE WHATSAPP (SÚPER DETALLADO)
+   7. FORMATO TICKET DE WHATSAPP (CON MEMORIA DE DATOS)
 ------------------------------------------------------------------ */
+
+// 💾 A) AL CARGAR LA PÁGINA: Recuperar datos guardados del cliente
+document.addEventListener('DOMContentLoaded', function() {
+    const savedName = localStorage.getItem('seijaku_client_name');
+    const savedPhone = localStorage.getItem('seijaku_client_phone');
+    const savedAddress = localStorage.getItem('seijaku_client_address');
+
+    if (savedName) {
+        const nameInput = document.getElementById('client-name');
+        if (nameInput) nameInput.value = savedName;
+    }
+    if (savedPhone) {
+        const phoneInput = document.getElementById('client-phone');
+        if (phoneInput) phoneInput.value = savedPhone;
+    }
+    if (savedAddress) {
+        const addressInput = document.getElementById('client-address');
+        if (addressInput) addressInput.value = savedAddress;
+    }
+});
+
 if (checkoutForm) {
     checkoutForm.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -388,6 +409,11 @@ if (checkoutForm) {
         var clientName = nameInput ? nameInput.value : "No provisto";
         var clientPhone = phoneInput ? phoneInput.value : "No provisto";
         var clientAddress = addressInput ? addressInput.value : "No provisto";
+
+        // 💾 B) AL ENVIAR PEDIDO: Guardar los datos actuales en el navegador
+        localStorage.setItem('seijaku_client_name', clientName);
+        localStorage.setItem('seijaku_client_phone', clientPhone);
+        localStorage.setItem('seijaku_client_address', clientAddress);
 
         // GENERACIÓN DEL NÚMERO DE PEDIDO (Aleatorio de 4 dígitos)
         var numeroPedido = Math.floor(1000 + Math.random() * 9000);
