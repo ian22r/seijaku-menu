@@ -366,9 +366,8 @@ document.addEventListener('DOMContentLoaded', function() {
     updateEstimatedTime();
     setInterval(updateEstimatedTime, 300000); 
 });
-
 /* ------------------------------------------------------------------
-   7. FORMATO TICKET DE WHATSAPP (CON MEMORIA DE DATOS)
+   7. FORMATO TICKET DE WHATSAPP (CON ENVÍO DINÁMICO Y MEMORIA)
 ------------------------------------------------------------------ */
 
 // 💾 A) AL CARGAR LA PÁGINA: Recuperar datos guardados del cliente
@@ -394,13 +393,6 @@ document.addEventListener('DOMContentLoaded', function() {
 if (checkoutForm) {
     checkoutForm.addEventListener('submit', function(e) {
         e.preventDefault();
-
-        var currentTotal = 0;
-        cart.forEach(function(item) { currentTotal += item.price; });
-        if (currentTotal < 200) {
-            alert("El monto mínimo para procesar tu pedido es de $200. Por favor, añade más productos.");
-            return;
-        }
 
         var nameInput = document.getElementById('client-name');
         var phoneInput = document.getElementById('client-phone');
@@ -433,18 +425,33 @@ if (checkoutForm) {
             counts[item.name] = (counts[item.name] || 0) + 1;
         });
 
-        var total = 0;
+        var subtotal = 0;
         for (var itemName in counts) {
             var quantity = counts[itemName];
             var unitPrice = cart.find(i => i.name === itemName).price;
             var itemSubtotal = unitPrice * quantity;
-            total += itemSubtotal;
+            subtotal += itemSubtotal;
 
             message += "• *" + quantity + "x* " + itemName + " _($" + itemSubtotal + ")_\n";
         }
 
+        // 🛵 CALCULAR SI SE APLICA COSTO DE ENVÍO ($20 si es menor a $200)
+        var envioCosto = 0;
+        var mensajeEnvio = "";
+        if (subtotal < 200) {
+            envioCosto = 20;
+            mensajeEnvio = "🛵 *Envío:* $20 MXN\n";
+        } else {
+            mensajeEnvio = "🛵 *Envío:* ¡GRATIS!\n";
+        }
+
+        var totalFinal = subtotal + envioCosto;
+
         message += "──────────────────────────\n";
-        message += "💰 *TOTAL A PAGAR:* $" + total + " MXN\n";
+        message += "📦 *Subtotal:* $" + subtotal + " MXN\n";
+        message += mensajeEnvio; // Pinta si es gratis o si son $20
+        message += "──────────────────────────\n";
+        message += "💰 *TOTAL A PAGAR:* $" + totalFinal + " MXN\n";
         message += "──────────────────────────\n";
         message += "🛵 _Pedido enviado desde el menú digital. ¡Gracias!_\nUn miembro del equipo responderá a este mensaje."; 
 
