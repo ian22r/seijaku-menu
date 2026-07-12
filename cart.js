@@ -318,6 +318,56 @@ function checkAutomaticDarkMode() {
 document.addEventListener('DOMContentLoaded', checkAutomaticDarkMode);
 
 /* ------------------------------------------------------------------
+   6.1 TIEMPO DE ENTREGA ESTIMADO DINÁMICO (HORARIOS SEIJAKU)
+------------------------------------------------------------------ */
+function updateEstimatedTime() {
+    const timeDisplay = document.getElementById('estimated-time-display');
+    if (!timeDisplay) return;
+
+    const now = new Date();
+    const day = now.getDay(); // 0 = Domingo, 2 = Martes, etc.
+    const hour = now.getHours();
+
+    // 🛑 1️⃣ CANDADO DE DÍA DE DESCANSO: Martes cerrado
+    if (day === 2) {
+        timeDisplay.innerHTML = `🛵 *Hoy martes descansamos.* ¡Te esperamos mañana desde la 1:00 PM!`;
+        return;
+    }
+
+    let minTime = 30;
+    let maxTime = 40; // ⏱️ Tiempo regular establecido
+
+    // 2️⃣ De 1:00 PM a 4:00 PM (Demanda baja de apertura - Entrega rápida)
+    if (hour >= 13 && hour < 16) {
+        minTime = 20;
+        maxTime = 30;
+    } 
+    // 3️⃣ De 4:00 PM a 7:00 PM (⚠️ HORA PICO - Alta demanda)
+    else if (hour >= 16 && hour < 19) {
+        minTime = 40;
+        maxTime = 55;
+    } 
+    // 4️⃣ De 7:00 PM a 10:00 PM (Tiempo regular hacia el cierre)
+    else if (hour >= 19 && hour < 22) {
+        minTime = 30;
+        maxTime = 40;
+    }
+    // Fuera de horario general (Cerrado por la noche/mañana)
+    else {
+        timeDisplay.innerHTML = `🛵 *Cocina cerrada.* Abrimos de 1:00 PM a 10:00 PM (Martes cerrado)`;
+        return;
+    }
+
+    timeDisplay.innerHTML = `⏱️ *Tiempo estimado de entrega actual:* ${minTime} - ${maxTime} min`;
+}
+
+// Ejecutar automáticamente al cargar la página
+document.addEventListener('DOMContentLoaded', function() {
+    updateEstimatedTime();
+    setInterval(updateEstimatedTime, 300000); 
+});
+
+/* ------------------------------------------------------------------
    7. FORMATO TICKET DE WHATSAPP (SÚPER DETALLADO)
 ------------------------------------------------------------------ */
 if (checkoutForm) {
