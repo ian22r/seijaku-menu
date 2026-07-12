@@ -481,7 +481,7 @@ document.addEventListener('DOMContentLoaded', function() {
     avisoBanner.style.position = 'relative';
     
     // Contenido del mensaje corto
-    avisoBanner.innerHTML = `🛑 Aviso: Hoy no tendremos servicio por causas de fuerza mayor. ¡Los esperamos mañana en nuestro horario habitual! 🍣`;
+    avisoBanner.innerHTML = `🛑 Aviso: Hoy no tendremos servicio. ¡Los esperamos mañana en nuestro horario habitual! 🍣`;
 
     // 2. Lo colocamos dinámicamente justo abajo de la barra verde matcha
     // Buscamos el header de tu página. Si no lo encuentra, lo pone al principio del body.
