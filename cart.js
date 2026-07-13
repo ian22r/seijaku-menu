@@ -461,36 +461,3 @@ if (checkoutForm) {
         cart = [];
         updateCartUI();
     });
-
-    /* ==========================================================================
-   ⚠️ BANNER TEMPORAL DE "NO HAY SERVICIO" (BORRAR MAÑANA AL ABRIR)
-   ========================================================================== */
-document.addEventListener('DOMContentLoaded', function() {
-    // 1. Creamos el banner estilizado
-    const avisoBanner = document.createElement('div');
-    avisoBanner.id = 'seijaku-temp-banner';
-    avisoBanner.style.backgroundColor = '#922b21'; // Color vino/rojo oscuro elegante
-    avisoBanner.style.color = '#ffffff';
-    avisoBanner.style.padding = '12px 15px';
-    avisoBanner.style.textAlign = 'center';
-    avisoBanner.style.fontSize = '14px';
-    avisoBanner.style.fontWeight = '600';
-    avisoBanner.style.fontFamily = 'sans-serif';
-    avisoBanner.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
-    avisoBanner.style.zIndex = '9999';
-    avisoBanner.style.position = 'relative';
-    
-    // Contenido del mensaje corto
-    avisoBanner.innerHTML = `🛑 Aviso: Hoy no tendremos servicio. ¡Los esperamos mañana en nuestro horario habitual! 🍣`;
-
-    // 2. Lo colocamos dinámicamente justo abajo de la barra verde matcha
-    // Buscamos el header de tu página. Si no lo encuentra, lo pone al principio del body.
-    const header = document.querySelector('header') || document.querySelector('.navbar') || document.body.firstChild;
-    
-    if (header && header.parentNode) {
-        header.parentNode.insertBefore(avisoBanner, header.nextSibling);
-    } else {
-        document.body.insertBefore(avisoBanner, document.body.firstChild);
-    }
-});
-}
