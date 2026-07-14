@@ -101,17 +101,17 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 30px 20px 30px; /* ← Cambiamos el 60px de arriba por 30px para que el gato suba más en el iPhone */
+    padding: 30px 20px 40px; /* Mantenemos el padding superior reducido */
     width: 100%;
     animation: fadeIn 0.5s ease-out;
 }
 
 .logo-wrapper {
-    margin-bottom: 0px; /* ← Lo bajamos a 0px para quitar todo el espacio inferior del gato */
+    margin-bottom: 0px; /* Sin espacio abajo del contenedor */
 }
 
 .brand-logo {
-    width: 260px; /* ← ¡Lo subí a 240px! Si sientes que 200px aún se ve chico en iPhone, con esto ganará más fuerza */
+    width: 320px; /* ← ¡Aumento drástico! Subimos de 240px a 320px forzados en móvil */
     height: auto;
     display: block;
     margin: 0 auto;
@@ -123,7 +123,42 @@ body {
     font-size: 20px;
     letter-spacing: 3px;
     color: #ebdcb9;
-    margin: -12px auto 25px; /* ← ¡La clave! Cambiamos 15px por -12px. Esto jala el texto hacia arriba y lo pega al gato */
+    /* Ajustamos el margen negativo para un gato más grande: -8px es suficiente */
+    margin: -8px auto 25px; /* ← Jala el texto hacia arriba pero no tanto como antes para que respire */
+}/* ==========================================================================
+   HERO
+   ========================================================================== */
+.hero-section {
+    background-color: #095a35;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 30px 20px 40px; /* Mantenemos el padding superior reducido */
+    width: 100%;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.logo-wrapper {
+    margin-bottom: 0px; /* Sin espacio abajo del contenedor */
+}
+
+.brand-logo {
+    width: 320px; /* ← ¡Aumento drástico! Subimos de 240px a 320px forzados en móvil */
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.slogan {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 20px;
+    letter-spacing: 3px;
+    color: #ebdcb9;
+    /* Ajustamos el margen negativo para un gato más grande: -8px es suficiente */
+    margin: -8px auto 25px; /* ← Jala el texto hacia arriba pero no tanto como antes para que respire */
 }
 
 .shoji-divider-center {
