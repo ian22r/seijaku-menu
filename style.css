@@ -111,7 +111,7 @@ body {
 }
 
 .brand-logo {
-    width: 240px; /* ← ¡Lo subí a 240px! Si sientes que 200px aún se ve chico en iPhone, con esto ganará más fuerza */
+    width: 260px; /* ← ¡Lo subí a 240px! Si sientes que 200px aún se ve chico en iPhone, con esto ganará más fuerza */
     height: auto;
     display: block;
     margin: 0 auto;
