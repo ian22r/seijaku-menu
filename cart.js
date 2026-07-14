@@ -507,76 +507,98 @@ if (checkoutForm) {
     });
 }
 /* ==========================================================================
-   🔬 MODO DIAGNÓSTICO: ANIMACIÓN CARRITO (VAMOS A VER QUÉ PASA)
+   ✨ EFECTO VISUAL: ANIMACIÓN "VOLAR A LA BOLSITA" (VERSIÓN FINAL SEIJAKU)
    ========================================================================== */
 (function() {
-    // 1. Inyectamos estilos base
+    // 1. Inyectamos los estilos CSS necesarios
     const style = document.createElement('style');
     style.innerHTML = `
         .flying-particle-matcha {
             position: fixed;
-            width: 25px;
-            height: 25px;
-            background-color: #5d875a !important;
+            width: 22px;
+            height: 22px;
+            background-color: #5d875a !important; /* Verde Matcha Seijaku */
             border-radius: 50%;
             z-index: 9999999;
             pointer-events: none;
             transition: all 0.7s cubic-bezier(0.25, 1, 0.5, 1);
-            box-shadow: 0 0 12px rgba(93, 135, 90, 0.8);
+            box-shadow: 0 0 10px rgba(93, 135, 90, 0.6);
+        }
+        @keyframes bentoBounce {
+            0% { transform: scale(1); }
+            30% { transform: scale(1.3) rotate(-10deg); }
+            50% { transform: scale(0.85) rotate(6deg); }
+            70% { transform: scale(1.1) rotate(-3deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+        .bento-bounce-active {
+            animation: bentoBounce 0.6s ease-in-out !important;
         }
     `;
     document.head.appendChild(style);
 
-    document.addEventListener('click', function(event) {
-        // Buscamos cualquier elemento que parezca un botón de agregar (subiendo por sus padres)
-        const target = event.target;
-        
-        // 🧪 Alerta de diagnóstico 1: ¿Dónde diste clic?
-        console.log("Diste clic en:", target.tagName, "Texto:", target.textContent?.trim());
+    // 2. Función que ejecuta el vuelo de la bolita matcha
+    function runFlyAnimation(buttonElement) {
+        const cartIcon = document.getElementById('cart-floating-btn');
+        const bentoSvg = document.querySelector('.bento-svg');
+        if (!buttonElement || !cartIcon) return;
 
-        // Buscador ultra-amplio del botón
-        const isAddButton = target.closest('button') || 
-                            target.closest('.btn-add') || 
-                            target.closest('.add-to-cart') ||
-                            target.closest('[class*="add"]') ||
-                            (target.textContent && target.textContent.toLowerCase().includes('agreg'));
+        // Si el botón está oculto (.hidden), lo mostramos un microsegundo antes 
+        // para poder calcular sus coordenadas reales en pantalla
+        const wasHidden = cartIcon.classList.contains('hidden');
+        if (wasHidden) {
+            cartIcon.classList.remove('hidden');
+        }
+
+        const btnRect = buttonElement.getBoundingClientRect();
+        const cartRect = cartIcon.getBoundingClientRect();
+
+        // Si estaba oculto, lo volvemos a ocultar (tu lógica principal lo mostrará formalmente)
+        if (wasHidden) {
+            cartIcon.classList.add('hidden');
+        }
+
+        // Creamos la bolita matcha
+        const particle = document.createElement('div');
+        particle.className = 'flying-particle-matcha';
+        
+        // La centramos en el botón de agregar
+        particle.style.left = `${btnRect.left + btnRect.width / 2 - 11}px`;
+        particle.style.top = `${btnRect.top + btnRect.height / 2 - 11}px`;
+        document.body.appendChild(particle);
+
+        // Iniciamos el vuelo hacia la bolsita
+        requestAnimationFrame(() => {
+            particle.style.left = `${cartRect.left + cartRect.width / 2 - 11}px`;
+            particle.style.top = `${cartRect.top + cartRect.height / 2 - 11}px`;
+            particle.style.transform = 'scale(0.2)'; // Se encoge
+            particle.style.opacity = '0.3';
+        });
+
+        // Al impactar la bolsita
+        setTimeout(() => {
+            particle.remove();
+            
+            // Hacemos rebotar el SVG de la bolsita premium
+            if (bentoSvg) {
+                bentoSvg.classList.add('bento-bounce-active');
+                setTimeout(() => {
+                    bentoSvg.classList.remove('bento-bounce-active');
+                }, 600);
+            }
+        }, 700);
+    }
+
+    // 3. Escucha inteligente de clics en tus botones de agregar
+    document.addEventListener('click', function(event) {
+        const target = event.target;
+        const isAddButton = target.closest('.btn-add') || 
+                            target.closest('.add-to-cart') || 
+                            target.closest('button[onclick*="cart"]') ||
+                            (target.tagName === 'BUTTON' && target.textContent.toLowerCase().includes('agregar'));
 
         if (isAddButton) {
-            // 🧪 Alerta de diagnóstico 2: ¡Detectamos el botón!
-            alert("¡Botón de agregar detectado con éxito! Buscando la bolsa...");
-
-            // Buscador ultra-amplio de la bolsa o carrito
-            const cartIcon = document.getElementById('cart-icon') || 
-                             document.querySelector('.cart-button-floating') || 
-                             document.querySelector('[class*="cart"]') || 
-                             document.querySelector('[class*="bolsa"]') || 
-                             document.querySelector('.bag-icon') ||
-                             document.querySelector('[href*="cart"]');
-
-            if (!cartIcon) {
-                // 🧪 Alerta de diagnóstico 3: El botón está bien, pero no encontramos el carrito
-                alert("❌ Error: No encontré el icono del carrito en la pantalla. Revisa cómo se llama su ID o clase.");
-                return;
-            }
-
-            // Si encontró ambos, ejecuta el vuelo
-            const btnRect = isAddButton.getBoundingClientRect();
-            const cartRect = cartIcon.getBoundingClientRect();
-
-            const particle = document.createElement('div');
-            particle.className = 'flying-particle-matcha';
-            particle.style.left = `${btnRect.left + btnRect.width / 2 - 12}px`;
-            particle.style.top = `${btnRect.top + btnRect.height / 2 - 12}px`;
-            document.body.appendChild(particle);
-
-            requestAnimationFrame(() => {
-                particle.style.left = `${cartRect.left + cartRect.width / 2 - 12}px`;
-                particle.style.top = `${cartRect.top + cartRect.height / 2 - 12}px`;
-                particle.style.transform = 'scale(0.1)';
-                particle.style.opacity = '0';
-            });
-
-            setTimeout(() => { particle.remove(); }, 750);
+            runFlyAnimation(isAddButton);
         }
     });
 })();
