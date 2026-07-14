@@ -507,91 +507,76 @@ if (checkoutForm) {
     });
 }
 /* ==========================================================================
-   ✨ EFECTO VISUAL: ANIMACIÓN "VOLAR AL CARRITO" (AUTO-INJECTABLE)
+   🔬 MODO DIAGNÓSTICO: ANIMACIÓN CARRITO (VAMOS A VER QUÉ PASA)
    ========================================================================== */
 (function() {
-    // 1. Inyectar estilos CSS directamente desde JS para asegurar que funcionen
+    // 1. Inyectamos estilos base
     const style = document.createElement('style');
     style.innerHTML = `
         .flying-particle-matcha {
             position: fixed;
-            width: 22px;
-            height: 22px;
-            background-color: #5d875a !important; /* Verde Matcha Seijaku */
+            width: 25px;
+            height: 25px;
+            background-color: #5d875a !important;
             border-radius: 50%;
             z-index: 9999999;
             pointer-events: none;
             transition: all 0.7s cubic-bezier(0.25, 1, 0.5, 1);
-            box-shadow: 0 0 10px rgba(93, 135, 90, 0.6);
-        }
-        @keyframes cartBounceEffect {
-            0% { transform: scale(1); }
-            30% { transform: scale(1.3) rotate(-8deg); }
-            50% { transform: scale(0.9) rotate(4deg); }
-            70% { transform: scale(1.1) rotate(-2deg); }
-            100% { transform: scale(1) rotate(0deg); }
-        }
-        .cart-bounce-active {
-            animation: cartBounceEffect 0.6s ease-in-out !important;
+            box-shadow: 0 0 12px rgba(93, 135, 90, 0.8);
         }
     `;
     document.head.appendChild(style);
 
-    // 2. Función que calcula y ejecuta el vuelo
-    function runFlyAnimation(buttonElement) {
-        // Buscador inteligente del icono de la bolsa/carrito
-        const cartIcon = document.getElementById('cart-icon') || 
-                         document.querySelector('.cart-button-floating') || 
-                         document.querySelector('[class*="cart"]') || 
-                         document.querySelector('[class*="bolsa"]') || 
-                         document.querySelector('.bag-icon');
-
-        if (!buttonElement || !cartIcon) return;
-
-        // Obtener posiciones exactas
-        const btnRect = buttonElement.getBoundingClientRect();
-        const cartRect = cartIcon.getBoundingClientRect();
-
-        // Crear la bolita matcha que va a volar
-        const particle = document.createElement('div');
-        particle.className = 'flying-particle-matcha';
-        
-        // Colocarla justo sobre el botón de "Agregar"
-        particle.style.left = `${btnRect.left + btnRect.width / 2 - 11}px`;
-        particle.style.top = `${btnRect.top + btnRect.height / 2 - 11}px`;
-        
-        document.body.appendChild(particle);
-
-        // Retraso mínimo para activar la transición de movimiento
-        requestAnimationFrame(() => {
-            particle.style.left = `${cartRect.left + cartRect.width / 2 - 11}px`;
-            particle.style.top = `${cartRect.top + cartRect.height / 2 - 11}px`;
-            particle.style.transform = 'scale(0.2)'; // Se encoge en el aire
-            particle.style.opacity = '0.3';
-        });
-
-        // Al terminar el vuelo, golpea el carrito y lo hace rebotar
-        setTimeout(() => {
-            particle.remove();
-            
-            cartIcon.classList.add('cart-bounce-active');
-            setTimeout(() => {
-                cartIcon.classList.remove('cart-bounce-active');
-            }, 600);
-        }, 700);
-    }
-
-    // 3. Escuchar clics en toda la página de forma inteligente
     document.addEventListener('click', function(event) {
-        // Busca si el clic fue en un botón de agregar (por clase o texto)
+        // Buscamos cualquier elemento que parezca un botón de agregar (subiendo por sus padres)
         const target = event.target;
-        const isAddButton = target.closest('.btn-add') || 
-                            target.closest('.add-to-cart') || 
-                            target.closest('button[onclick*="cart"]') ||
-                            (target.tagName === 'BUTTON' && target.textContent.toLowerCase().includes('agregar'));
+        
+        // 🧪 Alerta de diagnóstico 1: ¿Dónde diste clic?
+        console.log("Diste clic en:", target.tagName, "Texto:", target.textContent?.trim());
+
+        // Buscador ultra-amplio del botón
+        const isAddButton = target.closest('button') || 
+                            target.closest('.btn-add') || 
+                            target.closest('.add-to-cart') ||
+                            target.closest('[class*="add"]') ||
+                            (target.textContent && target.textContent.toLowerCase().includes('agreg'));
 
         if (isAddButton) {
-            runFlyAnimation(isAddButton);
+            // 🧪 Alerta de diagnóstico 2: ¡Detectamos el botón!
+            alert("¡Botón de agregar detectado con éxito! Buscando la bolsa...");
+
+            // Buscador ultra-amplio de la bolsa o carrito
+            const cartIcon = document.getElementById('cart-icon') || 
+                             document.querySelector('.cart-button-floating') || 
+                             document.querySelector('[class*="cart"]') || 
+                             document.querySelector('[class*="bolsa"]') || 
+                             document.querySelector('.bag-icon') ||
+                             document.querySelector('[href*="cart"]');
+
+            if (!cartIcon) {
+                // 🧪 Alerta de diagnóstico 3: El botón está bien, pero no encontramos el carrito
+                alert("❌ Error: No encontré el icono del carrito en la pantalla. Revisa cómo se llama su ID o clase.");
+                return;
+            }
+
+            // Si encontró ambos, ejecuta el vuelo
+            const btnRect = isAddButton.getBoundingClientRect();
+            const cartRect = cartIcon.getBoundingClientRect();
+
+            const particle = document.createElement('div');
+            particle.className = 'flying-particle-matcha';
+            particle.style.left = `${btnRect.left + btnRect.width / 2 - 12}px`;
+            particle.style.top = `${btnRect.top + btnRect.height / 2 - 12}px`;
+            document.body.appendChild(particle);
+
+            requestAnimationFrame(() => {
+                particle.style.left = `${cartRect.left + cartRect.width / 2 - 12}px`;
+                particle.style.top = `${cartRect.top + cartRect.height / 2 - 12}px`;
+                particle.style.transform = 'scale(0.1)';
+                particle.style.opacity = '0';
+            });
+
+            setTimeout(() => { particle.remove(); }, 750);
         }
     });
 })();
