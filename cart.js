@@ -347,50 +347,6 @@ function animateFlyToCart(buttonElement) {
             cartIcon.classList.remove('cart-icon-bounce');
         }, 500);
     }, 600);
-}/* ------------------------------------------------------------------
-   EFECTO VISUAL: PARTÍCULA VOLADORA AL CARRITO
------------------------------------------------------------------- */
-function animateFlyToCart(buttonElement) {
-    // 1. Localizar el botón que se presionó y el icono del carrito flotante
-    // Ajusta '#cart-icon' o '.cart-btn' según la clase/ID real de tu botón de carrito en el HTML
-    const cartIcon = document.getElementById('cart-icon') || document.querySelector('.cart-button-floating');
-    if (!buttonElement || !cartIcon) return;
-
-    // 2. Obtener las coordenadas en pantalla de ambos elementos
-    const btnRect = buttonElement.getBoundingClientRect();
-    const cartRect = cartIcon.getBoundingClientRect();
-
-    // 3. Crear el elemento visual (la partícula)
-    const particle = document.createElement('div');
-    particle.className = 'flying-particle';
-    
-    // Posicionar la partícula exactamente encima del botón presionado
-    particle.style.left = `${btnRect.left + btnRect.width / 2 - 10}px`;
-    particle.style.top = `${btnRect.top + btnRect.height / 2 - 10}px`;
-    
-    document.body.appendChild(particle);
-
-    // 4. Forzar un pequeño delay para que el navegador registre la posición inicial antes de animar
-    requestAnimationFrame(() => {
-        // Mover la partícula hacia la posición del carrito
-        particle.style.left = `${cartRect.left + cartRect.width / 2 - 10}px`;
-        particle.style.top = `${cartRect.top + cartRect.height / 2 - 10}px`;
-        particle.style.transform = 'scale(0.3)'; // Se hace más chiquita mientras vuela
-        particle.style.opacity = '0.2';
-    });
-
-    // 5. Al terminar el vuelo (600ms), remover la partícula y hacer rebotar el carrito
-    setTimeout(() => {
-        particle.remove();
-        
-        // Agregar clase de rebote al carrito
-        cartIcon.classList.add('cart-icon-bounce');
-        
-        // Quitar la clase después de que termine la animación para que pueda volver a usarse
-        setTimeout(() => {
-            cartIcon.classList.remove('cart-icon-bounce');
-        }, 500);
-    }, 600);
 }
 /* ------------------------------------------------------------------
    6. MODO OSCURO PREMIUM AUTOMÁTICO
@@ -550,3 +506,92 @@ if (checkoutForm) {
         updateCartUI();
     });
 }
+/* ==========================================================================
+   ✨ EFECTO VISUAL: ANIMACIÓN "VOLAR AL CARRITO" (AUTO-INJECTABLE)
+   ========================================================================== */
+(function() {
+    // 1. Inyectar estilos CSS directamente desde JS para asegurar que funcionen
+    const style = document.createElement('style');
+    style.innerHTML = `
+        .flying-particle-matcha {
+            position: fixed;
+            width: 22px;
+            height: 22px;
+            background-color: #5d875a !important; /* Verde Matcha Seijaku */
+            border-radius: 50%;
+            z-index: 9999999;
+            pointer-events: none;
+            transition: all 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+            box-shadow: 0 0 10px rgba(93, 135, 90, 0.6);
+        }
+        @keyframes cartBounceEffect {
+            0% { transform: scale(1); }
+            30% { transform: scale(1.3) rotate(-8deg); }
+            50% { transform: scale(0.9) rotate(4deg); }
+            70% { transform: scale(1.1) rotate(-2deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+        .cart-bounce-active {
+            animation: cartBounceEffect 0.6s ease-in-out !important;
+        }
+    `;
+    document.head.appendChild(style);
+
+    // 2. Función que calcula y ejecuta el vuelo
+    function runFlyAnimation(buttonElement) {
+        // Buscador inteligente del icono de la bolsa/carrito
+        const cartIcon = document.getElementById('cart-icon') || 
+                         document.querySelector('.cart-button-floating') || 
+                         document.querySelector('[class*="cart"]') || 
+                         document.querySelector('[class*="bolsa"]') || 
+                         document.querySelector('.bag-icon');
+
+        if (!buttonElement || !cartIcon) return;
+
+        // Obtener posiciones exactas
+        const btnRect = buttonElement.getBoundingClientRect();
+        const cartRect = cartIcon.getBoundingClientRect();
+
+        // Crear la bolita matcha que va a volar
+        const particle = document.createElement('div');
+        particle.className = 'flying-particle-matcha';
+        
+        // Colocarla justo sobre el botón de "Agregar"
+        particle.style.left = `${btnRect.left + btnRect.width / 2 - 11}px`;
+        particle.style.top = `${btnRect.top + btnRect.height / 2 - 11}px`;
+        
+        document.body.appendChild(particle);
+
+        // Retraso mínimo para activar la transición de movimiento
+        requestAnimationFrame(() => {
+            particle.style.left = `${cartRect.left + cartRect.width / 2 - 11}px`;
+            particle.style.top = `${cartRect.top + cartRect.height / 2 - 11}px`;
+            particle.style.transform = 'scale(0.2)'; // Se encoge en el aire
+            particle.style.opacity = '0.3';
+        });
+
+        // Al terminar el vuelo, golpea el carrito y lo hace rebotar
+        setTimeout(() => {
+            particle.remove();
+            
+            cartIcon.classList.add('cart-bounce-active');
+            setTimeout(() => {
+                cartIcon.classList.remove('cart-bounce-active');
+            }, 600);
+        }, 700);
+    }
+
+    // 3. Escuchar clics en toda la página de forma inteligente
+    document.addEventListener('click', function(event) {
+        // Busca si el clic fue en un botón de agregar (por clase o texto)
+        const target = event.target;
+        const isAddButton = target.closest('.btn-add') || 
+                            target.closest('.add-to-cart') || 
+                            target.closest('button[onclick*="cart"]') ||
+                            (target.tagName === 'BUTTON' && target.textContent.toLowerCase().includes('agregar'));
+
+        if (isAddButton) {
+            runFlyAnimation(isAddButton);
+        }
+    });
+})();
