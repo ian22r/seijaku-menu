@@ -158,8 +158,8 @@ body {
     font-size: 20px;
     letter-spacing: 3px;
     color: #ebdcb9;
-    /* Ajustamos el margen negativo para un gato más grande: -8px es suficiente */
-    margin: -8px auto 25px; /* ← Jala el texto hacia arriba pero no tanto como antes para que respire */
+    /* ¡La clave! Cambiamos -8px por -25px para que el texto suba y se pegue al gato grande */
+    margin: -25px auto 25px; 
 }
 
 .shoji-divider-center {
