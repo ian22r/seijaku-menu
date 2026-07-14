@@ -145,10 +145,11 @@ body {
 }
 
 .brand-logo {
-    width: 320px; /* ← ¡Aumento drástico! Subimos de 240px a 320px forzados en móvil */
-    height: auto;
-    display: block;
-    margin: 0 auto;
+    width: 320px !important; /* ← Agregamos !important para obligar al iPhone a usar este tamaño */
+    max-width: 100% !important; /* ← También forzamos que no se salga de la pantalla */
+    height: auto !important;
+    display: block !important;
+    margin: 0 auto !important;
 }
 
 .slogan {
