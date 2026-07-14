@@ -101,18 +101,17 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 60px 20px 60px;
+    padding: 30px 20px 40px; /* ← Cambiamos el 60px de arriba por 30px para que el gato suba más en el iPhone */
     width: 100%;
     animation: fadeIn 0.5s ease-out;
 }
 
 .logo-wrapper {
-    margin-bottom: 5px;
+    margin-bottom: 0px; /* ← Lo bajamos a 0px para quitar todo el espacio inferior del gato */
 }
 
 .brand-logo {
-    max-width: 420px;
-    width: 100%;
+    width: 240px; /* ← ¡Lo subí a 240px! Si sientes que 200px aún se ve chico en iPhone, con esto ganará más fuerza */
     height: auto;
     display: block;
     margin: 0 auto;
@@ -124,7 +123,7 @@ body {
     font-size: 20px;
     letter-spacing: 3px;
     color: #ebdcb9;
-    margin: 15px auto 25px;
+    margin: -12px auto 25px; /* ← ¡La clave! Cambiamos 15px por -12px. Esto jala el texto hacia arriba y lo pega al gato */
 }
 
 .shoji-divider-center {
