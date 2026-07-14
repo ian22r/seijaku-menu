@@ -303,7 +303,95 @@ if (closeModalBtn) {
         if (cartModal) cartModal.classList.add('hidden');
     });
 }
+/* ------------------------------------------------------------------
+   EFECTO VISUAL: PARTÍCULA VOLADORA AL CARRITO
+------------------------------------------------------------------ */
+function animateFlyToCart(buttonElement) {
+    // 1. Localizar el botón que se presionó y el icono del carrito flotante
+    // Ajusta '#cart-icon' o '.cart-btn' según la clase/ID real de tu botón de carrito en el HTML
+    const cartIcon = document.getElementById('cart-icon') || document.querySelector('.cart-button-floating');
+    if (!buttonElement || !cartIcon) return;
 
+    // 2. Obtener las coordenadas en pantalla de ambos elementos
+    const btnRect = buttonElement.getBoundingClientRect();
+    const cartRect = cartIcon.getBoundingClientRect();
+
+    // 3. Crear el elemento visual (la partícula)
+    const particle = document.createElement('div');
+    particle.className = 'flying-particle';
+    
+    // Posicionar la partícula exactamente encima del botón presionado
+    particle.style.left = `${btnRect.left + btnRect.width / 2 - 10}px`;
+    particle.style.top = `${btnRect.top + btnRect.height / 2 - 10}px`;
+    
+    document.body.appendChild(particle);
+
+    // 4. Forzar un pequeño delay para que el navegador registre la posición inicial antes de animar
+    requestAnimationFrame(() => {
+        // Mover la partícula hacia la posición del carrito
+        particle.style.left = `${cartRect.left + cartRect.width / 2 - 10}px`;
+        particle.style.top = `${cartRect.top + cartRect.height / 2 - 10}px`;
+        particle.style.transform = 'scale(0.3)'; // Se hace más chiquita mientras vuela
+        particle.style.opacity = '0.2';
+    });
+
+    // 5. Al terminar el vuelo (600ms), remover la partícula y hacer rebotar el carrito
+    setTimeout(() => {
+        particle.remove();
+        
+        // Agregar clase de rebote al carrito
+        cartIcon.classList.add('cart-icon-bounce');
+        
+        // Quitar la clase después de que termine la animación para que pueda volver a usarse
+        setTimeout(() => {
+            cartIcon.classList.remove('cart-icon-bounce');
+        }, 500);
+    }, 600);
+}/* ------------------------------------------------------------------
+   EFECTO VISUAL: PARTÍCULA VOLADORA AL CARRITO
+------------------------------------------------------------------ */
+function animateFlyToCart(buttonElement) {
+    // 1. Localizar el botón que se presionó y el icono del carrito flotante
+    // Ajusta '#cart-icon' o '.cart-btn' según la clase/ID real de tu botón de carrito en el HTML
+    const cartIcon = document.getElementById('cart-icon') || document.querySelector('.cart-button-floating');
+    if (!buttonElement || !cartIcon) return;
+
+    // 2. Obtener las coordenadas en pantalla de ambos elementos
+    const btnRect = buttonElement.getBoundingClientRect();
+    const cartRect = cartIcon.getBoundingClientRect();
+
+    // 3. Crear el elemento visual (la partícula)
+    const particle = document.createElement('div');
+    particle.className = 'flying-particle';
+    
+    // Posicionar la partícula exactamente encima del botón presionado
+    particle.style.left = `${btnRect.left + btnRect.width / 2 - 10}px`;
+    particle.style.top = `${btnRect.top + btnRect.height / 2 - 10}px`;
+    
+    document.body.appendChild(particle);
+
+    // 4. Forzar un pequeño delay para que el navegador registre la posición inicial antes de animar
+    requestAnimationFrame(() => {
+        // Mover la partícula hacia la posición del carrito
+        particle.style.left = `${cartRect.left + cartRect.width / 2 - 10}px`;
+        particle.style.top = `${cartRect.top + cartRect.height / 2 - 10}px`;
+        particle.style.transform = 'scale(0.3)'; // Se hace más chiquita mientras vuela
+        particle.style.opacity = '0.2';
+    });
+
+    // 5. Al terminar el vuelo (600ms), remover la partícula y hacer rebotar el carrito
+    setTimeout(() => {
+        particle.remove();
+        
+        // Agregar clase de rebote al carrito
+        cartIcon.classList.add('cart-icon-bounce');
+        
+        // Quitar la clase después de que termine la animación para que pueda volver a usarse
+        setTimeout(() => {
+            cartIcon.classList.remove('cart-icon-bounce');
+        }, 500);
+    }, 600);
+}
 /* ------------------------------------------------------------------
    6. MODO OSCURO PREMIUM AUTOMÁTICO
 ------------------------------------------------------------------ */
