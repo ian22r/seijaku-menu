@@ -455,7 +455,7 @@ if (checkoutForm) {
         var numeroPedido = Math.floor(1000 + Math.random() * 9000);
 
         // CONSTRUCCIÓN DEL TICKET ELEGANTE
-        var message = "🍣 *SEIJAKU - PEDIDO #" + numeroPedido + "* 🍣\n"; 
+        var message = "🍣 *¡Hola Seijaku! Me gustaría hacer el siguiente pedido:#" + numeroPedido + "* 🍣\n"; 
         message += "──────────────────────────\n";
         message += "👤 *Cliente:* " + clientName + "\n";
         message += "📞 *Teléfono:* " + clientPhone + "\n";
