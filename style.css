@@ -1293,3 +1293,66 @@ body.dark-mode .category-btn {
 .cart-icon-bounce {
     animation: cartBounce 0.5s ease-in-out;
 }
+
+/* ========================================= */
+/* ESTILOS DEL PRELOADER (PANTALLA DE CARGA) */
+/* ========================================= */
+
+#preloader {
+    position: fixed; /* Ocupa toda la pantalla */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #095a35; /* Tu verde profundo de Seijaku */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Asegura que esté por encima de TODO */
+    transition: opacity 0.5s ease, visibility 0.5s ease; /* Transición suave al desaparecer */
+}
+
+.preloader-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.loader-logo {
+    width: 150px; /* Ajusta el tamaño de tu gato cargando */
+    height: auto;
+    /* Aplicamos la animación de respiración */
+    animation: breathing 2.5s ease-out infinite;
+}
+
+.loader-text {
+    font-family: 'Playfair Display', serif; /* Usamos tu tipografía elegante */
+    color: #ebdcb9; /* Color crema para el texto */
+    font-size: 16px;
+    letter-spacing: 2px;
+    margin: 0;
+    opacity: 0.8;
+}
+
+/* Ocultar el scroll del body mientras carga */
+body.loading {
+    overflow: hidden;
+}
+
+/* DEFINICIÓN DE LA ANIMACIÓN DE RESPIRACIÓN (PULSO SUAVE) */
+@keyframes breathing {
+    0% {
+        transform: scale(0.98);
+        opacity: 0.7;
+    }
+    50% {
+        transform: scale(1.02); /* Se agranda ligeramente */
+        opacity: 1; /* Se ilumina completamente */
+    }
+    100% {
+        transform: scale(0.98);
+        opacity: 0.7;
+    }
+}

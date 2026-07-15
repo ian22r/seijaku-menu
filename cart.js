@@ -602,3 +602,25 @@ if (checkoutForm) {
         }
     });
 })();
+
+
+
+// Espera a que TODO el contenido de la página (imágenes, estilos, etc.) se cargue
+window.addEventListener('load', function() {
+    // Selecciona el elemento del preloader
+    const preloader = document.getElementById('preloader');
+    
+    // Agrega una pequeña pausa opcional (ej. 500ms) para que la animación se aprecie bien
+    // antes de empezar a ocultarlo. Si quieres que sea instantáneo, usa 0.
+    setTimeout(function() {
+        // Cambia la opacidad para que se desvanezca suavemente
+        preloader.style.opacity = '0';
+        preloader.style.visibility = 'hidden';
+        
+        // Reactiva el scroll en el body
+        document.body.classList.remove('loading');
+    }, 1000); // 1000 milisegundos = 1 segundo de retraso total
+});
+
+// Al inicio, agregamos la clase loading al body para bloquear el scroll
+document.body.classList.add('loading');
