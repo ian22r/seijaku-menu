@@ -4,8 +4,62 @@
 
 const WHATSAPP_NUMBER = "5217721540533";
 let cart = [];
-let notificationTimeout = null; 
-let hasShownNotification = false; 
+let notificationTimeout = null;
+let hasShownNotification = false;
+
+/* ------------------------------------------------------------------
+   0. PROMO DEL DÍA: 2 ROLLOS x $170 (solo 2026-07-17)
+------------------------------------------------------------------ */
+const ROLL_PROMO_DATE  = "2026-07-17";
+const ROLL_PROMO_PRICE = 170;
+
+function isRollPromoActiveToday() {
+    var now = new Date();
+    var todayStr = now.getFullYear() + "-" +
+        String(now.getMonth() + 1).padStart(2, "0") + "-" +
+        String(now.getDate()).padStart(2, "0");
+    return todayStr === ROLL_PROMO_DATE;
+}
+
+// Calcula subtotal, descuento de promo, envío y total a partir del carrito
+function calculateOrderTotals(cartItems) {
+    var rawSubtotal = 0;
+    cartItems.forEach(function(item) { rawSubtotal += item.price; });
+
+    var promoDiscount = 0;
+    var promoPairs = 0;
+
+    if (isRollPromoActiveToday()) {
+        var rollPrices = cartItems
+            .filter(function(item) { return item.category === 'roll'; })
+            .map(function(item) { return item.price; })
+            .sort(function(a, b) { return b - a; }); // más caros primero
+
+        promoPairs = Math.floor(rollPrices.length / 2);
+
+        if (promoPairs > 0) {
+            var originalPairsSum = 0;
+            for (var i = 0; i < promoPairs * 2; i++) {
+                originalPairsSum += rollPrices[i];
+            }
+            var discountedPairsSum = promoPairs * ROLL_PROMO_PRICE;
+            promoDiscount = Math.max(0, originalPairsSum - discountedPairsSum);
+        }
+    }
+
+    var subtotalConPromo = rawSubtotal - promoDiscount;
+    var envioCosto = subtotalConPromo >= 200 ? 0 : 20;
+    var totalFinal = subtotalConPromo + envioCosto;
+
+    return {
+        rawSubtotal: rawSubtotal,
+        promoDiscount: promoDiscount,
+        promoPairs: promoPairs,
+        subtotalConPromo: subtotalConPromo,
+        envioCosto: envioCosto,
+        totalFinal: totalFinal
+    };
+}
 
 // Referencias DOM
 const cartFloatingBtn = document.getElementById('cart-floating-btn');
@@ -87,7 +141,7 @@ document.addEventListener('click', function(e) {
             return;
         }
         var price = parseInt(btn.getAttribute('data-price')) || 145;
-        addToCart(name, price);
+        addToCart(name, price, btn.getAttribute('data-category'));
 
         document.querySelectorAll('.custom-roll-block input[type="checkbox"]').forEach(function(cb) {
             cb.checked = false;
@@ -100,7 +154,7 @@ document.addEventListener('click', function(e) {
     if (btn.id === 'calpis-btn' && calpisSelect) {
         var currentFlavor = calpisSelect.value;
         var calpisPrice = parseInt(btn.getAttribute('data-price')) || 70;
-        addToCart("Calpis de la Casa (" + currentFlavor + ")", calpisPrice);
+        addToCart("Calpis de la Casa (" + currentFlavor + ")", calpisPrice, btn.getAttribute('data-category'));
         feedbackButton(btn, 'Añadir al carrito');
         return;
     }
@@ -126,13 +180,13 @@ document.addEventListener('click', function(e) {
     var originalText = btn.textContent || "Añadir al carrito";
 
     if (name && price > 0) {
-        addToCart(name, price);
+        addToCart(name, price, btn.getAttribute('data-category'));
         feedbackButton(btn, originalText);
     }
 });
 
-function addToCart(name, price) {
-    cart.push({ name: name, price: price });
+function addToCart(name, price, category) {
+    cart.push({ name: name, price: price, category: category || 'other' });
     updateCartUI();
     
     if (cart.length === 1 && !hasShownNotification) {
@@ -180,7 +234,7 @@ function showFlashNotification() {
 
     var currentTotal = 0;
     if (typeof cart !== 'undefined' && cart.forEach) {
-        cart.forEach(function(item) { currentTotal += item.price; });
+        currentTotal = calculateOrderTotals(cart).subtotalConPromo;
     }
     if (currentTotal >= 200) return;
 
@@ -235,11 +289,9 @@ function updateCartUI() {
 function renderCartModal() {
     if (!cartItemsList) return;
     cartItemsList.innerHTML = '';
-    var total = 0;
 
     cart.forEach(function(item, index) {
         var subtotal = item.price;
-        total += subtotal;
 
         var row = document.createElement('div');
         row.className = 'cart-item-row';
@@ -289,7 +341,19 @@ function renderCartModal() {
         cartItemsList.appendChild(row);
     });
 
-    if (cartTotalPrice) cartTotalPrice.textContent = '$' + total;
+    var totals = calculateOrderTotals(cart);
+    var promoLine = document.getElementById('cart-promo-line');
+    if (promoLine) {
+        if (totals.promoDiscount > 0) {
+            promoLine.textContent = '🎉 Promo del día 2 rollos x $' + ROLL_PROMO_PRICE + ' aplicada: -$' + totals.promoDiscount;
+            promoLine.classList.remove('hidden');
+        } else {
+            promoLine.textContent = '';
+            promoLine.classList.add('hidden');
+        }
+    }
+
+    if (cartTotalPrice) cartTotalPrice.textContent = '$' + totals.subtotalConPromo;
 }
 
 if (cartFloatingBtn) {
@@ -348,6 +412,16 @@ function animateFlyToCart(buttonElement) {
         }, 500);
     }, 600);
 }
+/* ------------------------------------------------------------------
+   5.1 BANNER DE PROMO DEL DÍA (SOLO SE MUESTRA SI ESTÁ VIGENTE HOY)
+------------------------------------------------------------------ */
+document.addEventListener('DOMContentLoaded', function() {
+    var banner = document.getElementById('roll-promo-banner');
+    if (banner && isRollPromoActiveToday()) {
+        banner.classList.remove('hidden');
+    }
+});
+
 /* ------------------------------------------------------------------
    6. MODO OSCURO PREMIUM AUTOMÁTICO
 ------------------------------------------------------------------ */
@@ -469,33 +543,28 @@ if (checkoutForm) {
             counts[item.name] = (counts[item.name] || 0) + 1;
         });
 
-        var subtotal = 0;
         for (var itemName in counts) {
             var quantity = counts[itemName];
             var unitPrice = cart.find(i => i.name === itemName).price;
             var itemSubtotal = unitPrice * quantity;
-            subtotal += itemSubtotal;
 
             message += "• *" + quantity + "x* " + itemName + " _($" + itemSubtotal + ")_\n";
         }
 
-        // 🛵 CALCULAR SI SE APLICA COSTO DE ENVÍO ($20 si es menor a $200)
-        var envioCosto = 0;
-        var mensajeEnvio = "";
-        if (subtotal < 200) {
-            envioCosto = 20;
-            mensajeEnvio = "🛵 *Envío:* $20 MXN\n";
-        } else {
-            mensajeEnvio = "🛵 *Envío:* ¡GRATIS!\n";
-        }
-
-        var totalFinal = subtotal + envioCosto;
+        // 🎉 PROMO DEL DÍA + 🛵 CÁLCULO DE ENVÍO (sobre el subtotal ya con promo aplicada)
+        var totals = calculateOrderTotals(cart);
+        var mensajeEnvio = totals.envioCosto > 0
+            ? "🛵 *Envío:* $" + totals.envioCosto + " MXN\n"
+            : "🛵 *Envío:* ¡GRATIS!\n";
 
         message += "──────────────────────────\n";
-        message += "📦 *Subtotal:* $" + subtotal + " MXN\n";
+        message += "📦 *Subtotal:* $" + totals.rawSubtotal + " MXN\n";
+        if (totals.promoDiscount > 0) {
+            message += "🎉 *Promo 2 rollos x $" + ROLL_PROMO_PRICE + ":* -$" + totals.promoDiscount + " MXN\n";
+        }
         message += mensajeEnvio; // Pinta si es gratis o si son $20
         message += "──────────────────────────\n";
-        message += "💰 *TOTAL A PAGAR:* $" + totalFinal + " MXN\n";
+        message += "💰 *TOTAL A PAGAR:* $" + totals.totalFinal + " MXN\n";
         message += "──────────────────────────\n";
         message += "🛵 _Pedido enviado desde el menú digital. ¡Gracias!_\nUn miembro del equipo responderá a este mensaje."; 
 
