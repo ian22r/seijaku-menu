@@ -140,6 +140,10 @@ if (coldfoamSelect && coldfoamBtn) {
 
         var coldfoamPriceDisplay = document.getElementById('coldfoam-price');
         if (coldfoamPriceDisplay) coldfoamPriceDisplay.textContent = '$' + flavorPrice;
+
+        document.querySelectorAll('.coldfoam-desc').forEach(function(desc) {
+            desc.classList.toggle('hidden', desc.getAttribute('data-flavor') !== coldfoamSelect.value);
+        });
     });
 }
 
