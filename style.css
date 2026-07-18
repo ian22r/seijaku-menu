@@ -565,6 +565,36 @@ body {
 }
 
 /* ==========================================================================
+   CALIDAD Y CONFIANZA
+   ========================================================================== */
+.trust-section {
+    background-color: #eef0e9;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.trust-container {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.trust-title {
+    font-family: 'Playfair Display', serif;
+    color: #095a35;
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.trust-text {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: #4a4a4a;
+    font-weight: 300;
+}
+
+/* ==========================================================================
    FOOTER / CONTACTO
    ========================================================================== */
 .contact-section {
