@@ -72,6 +72,8 @@ const checkoutForm    = document.getElementById('checkout-form');
 const customRollBtn   = document.getElementById('add-custom-roll-btn');
 const calpisSelect    = document.getElementById('calpis-flavor');
 const calpisBtn       = document.getElementById('calpis-btn');
+const coldfoamSelect  = document.getElementById('coldfoam-flavor');
+const coldfoamBtn     = document.getElementById('coldfoam-btn');
 const notificationDiv = document.getElementById('notification');
 
 /* ------------------------------------------------------------------
@@ -122,6 +124,22 @@ function updateCustomRollData() {
 if (calpisSelect && calpisBtn) {
     calpisSelect.addEventListener('change', function() {
         calpisBtn.setAttribute('data-name', "Calpis de la Casa (" + this.value + ")");
+    });
+}
+
+/* ------------------------------------------------------------------
+   2.1 MANEJO DE COLD FOAM DINÁMICO (precio distinto por sabor)
+------------------------------------------------------------------ */
+if (coldfoamSelect && coldfoamBtn) {
+    coldfoamSelect.addEventListener('change', function() {
+        var selectedOption = this.options[this.selectedIndex];
+        var flavorPrice = parseInt(selectedOption.getAttribute('data-price')) || 0;
+
+        coldfoamBtn.setAttribute('data-name', "Cold Foam (" + this.value + ")");
+        coldfoamBtn.setAttribute('data-price', flavorPrice);
+
+        var coldfoamPriceDisplay = document.getElementById('coldfoam-price');
+        if (coldfoamPriceDisplay) coldfoamPriceDisplay.textContent = '$' + flavorPrice;
     });
 }
 
