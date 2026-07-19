@@ -21,8 +21,8 @@ function isRollPromoActiveToday() {
     return todayStr === ROLL_PROMO_DATE;
 }
 
-// Calcula subtotal, descuento de promo, envío y total a partir del carrito
-function calculateOrderTotals(cartItems) {
+// Calcula subtotal, descuento de promo, envío, descuento de lealtad y total a partir del carrito
+function calculateOrderTotals(cartItems, loyaltyDiscountPercent) {
     var rawSubtotal = 0;
     cartItems.forEach(function(item) { rawSubtotal += item.price; });
 
@@ -48,14 +48,25 @@ function calculateOrderTotals(cartItems) {
     }
 
     var subtotalConPromo = rawSubtotal - promoDiscount;
+
+    // El envío se evalúa sobre el subtotal ANTES del descuento de lealtad,
+    // para que el premio no le haga perder el envío gratis a nadie.
     var envioCosto = subtotalConPromo >= 200 ? 0 : 20;
-    var totalFinal = subtotalConPromo + envioCosto;
+
+    var loyaltyPercent = loyaltyDiscountPercent || 0;
+    var loyaltyDiscountAmount = Math.round(subtotalConPromo * loyaltyPercent / 100);
+
+    var subtotalFinal = subtotalConPromo - loyaltyDiscountAmount;
+    var totalFinal = subtotalFinal + envioCosto;
 
     return {
         rawSubtotal: rawSubtotal,
         promoDiscount: promoDiscount,
         promoPairs: promoPairs,
         subtotalConPromo: subtotalConPromo,
+        loyaltyDiscountPercent: loyaltyPercent,
+        loyaltyDiscountAmount: loyaltyDiscountAmount,
+        subtotalFinal: subtotalFinal,
         envioCosto: envioCosto,
         totalFinal: totalFinal
     };
@@ -69,15 +80,15 @@ const LOYALTY_STORAGE_KEY = 'seijaku_order_count';
 
 const LOYALTY_REWARDS = [
     { reward: null,                          message: "¡Gracias por tu primer pedido! Esperamos que disfrutes de tu comida." },
-    { reward: "Calpis gratis",                message: "¡Felicidades! Por ser un cliente fiel, recibe un calpis gratis en tu próximo pedido." },
-    { reward: "Mochi gratis",                 message: "¡Increíble! Por ser un cliente fiel, recibe un mochi gratis en tu próximo pedido." },
-    { reward: "Kushiages gratis",             message: "¡Genial! Por ser un cliente fiel, recibe kushiages gratis con tu próximo pedido." },
-    { reward: "10% de descuento",             message: "¡Gracias por tu lealtad! Disfruta un 10% de descuento en tu próximo pedido." },
-    { reward: "Sushi gratis",                 message: "¡Fantástico! Por tu lealtad, recibe un sushi gratis en tu próximo pedido." },
-    { reward: "15% de descuento",             message: "¡Asombroso! Como agradecimiento, disfruta un 15% de descuento en tu próximo pedido." },
-    { reward: "Bebida gratis",                message: "¡Increíble! Por ser un cliente fiel, recibe una bebida gratis en tu próximo pedido." },
-    { reward: "Gyozas gratis",                message: "¡Impresionante! Por tu lealtad, recibe unas gyozas gratis en tu próximo pedido." },
-    { reward: "Mochi gratis (nuevo ciclo)",   message: "¡Eres un cliente excepcional! Recibirás un mochi gratis (iniciamos nuevo ciclo)." }
+    { reward: "Calpis gratis",                message: "¡Felicidades! Por ser un cliente fiel, este pedido incluye un calpis gratis." },
+    { reward: "Mochi gratis",                 message: "¡Increíble! Por ser un cliente fiel, este pedido incluye un mochi gratis." },
+    { reward: "Kushiages gratis",             message: "¡Genial! Por ser un cliente fiel, este pedido incluye kushiages gratis." },
+    { reward: "10% de descuento",             message: "¡Gracias por tu lealtad! Este pedido tiene un 10% de descuento." },
+    { reward: "Sushi gratis",                 message: "¡Fantástico! Por tu lealtad, este pedido incluye un sushi gratis." },
+    { reward: "15% de descuento",             message: "¡Asombroso! Como agradecimiento, este pedido tiene un 15% de descuento." },
+    { reward: "Bebida gratis",                message: "¡Increíble! Por ser un cliente fiel, este pedido incluye una bebida gratis." },
+    { reward: "Gyozas gratis",                message: "¡Impresionante! Por tu lealtad, este pedido incluye unas gyozas gratis." },
+    { reward: "Mochi gratis (nuevo ciclo)",   message: "¡Eres un cliente excepcional! Este pedido incluye un mochi gratis (iniciamos nuevo ciclo)." }
 ];
 
 // Número de pedido que se completaría SI el cliente envía este carrito ahora mismo
@@ -90,6 +101,14 @@ function getUpcomingOrderNumber() {
 function getLoyaltyReward(orderNumber) {
     var index = (orderNumber - 1) % LOYALTY_REWARDS.length;
     return LOYALTY_REWARDS[index];
+}
+
+// Solo los premios de % de descuento se aplican solos al total.
+// Los premios de producto gratis quedan como aviso para que el equipo los agregue manualmente.
+function getLoyaltyDiscountPercent(rewardName) {
+    if (rewardName === '10% de descuento') return 10;
+    if (rewardName === '15% de descuento') return 15;
+    return 0;
 }
 
 // Referencias DOM
@@ -394,7 +413,12 @@ function renderCartModal() {
         cartItemsList.appendChild(row);
     });
 
-    var totals = calculateOrderTotals(cart);
+    var upcomingOrderNumber = getUpcomingOrderNumber();
+    var upcomingReward = getLoyaltyReward(upcomingOrderNumber);
+    var loyaltyPercent = getLoyaltyDiscountPercent(upcomingReward.reward);
+
+    var totals = calculateOrderTotals(cart, loyaltyPercent);
+
     var promoLine = document.getElementById('cart-promo-line');
     if (promoLine) {
         if (totals.promoDiscount > 0) {
@@ -408,10 +432,12 @@ function renderCartModal() {
 
     var loyaltyLine = document.getElementById('cart-loyalty-line');
     if (loyaltyLine) {
-        var upcomingOrderNumber = getUpcomingOrderNumber();
-        var upcomingReward = getLoyaltyReward(upcomingOrderNumber);
         if (upcomingReward.reward) {
-            loyaltyLine.textContent = '🎁 Este será tu pedido #' + upcomingOrderNumber + ': ' + upcomingReward.message;
+            var loyaltyText = '🎁 Pedido #' + upcomingOrderNumber + ' de tu ciclo de lealtad: ' + upcomingReward.message;
+            if (loyaltyPercent > 0) {
+                loyaltyText += ' (-$' + totals.loyaltyDiscountAmount + ' ya aplicado a este pedido)';
+            }
+            loyaltyLine.textContent = loyaltyText;
             loyaltyLine.classList.remove('hidden');
         } else {
             loyaltyLine.textContent = '';
@@ -419,7 +445,7 @@ function renderCartModal() {
         }
     }
 
-    if (cartTotalPrice) cartTotalPrice.textContent = '$' + totals.subtotalConPromo;
+    if (cartTotalPrice) cartTotalPrice.textContent = '$' + totals.subtotalFinal;
 }
 
 if (cartFloatingBtn) {
@@ -617,8 +643,13 @@ if (checkoutForm) {
             message += "• *" + quantity + "x* " + itemName + " _($" + itemSubtotal + ")_\n";
         }
 
-        // 🎉 PROMO DEL DÍA + 🛵 CÁLCULO DE ENVÍO (sobre el subtotal ya con promo aplicada)
-        var totals = calculateOrderTotals(cart);
+        // 🎁 PROGRAMA DE LEALTAD (ciclo de 10 pedidos)
+        var loyaltyOrderNumber = getUpcomingOrderNumber();
+        var loyaltyReward = getLoyaltyReward(loyaltyOrderNumber);
+        var loyaltyPercent = getLoyaltyDiscountPercent(loyaltyReward.reward);
+
+        // 🎉 PROMO DEL DÍA + 🎯 DESCUENTO DE LEALTAD + 🛵 CÁLCULO DE ENVÍO
+        var totals = calculateOrderTotals(cart, loyaltyPercent);
         var mensajeEnvio = totals.envioCosto > 0
             ? "🛵 *Envío:* $" + totals.envioCosto + " MXN\n"
             : "🛵 *Envío:* ¡GRATIS!\n";
@@ -628,13 +659,13 @@ if (checkoutForm) {
         if (totals.promoDiscount > 0) {
             message += "🎉 *Promo 2 rollos x $" + ROLL_PROMO_PRICE + ":* -$" + totals.promoDiscount + " MXN\n";
         }
+        if (totals.loyaltyDiscountAmount > 0) {
+            message += "🎯 *Descuento de lealtad (" + totals.loyaltyDiscountPercent + "%):* -$" + totals.loyaltyDiscountAmount + " MXN\n";
+        }
         message += mensajeEnvio; // Pinta si es gratis o si son $20
         message += "──────────────────────────\n";
         message += "💰 *TOTAL A PAGAR:* $" + totals.totalFinal + " MXN\n";
 
-        // 🎁 PROGRAMA DE LEALTAD (ciclo de 10 pedidos)
-        var loyaltyOrderNumber = getUpcomingOrderNumber();
-        var loyaltyReward = getLoyaltyReward(loyaltyOrderNumber);
         message += "──────────────────────────\n";
         message += "🎁 *Pedido #" + loyaltyOrderNumber + " de tu ciclo de lealtad*\n";
         message += loyaltyReward.message + "\n";
