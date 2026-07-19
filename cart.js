@@ -77,6 +77,7 @@ function calculateOrderTotals(cartItems, loyaltyDiscountPercent) {
        del navegador del cliente — sin necesidad de backend)
 ------------------------------------------------------------------ */
 const LOYALTY_STORAGE_KEY = 'seijaku_order_count';
+const LOYALTY_MIN_SUBTOTAL = 350; // el pedido debe superar este monto para recibir el premio
 
 const LOYALTY_REWARDS = [
     { reward: null,                          message: "¡Gracias por tu primer pedido! Esperamos que disfrutes de tu comida." },
@@ -101,6 +102,12 @@ function getUpcomingOrderNumber() {
 function getLoyaltyReward(orderNumber) {
     var index = (orderNumber - 1) % LOYALTY_REWARDS.length;
     return LOYALTY_REWARDS[index];
+}
+
+// El pedido debe superar $350 de subtotal (sin envío) para que el premio se muestre/aplique.
+// Si no alcanza, el ciclo avanza igual pero el cliente pierde el premio de ese pedido.
+function isLoyaltyRewardEligible(subtotalConPromo) {
+    return subtotalConPromo > LOYALTY_MIN_SUBTOTAL;
 }
 
 // Solo los premios de % de descuento se aplican solos al total.
@@ -415,7 +422,11 @@ function renderCartModal() {
 
     var upcomingOrderNumber = getUpcomingOrderNumber();
     var upcomingReward = getLoyaltyReward(upcomingOrderNumber);
-    var loyaltyPercent = getLoyaltyDiscountPercent(upcomingReward.reward);
+
+    // Vemos primero el subtotal (sin descuento de lealtad) para decidir si el pedido alcanza el mínimo
+    var preLoyaltySubtotal = calculateOrderTotals(cart, 0).subtotalConPromo;
+    var loyaltyEligible = isLoyaltyRewardEligible(preLoyaltySubtotal);
+    var loyaltyPercent = loyaltyEligible ? getLoyaltyDiscountPercent(upcomingReward.reward) : 0;
 
     var totals = calculateOrderTotals(cart, loyaltyPercent);
 
@@ -432,7 +443,7 @@ function renderCartModal() {
 
     var loyaltyLine = document.getElementById('cart-loyalty-line');
     if (loyaltyLine) {
-        if (upcomingReward.reward) {
+        if (upcomingReward.reward && loyaltyEligible) {
             var loyaltyText = '🎁 Pedido #' + upcomingOrderNumber + ' de tu ciclo de lealtad: ' + upcomingReward.message;
             if (loyaltyPercent > 0) {
                 loyaltyText += ' (-$' + totals.loyaltyDiscountAmount + ' ya aplicado a este pedido)';
@@ -643,10 +654,12 @@ if (checkoutForm) {
             message += "• *" + quantity + "x* " + itemName + " _($" + itemSubtotal + ")_\n";
         }
 
-        // 🎁 PROGRAMA DE LEALTAD (ciclo de 10 pedidos)
+        // 🎁 PROGRAMA DE LEALTAD (ciclo de 10 pedidos, requiere pedido > $350 para cobrar el premio)
         var loyaltyOrderNumber = getUpcomingOrderNumber();
         var loyaltyReward = getLoyaltyReward(loyaltyOrderNumber);
-        var loyaltyPercent = getLoyaltyDiscountPercent(loyaltyReward.reward);
+        var preLoyaltySubtotal = calculateOrderTotals(cart, 0).subtotalConPromo;
+        var loyaltyEligible = isLoyaltyRewardEligible(preLoyaltySubtotal);
+        var loyaltyPercent = loyaltyEligible ? getLoyaltyDiscountPercent(loyaltyReward.reward) : 0;
 
         // 🎉 PROMO DEL DÍA + 🎯 DESCUENTO DE LEALTAD + 🛵 CÁLCULO DE ENVÍO
         var totals = calculateOrderTotals(cart, loyaltyPercent);
@@ -666,9 +679,11 @@ if (checkoutForm) {
         message += "──────────────────────────\n";
         message += "💰 *TOTAL A PAGAR:* $" + totals.totalFinal + " MXN\n";
 
-        message += "──────────────────────────\n";
-        message += "🎁 *Pedido #" + loyaltyOrderNumber + " de tu ciclo de lealtad*\n";
-        message += loyaltyReward.message + "\n";
+        if (loyaltyReward.reward && loyaltyEligible) {
+            message += "──────────────────────────\n";
+            message += "🎁 *Pedido #" + loyaltyOrderNumber + " de tu ciclo de lealtad*\n";
+            message += loyaltyReward.message + "\n";
+        }
 
         message += "──────────────────────────\n";
         message += "🛵 _Pedido enviado desde el menú digital. ¡Gracias!_\nUn miembro del equipo responderá a este mensaje.";
