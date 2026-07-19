@@ -73,15 +73,17 @@ function calculateOrderTotals(cartItems, loyaltyDiscountPercent) {
 }
 
 /* ------------------------------------------------------------------
-   0.1 PROGRAMA DE LEALTAD (ciclo de 10 pedidos, guardado en localStorage
-       del navegador del cliente — sin necesidad de backend)
+   0.1 PROGRAMA DE LEALTAD (ciclo de 12 pedidos: 3 sin premio + 9 con
+       premio, guardado en localStorage del navegador del cliente)
 ------------------------------------------------------------------ */
 const LOYALTY_STORAGE_KEY = 'seijaku_order_count';
 const LOYALTY_MIN_SUBTOTAL = 350; // el pedido debe superar este monto para recibir el premio
 
 const LOYALTY_REWARDS = [
     { reward: null,                          message: "¡Gracias por tu primer pedido! Esperamos que disfrutes de tu comida." },
-    { reward: "Calpis gratis",                message: "¡Felicidades! Por ser un cliente fiel, este pedido incluye un calpis gratis." },
+    { reward: null,                          message: "¡Gracias por volver! Este es tu segundo pedido con nosotros." },
+    { reward: null,                          message: "¡Ya vas por tu tercer pedido! En tu próxima compra te conviertes en cliente fiel y comienzan tus recompensas." },
+    { reward: "Calpis gratis",                message: "¡Felicidades, ya eres cliente fiel! Este pedido incluye un calpis gratis." },
     { reward: "Mochi gratis",                 message: "¡Increíble! Por ser un cliente fiel, este pedido incluye un mochi gratis." },
     { reward: "Kushiages gratis",             message: "¡Genial! Por ser un cliente fiel, este pedido incluye kushiages gratis." },
     { reward: "10% de descuento",             message: "¡Gracias por tu lealtad! Este pedido tiene un 10% de descuento." },
@@ -98,7 +100,7 @@ function getUpcomingOrderNumber() {
     return completedOrders + 1;
 }
 
-// El ciclo se repite cada 10 pedidos (orden 11 = orden 1, etc.)
+// El ciclo se repite cada 12 pedidos (orden 13 = orden 1, etc.)
 function getLoyaltyReward(orderNumber) {
     var index = (orderNumber - 1) % LOYALTY_REWARDS.length;
     return LOYALTY_REWARDS[index];
@@ -654,7 +656,7 @@ if (checkoutForm) {
             message += "• *" + quantity + "x* " + itemName + " _($" + itemSubtotal + ")_\n";
         }
 
-        // 🎁 PROGRAMA DE LEALTAD (ciclo de 10 pedidos, requiere pedido > $350 para cobrar el premio)
+        // 🎁 PROGRAMA DE LEALTAD (ciclo de 12 pedidos, requiere pedido > $350 para cobrar el premio)
         var loyaltyOrderNumber = getUpcomingOrderNumber();
         var loyaltyReward = getLoyaltyReward(loyaltyOrderNumber);
         var preLoyaltySubtotal = calculateOrderTotals(cart, 0).subtotalConPromo;
