@@ -377,6 +377,21 @@ body {
     display: none;
 }
 
+.cart-loyalty-line {
+    font-size: 12.5px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: #7a5c00;
+    background-color: rgba(212, 175, 55, 0.12);
+    border-radius: 6px;
+    padding: 8px 10px;
+    margin: -5px 0 12px 0;
+}
+
+.cart-loyalty-line.hidden {
+    display: none;
+}
+
 .roll-promo-banner {
     display: inline-flex;
     align-items: center;

@@ -61,6 +61,37 @@ function calculateOrderTotals(cartItems) {
     };
 }
 
+/* ------------------------------------------------------------------
+   0.1 PROGRAMA DE LEALTAD (ciclo de 10 pedidos, guardado en localStorage
+       del navegador del cliente — sin necesidad de backend)
+------------------------------------------------------------------ */
+const LOYALTY_STORAGE_KEY = 'seijaku_order_count';
+
+const LOYALTY_REWARDS = [
+    { reward: null,                          message: "¡Gracias por tu primer pedido! Esperamos que disfrutes de tu comida." },
+    { reward: "Calpis gratis",                message: "¡Felicidades! Por ser un cliente fiel, recibe un calpis gratis en tu próximo pedido." },
+    { reward: "Mochi gratis",                 message: "¡Increíble! Por ser un cliente fiel, recibe un mochi gratis en tu próximo pedido." },
+    { reward: "Kushiages gratis",             message: "¡Genial! Por ser un cliente fiel, recibe kushiages gratis con tu próximo pedido." },
+    { reward: "10% de descuento",             message: "¡Gracias por tu lealtad! Disfruta un 10% de descuento en tu próximo pedido." },
+    { reward: "Sushi gratis",                 message: "¡Fantástico! Por tu lealtad, recibe un sushi gratis en tu próximo pedido." },
+    { reward: "15% de descuento",             message: "¡Asombroso! Como agradecimiento, disfruta un 15% de descuento en tu próximo pedido." },
+    { reward: "Bebida gratis",                message: "¡Increíble! Por ser un cliente fiel, recibe una bebida gratis en tu próximo pedido." },
+    { reward: "Gyozas gratis",                message: "¡Impresionante! Por tu lealtad, recibe unas gyozas gratis en tu próximo pedido." },
+    { reward: "Mochi gratis (nuevo ciclo)",   message: "¡Eres un cliente excepcional! Recibirás un mochi gratis (iniciamos nuevo ciclo)." }
+];
+
+// Número de pedido que se completaría SI el cliente envía este carrito ahora mismo
+function getUpcomingOrderNumber() {
+    var completedOrders = parseInt(localStorage.getItem(LOYALTY_STORAGE_KEY)) || 0;
+    return completedOrders + 1;
+}
+
+// El ciclo se repite cada 10 pedidos (orden 11 = orden 1, etc.)
+function getLoyaltyReward(orderNumber) {
+    var index = (orderNumber - 1) % LOYALTY_REWARDS.length;
+    return LOYALTY_REWARDS[index];
+}
+
 // Referencias DOM
 const cartFloatingBtn = document.getElementById('cart-floating-btn');
 const cartCountBadge  = document.getElementById('cart-count-badge');
@@ -375,6 +406,19 @@ function renderCartModal() {
         }
     }
 
+    var loyaltyLine = document.getElementById('cart-loyalty-line');
+    if (loyaltyLine) {
+        var upcomingOrderNumber = getUpcomingOrderNumber();
+        var upcomingReward = getLoyaltyReward(upcomingOrderNumber);
+        if (upcomingReward.reward) {
+            loyaltyLine.textContent = '🎁 Este será tu pedido #' + upcomingOrderNumber + ': ' + upcomingReward.message;
+            loyaltyLine.classList.remove('hidden');
+        } else {
+            loyaltyLine.textContent = '';
+            loyaltyLine.classList.add('hidden');
+        }
+    }
+
     if (cartTotalPrice) cartTotalPrice.textContent = '$' + totals.subtotalConPromo;
 }
 
@@ -587,11 +631,22 @@ if (checkoutForm) {
         message += mensajeEnvio; // Pinta si es gratis o si son $20
         message += "──────────────────────────\n";
         message += "💰 *TOTAL A PAGAR:* $" + totals.totalFinal + " MXN\n";
+
+        // 🎁 PROGRAMA DE LEALTAD (ciclo de 10 pedidos)
+        var loyaltyOrderNumber = getUpcomingOrderNumber();
+        var loyaltyReward = getLoyaltyReward(loyaltyOrderNumber);
         message += "──────────────────────────\n";
-        message += "🛵 _Pedido enviado desde el menú digital. ¡Gracias!_\nUn miembro del equipo responderá a este mensaje."; 
+        message += "🎁 *Pedido #" + loyaltyOrderNumber + " de tu ciclo de lealtad*\n";
+        message += loyaltyReward.message + "\n";
+
+        message += "──────────────────────────\n";
+        message += "🛵 _Pedido enviado desde el menú digital. ¡Gracias!_\nUn miembro del equipo responderá a este mensaje.";
 
         var whatsappUrl = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message);
         window.open(whatsappUrl, '_blank');
+
+        // Se confirma el pedido: avanzamos el contador de lealtad
+        localStorage.setItem(LOYALTY_STORAGE_KEY, loyaltyOrderNumber);
 
         cart = [];
         updateCartUI();
