@@ -590,6 +590,69 @@ document.addEventListener('DOMContentLoaded', function() {
     setInterval(updateEstimatedTime, 300000); 
 });
 /* ------------------------------------------------------------------
+   6.2 ENVÍO DEL PEDIDO A SEIJAKU-APP (además de WhatsApp)
+       Guarda el mismo pedido en Supabase para que el equipo lo vea
+       e imprima el ticket desde seijaku-app. Si falla (sin internet,
+       etc.) no interrumpe el envío por WhatsApp: solo se registra en consola.
+------------------------------------------------------------------ */
+const SEIJAKU_APP_SUPABASE_URL = "https://edvbeteubbikhuzkbhuz.supabase.co";
+const SEIJAKU_APP_SUPABASE_ANON_KEY = "sb_publishable__VmNIEZkEI8KEX4L_TgAHA_deMlQgxO";
+
+const seijakuAppClient = (typeof window !== 'undefined' && window.supabase)
+    ? window.supabase.createClient(SEIJAKU_APP_SUPABASE_URL, SEIJAKU_APP_SUPABASE_ANON_KEY)
+    : null;
+
+async function enviarPedidoASeijakuApp(numeroPedido, clientName, clientPhone, clientAddress, cartItems, totals) {
+    if (!seijakuAppClient) return;
+
+    try {
+        var { data: pedidoInsertado, error: errorPedido } = await seijakuAppClient
+            .from('pedidos')
+            .insert({
+                numero_pedido: numeroPedido,
+                cliente_nombre: clientName,
+                cliente_telefono: clientPhone,
+                cliente_direccion: clientAddress,
+                subtotal: totals.rawSubtotal,
+                descuento_promo: totals.promoDiscount,
+                descuento_lealtad: totals.loyaltyDiscountAmount,
+                envio_costo: totals.envioCosto,
+                total: totals.totalFinal,
+            })
+            .select('id')
+            .single();
+
+        if (errorPedido || !pedidoInsertado) {
+            console.warn('No se pudo registrar el pedido en seijaku-app:', errorPedido);
+            return;
+        }
+
+        var counts = {};
+        var categorias = {};
+        cartItems.forEach(function(item) {
+            counts[item.name] = (counts[item.name] || 0) + 1;
+            categorias[item.name] = item.category;
+        });
+
+        var renglones = Object.keys(counts).map(function(nombre) {
+            var unitPrice = cartItems.find(function(i) { return i.name === nombre; }).price;
+            return {
+                pedido_id: pedidoInsertado.id,
+                nombre: nombre,
+                categoria: categorias[nombre] || null,
+                precio_unitario: unitPrice,
+                cantidad: counts[nombre],
+            };
+        });
+
+        var { error: errorItems } = await seijakuAppClient.from('pedido_items').insert(renglones);
+        if (errorItems) console.warn('No se pudieron registrar los productos del pedido:', errorItems);
+    } catch (err) {
+        console.warn('No se pudo enviar el pedido a seijaku-app:', err);
+    }
+}
+
+/* ------------------------------------------------------------------
    7. FORMATO TICKET DE WHATSAPP (CON ENVÍO DINÁMICO Y MEMORIA)
 ------------------------------------------------------------------ */
 
@@ -692,6 +755,9 @@ if (checkoutForm) {
 
         var whatsappUrl = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message);
         window.open(whatsappUrl, '_blank');
+
+        // También lo mandamos a seijaku-app para verlo/imprimirlo ahí (no bloquea el envío por WhatsApp)
+        enviarPedidoASeijakuApp(numeroPedido, clientName, clientPhone, clientAddress, cart.slice(), totals);
 
         // Se confirma el pedido: avanzamos el contador de lealtad
         localStorage.setItem(LOYALTY_STORAGE_KEY, loyaltyOrderNumber);
