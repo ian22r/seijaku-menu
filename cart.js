@@ -602,7 +602,7 @@ const seijakuAppClient = (typeof window !== 'undefined' && window.supabase)
     ? window.supabase.createClient(SEIJAKU_APP_SUPABASE_URL, SEIJAKU_APP_SUPABASE_ANON_KEY)
     : null;
 
-async function enviarPedidoASeijakuApp(numeroPedido, clientName, clientPhone, clientAddress, cartItems, totals) {
+async function enviarPedidoASeijakuApp(numeroPedido, clientName, clientPhone, clientAddress, cartItems, totals, premioLealtad) {
     if (!seijakuAppClient) return;
 
     // Generamos el id nosotros mismos: el cliente no tiene permiso de LEER pedidos
@@ -624,6 +624,7 @@ async function enviarPedidoASeijakuApp(numeroPedido, clientName, clientPhone, cl
                 descuento_lealtad: totals.loyaltyDiscountAmount,
                 envio_costo: totals.envioCosto,
                 total: totals.totalFinal,
+                premio_lealtad: premioLealtad,
             });
 
         if (errorPedido) {
@@ -770,7 +771,8 @@ if (checkoutForm) {
         window.open(whatsappUrl, '_blank');
 
         // También lo mandamos a seijaku-app para verlo/imprimirlo ahí (no bloquea el envío por WhatsApp)
-        enviarPedidoASeijakuApp(numeroPedido, clientName, clientPhone, clientAddress, cart.slice(), totals);
+        var premioLealtad = (loyaltyReward.reward && loyaltyEligible) ? loyaltyReward.reward : null;
+        enviarPedidoASeijakuApp(numeroPedido, clientName, clientPhone, clientAddress, cart.slice(), totals, premioLealtad);
 
         // Se confirma el pedido: avanzamos el contador de lealtad
         localStorage.setItem(LOYALTY_STORAGE_KEY, loyaltyOrderNumber);
