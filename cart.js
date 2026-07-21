@@ -605,10 +605,16 @@ const seijakuAppClient = (typeof window !== 'undefined' && window.supabase)
 async function enviarPedidoASeijakuApp(numeroPedido, clientName, clientPhone, clientAddress, cartItems, totals) {
     if (!seijakuAppClient) return;
 
+    // Generamos el id nosotros mismos: el cliente no tiene permiso de LEER pedidos
+    // (solo de crearlos), así que no podemos pedirle a Supabase que nos devuelva
+    // el id recién creado. Con esto evitamos esa lectura por completo.
+    var pedidoId = (crypto.randomUUID && crypto.randomUUID()) || generarUUIDRespaldo();
+
     try {
-        var { data: pedidoInsertado, error: errorPedido } = await seijakuAppClient
+        var { error: errorPedido } = await seijakuAppClient
             .from('pedidos')
             .insert({
+                id: pedidoId,
                 numero_pedido: numeroPedido,
                 cliente_nombre: clientName,
                 cliente_telefono: clientPhone,
@@ -618,11 +624,9 @@ async function enviarPedidoASeijakuApp(numeroPedido, clientName, clientPhone, cl
                 descuento_lealtad: totals.loyaltyDiscountAmount,
                 envio_costo: totals.envioCosto,
                 total: totals.totalFinal,
-            })
-            .select('id')
-            .single();
+            });
 
-        if (errorPedido || !pedidoInsertado) {
+        if (errorPedido) {
             console.warn('No se pudo registrar el pedido en seijaku-app:', errorPedido);
             return;
         }
@@ -637,7 +641,7 @@ async function enviarPedidoASeijakuApp(numeroPedido, clientName, clientPhone, cl
         var renglones = Object.keys(counts).map(function(nombre) {
             var unitPrice = cartItems.find(function(i) { return i.name === nombre; }).price;
             return {
-                pedido_id: pedidoInsertado.id,
+                pedido_id: pedidoId,
                 nombre: nombre,
                 categoria: categorias[nombre] || null,
                 precio_unitario: unitPrice,
@@ -650,6 +654,15 @@ async function enviarPedidoASeijakuApp(numeroPedido, clientName, clientPhone, cl
     } catch (err) {
         console.warn('No se pudo enviar el pedido a seijaku-app:', err);
     }
+}
+
+// Respaldo por si el navegador no soporta crypto.randomUUID() (ej. contextos http muy viejos)
+function generarUUIDRespaldo() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random() * 16 | 0;
+        var v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
 }
 
 /* ------------------------------------------------------------------
