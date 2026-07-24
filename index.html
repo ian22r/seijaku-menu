@@ -17,7 +17,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="logo.png">
     <link rel="icon" type="image/png" sizes="16x16" href="logo.png">
     <link rel="apple-touch-icon" href="logo.png">
-    <link rel="stylesheet" href="style.css?v=2.2">
+    <link rel="stylesheet" href="style.css?v=2.3">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-EE4Q1K8BZF"></script>
@@ -611,7 +611,11 @@
         <div class="cachis-avatar">
             <img src="logo.png" alt="Cachis">
         </div>
-        <div class="cachis-text" id="cachis-text"></div>
+        <div class="cachis-text">
+            <strong id="cachis-title"></strong>
+            <p class="cachis-step-text" id="cachis-step-text"></p>
+            <div class="cachis-dots" id="cachis-dots"></div>
+        </div>
     </div>
 
   <!-- BOTÓN FLOTANTE CARRITO (ÚNICO Y CON LA BOLSITA NUEVA) -->
@@ -643,6 +647,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 
     <!-- SCRIPT ÚNICO (Forzamos v2.9 para limpiar caché) -->
-    <script src="cart.js?v=3.2"></script>
+    <script src="cart.js?v=3.3"></script>
 </body>
 </html>

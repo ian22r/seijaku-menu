@@ -527,42 +527,83 @@ document.addEventListener('DOMContentLoaded', function() {
 /* ------------------------------------------------------------------
    5.1.1 BURBUJA DE CACHIS: explica cómo ordenar (solo primera vez) o
          da la bienvenida de regreso (si ya completó un pedido antes).
-         Se revela hasta que el preloader terminó de desaparecer, para
-         que no compita visualmente con la pantalla de carga.
+         Aparece hasta que el cliente empieza a ver el menú (no al cargar
+         la página), y muestra un paso a la vez con su propia animación.
 ------------------------------------------------------------------ */
-var cachisBubble, cachisCloseBtn, cachisIsFirstTime, cachisHideTimeout;
+var cachisBubble, cachisTitleEl, cachisStepTextEl, cachisDotsEl, cachisCloseBtn;
+var cachisIsFirstTime, cachisHideTimeout, cachisStepInterval;
+
+var CACHIS_STEPS = [
+    'Toca <strong>"Añadir al carrito"</strong> en cada platillo',
+    'Toca la <strong>bolsa flotante</strong> 🛍️',
+    'Confirma tus datos y <strong>envía por WhatsApp</strong>'
+];
 
 document.addEventListener('DOMContentLoaded', function() {
     cachisBubble = document.getElementById('cachis-bubble');
-    var textEl = document.getElementById('cachis-text');
+    cachisTitleEl = document.getElementById('cachis-title');
+    cachisStepTextEl = document.getElementById('cachis-step-text');
+    cachisDotsEl = document.getElementById('cachis-dots');
     cachisCloseBtn = document.getElementById('cachis-close');
-    if (!cachisBubble || !textEl || !cachisCloseBtn) return;
+    var menuSection = document.getElementById('menu');
+    if (!cachisBubble || !cachisTitleEl || !cachisStepTextEl || !cachisDotsEl || !cachisCloseBtn || !menuSection) return;
 
     var completedOrders = parseInt(localStorage.getItem(LOYALTY_STORAGE_KEY)) || 0;
     cachisIsFirstTime = completedOrders === 0;
 
-    textEl.innerHTML = cachisIsFirstTime
-        ? '<strong>¡Hola! Soy Cachis 🐱</strong>' +
-          '<ol>' +
-          '<li>Toca <strong>"Añadir al carrito"</strong> en cada platillo</li>' +
-          '<li>Toca la <strong>bolsa flotante</strong> 🛍️</li>' +
-          '<li>Confirma tus datos y <strong>envía por WhatsApp</strong></li>' +
-          '</ol>'
-        : '<strong>¡Qué bueno verte de nuevo! 🐱</strong>';
-
     cachisCloseBtn.addEventListener('click', hideCachisBubble);
+
+    var observer = new IntersectionObserver(function(entries, obs) {
+        if (entries[0].isIntersecting) {
+            showCachisBubble();
+            obs.disconnect();
+        }
+    }, { threshold: 0.05 });
+    observer.observe(menuSection);
 });
 
 function showCachisBubble() {
     if (!cachisBubble) return;
     cachisBubble.classList.remove('hidden');
     requestAnimationFrame(function() { cachisBubble.classList.add('show'); });
-    cachisHideTimeout = setTimeout(hideCachisBubble, cachisIsFirstTime ? 11000 : 5000);
+
+    if (cachisIsFirstTime) {
+        cachisTitleEl.textContent = '¡Hola! Soy Cachis, el gatito oficial de Seijaku 🐱';
+        cachisDotsEl.innerHTML = CACHIS_STEPS.map(function() { return '<span></span>'; }).join('');
+        var dots = cachisDotsEl.querySelectorAll('span');
+        var stepIndex = 0;
+
+        var renderStep = function() {
+            cachisStepTextEl.classList.add('fade');
+            setTimeout(function() {
+                cachisStepTextEl.innerHTML = CACHIS_STEPS[stepIndex];
+                dots.forEach(function(dot, i) { dot.classList.toggle('active', i === stepIndex); });
+                cachisStepTextEl.classList.remove('fade');
+            }, 250);
+        };
+
+        renderStep();
+        cachisStepInterval = setInterval(function() {
+            stepIndex++;
+            if (stepIndex >= CACHIS_STEPS.length) {
+                clearInterval(cachisStepInterval);
+                cachisHideTimeout = setTimeout(hideCachisBubble, 2800);
+                return;
+            }
+            renderStep();
+        }, 2600);
+    } else {
+        cachisTitleEl.textContent = '¡Qué bueno verte de nuevo! 🐱';
+        cachisStepTextEl.textContent = '';
+        cachisDotsEl.innerHTML = '';
+        cachisHideTimeout = setTimeout(hideCachisBubble, 4500);
+    }
 }
 
 function hideCachisBubble() {
     if (!cachisBubble) return;
     clearTimeout(cachisHideTimeout);
+    clearInterval(cachisStepInterval);
     cachisBubble.classList.remove('show');
     setTimeout(function() { cachisBubble.classList.add('hidden'); }, 450);
 }
@@ -954,9 +995,6 @@ window.addEventListener('load', function() {
 
         // Reactiva el scroll en el body
         document.body.classList.remove('loading');
-
-        // Hasta que el preloader terminó de desvanecerse (transición de 0.5s) mostramos a Cachis
-        setTimeout(showCachisBubble, 500);
     }, 1000); // 1000 milisegundos = 1 segundo de retraso total
 });
 

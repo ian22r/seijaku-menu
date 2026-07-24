@@ -712,24 +712,24 @@ body {
    ========================================================================== */
 .cachis-bubble {
     position: fixed;
-    left: 20px;
-    bottom: 100px;
-    max-width: 300px;
+    left: 16px;
+    bottom: 96px;
+    width: min(72vw, 230px);
     display: flex;
     align-items: flex-start;
-    gap: 12px;
-    background: rgba(247, 244, 235, 0.9);
+    gap: 10px;
+    background: rgba(247, 244, 235, 0.92);
     backdrop-filter: blur(16px) saturate(150%);
     -webkit-backdrop-filter: blur(16px) saturate(150%);
-    border: 1px solid rgba(201, 160, 84, 0.35);
-    border-radius: 16px 16px 16px 4px;
-    padding: 16px 18px;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.18);
+    border: 1px solid rgba(201, 160, 84, 0.3);
+    border-radius: 14px 14px 14px 3px;
+    padding: 12px 14px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
     z-index: 99998;
     opacity: 0;
-    transform: translateY(16px) scale(0.96);
+    transform: translateY(10px) scale(0.97);
     pointer-events: none;
-    transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .cachis-bubble.show {
@@ -743,8 +743,8 @@ body {
 }
 
 .cachis-avatar {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     flex-shrink: 0;
     border-radius: 50%;
     background-color: #095a35;
@@ -759,62 +759,71 @@ body {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    padding: 4px;
+    padding: 3px;
 }
 
 .cachis-text {
-    font-size: 12.5px;
-    line-height: 1.6;
+    font-size: 11.5px;
+    line-height: 1.5;
     color: #1e2923;
+    min-width: 0;
 }
 
 .cachis-text strong {
     display: block;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
     font-family: 'Playfair Display', serif;
-    font-size: 14px;
+    font-size: 12px;
     color: #095a35;
 }
 
-.cachis-text ol {
-    margin: 0;
-    padding-left: 16px;
+.cachis-step-text {
+    min-height: 30px;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.cachis-text li {
-    margin-bottom: 4px;
+.cachis-step-text.fade {
     opacity: 0;
-    transform: translateY(4px);
+    transform: translateY(3px);
 }
 
-.cachis-text li:last-child {
-    margin-bottom: 0;
+.cachis-step-text strong {
+    display: inline;
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    color: #095a35;
 }
 
-/* Los pasos solo se animan (uno por uno) cuando la burbuja ya está visible */
-.cachis-bubble.show .cachis-text li {
-    animation: cachisStepIn 0.45s ease forwards;
+.cachis-dots {
+    display: flex;
+    gap: 4px;
+    margin-top: 8px;
 }
 
-.cachis-bubble.show .cachis-text li:nth-child(1) { animation-delay: 0.35s; }
-.cachis-bubble.show .cachis-text li:nth-child(2) { animation-delay: 1.35s; }
-.cachis-bubble.show .cachis-text li:nth-child(3) { animation-delay: 2.35s; }
+.cachis-dots span {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: rgba(9, 90, 53, 0.25);
+    transition: background 0.3s ease, transform 0.3s ease;
+}
 
-@keyframes cachisStepIn {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.cachis-dots span.active {
+    background: #095a35;
+    transform: scale(1.4);
 }
 
 .cachis-close {
     position: absolute;
-    top: 6px;
-    right: 10px;
+    top: 5px;
+    right: 8px;
     background: none;
     border: none;
     color: #7b8580;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 1;
     cursor: pointer;
     padding: 4px;
@@ -833,16 +842,25 @@ body.dark-mode .cachis-text {
     color: #e0e0e0 !important;
 }
 
-body.dark-mode .cachis-text strong {
+body.dark-mode .cachis-text strong,
+body.dark-mode .cachis-step-text strong {
     color: #d4af37 !important;
+}
+
+body.dark-mode .cachis-dots span {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+body.dark-mode .cachis-dots span.active {
+    background: #d4af37;
 }
 
 @media (max-width: 480px) {
     .cachis-bubble {
-        left: 14px;
-        right: 14px;
-        max-width: none;
-        bottom: 90px;
+        left: 12px;
+        bottom: 84px;
+        width: min(70vw, 210px);
+        padding: 11px 12px;
     }
 }
 
