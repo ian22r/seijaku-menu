@@ -530,8 +530,8 @@ document.addEventListener('DOMContentLoaded', function() {
          Aparece hasta que el cliente empieza a ver el menú (no al cargar
          la página), y muestra un paso a la vez con su propia animación.
 ------------------------------------------------------------------ */
-var cachisBubble, cachisTitleEl, cachisStepTextEl, cachisDotsEl, cachisCloseBtn;
-var cachisIsFirstTime, cachisHideTimeout, cachisStepInterval;
+var cachisBubble, cachisTitleEl, cachisStepTextEl, cachisDotsEl, cachisCloseBtn, cachisMenuSection;
+var cachisIsFirstTime, cachisHideTimeout, cachisStepInterval, cachisPreloaderDone = false;
 
 var CACHIS_STEPS = [
     'Toca <strong>"Añadir al carrito"</strong> en cada platillo',
@@ -545,22 +545,30 @@ document.addEventListener('DOMContentLoaded', function() {
     cachisStepTextEl = document.getElementById('cachis-step-text');
     cachisDotsEl = document.getElementById('cachis-dots');
     cachisCloseBtn = document.getElementById('cachis-close');
-    var menuSection = document.getElementById('menu');
-    if (!cachisBubble || !cachisTitleEl || !cachisStepTextEl || !cachisDotsEl || !cachisCloseBtn || !menuSection) return;
+    cachisMenuSection = document.getElementById('menu');
+    if (!cachisBubble || !cachisTitleEl || !cachisStepTextEl || !cachisDotsEl || !cachisCloseBtn || !cachisMenuSection) return;
 
     var completedOrders = parseInt(localStorage.getItem(LOYALTY_STORAGE_KEY)) || 0;
     cachisIsFirstTime = completedOrders === 0;
 
     cachisCloseBtn.addEventListener('click', hideCachisBubble);
+});
+
+// Solo se llama una vez que la pantalla de carga terminó por completo:
+// así Cachis nunca puede activarse mientras el preloader sigue tapando la pantalla,
+// incluso si el navegador restauró el scroll en una posición baja de la página.
+function initCachisObserver() {
+    cachisPreloaderDone = true;
+    if (!cachisBubble || !cachisMenuSection) return;
 
     var observer = new IntersectionObserver(function(entries, obs) {
-        if (entries[0].isIntersecting) {
+        if (entries[0].isIntersecting && cachisPreloaderDone) {
             showCachisBubble();
             obs.disconnect();
         }
     }, { threshold: 0.05 });
-    observer.observe(menuSection);
-});
+    observer.observe(cachisMenuSection);
+}
 
 function showCachisBubble() {
     if (!cachisBubble) return;
@@ -983,9 +991,12 @@ if (checkoutForm) {
 
 // Espera a que TODO el contenido de la página (imágenes, estilos, etc.) se cargue
 window.addEventListener('load', function() {
+    // Por si el navegador restauró el scroll de una visita anterior
+    window.scrollTo(0, 0);
+
     // Selecciona el elemento del preloader
     const preloader = document.getElementById('preloader');
-    
+
     // Agrega una pequeña pausa opcional (ej. 500ms) para que la animación se aprecie bien
     // antes de empezar a ocultarlo. Si quieres que sea instantáneo, usa 0.
     setTimeout(function() {
@@ -995,6 +1006,11 @@ window.addEventListener('load', function() {
 
         // Reactiva el scroll en el body
         document.body.classList.remove('loading');
+
+        // Hasta que el preloader terminó de desvanecerse (transición de 0.5s) activamos a Cachis
+        setTimeout(function() {
+            if (typeof initCachisObserver === 'function') initCachisObserver();
+        }, 500);
     }, 1000); // 1000 milisegundos = 1 segundo de retraso total
 });
 
