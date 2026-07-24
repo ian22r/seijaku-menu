@@ -17,7 +17,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="logo.png">
     <link rel="icon" type="image/png" sizes="16x16" href="logo.png">
     <link rel="apple-touch-icon" href="logo.png">
-    <link rel="stylesheet" href="style.css?v=1.9">
+    <link rel="stylesheet" href="style.css?v=2.0">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-EE4Q1K8BZF"></script>
@@ -85,7 +85,16 @@
             </div>
         </div>
 
-        <section class="category-block">
+        <nav class="categories-nav" id="categories-nav">
+            <div class="categories-scroll">
+                <a href="#cat-rolls" class="category-btn">🍣 Rolls</a>
+                <a href="#cat-otsumami" class="category-btn">🥟 Entradas</a>
+                <a href="#cat-ramen" class="category-btn">🍜 Ramen & Bowls</a>
+                <a href="#cat-kanmi" class="category-btn">🍡 Postres & Bebidas</a>
+            </div>
+        </nav>
+
+        <section class="category-block" id="cat-rolls">
             <h3 class="category-title">Makimono 巻き物 & Special Rolls</h3>
             <div id="roll-promo-banner" class="roll-promo-banner hidden">
                 <i class="fas fa-crown"></i> Promo de los viernes: <strong>2 rollos x $180</strong>
@@ -300,7 +309,7 @@
                 </div>
             </div>
         </section>
-        <section class="category-block">
+        <section class="category-block" id="cat-otsumami">
             <h3 class="category-title">Otsumami おつまみ entradas o aperitivos</h3>
             <div class="menu-grid">
                  <div class="menu-item item-with-image">
@@ -369,7 +378,7 @@
                 </div>
             </div>
         </section>
-        <section class="category-block">
+        <section class="category-block" id="cat-ramen">
             <h3 class="category-title">Ramen & Bowls <span class="title-sub">Especialidades Calientes</span></h3>
             <div class="menu-grid">
                 <div class="menu-item item-with-image">
@@ -431,7 +440,7 @@
                 </div>
             </div>
         </section>
-        <section class="category-block">
+        <section class="category-block" id="cat-kanmi">
             <h3 class="category-title">Kanmi 甘味 Postres y bebidas</h3>
             <div class="menu-grid">
                 <div class="menu-item item-with-image">
@@ -641,6 +650,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 
     <!-- SCRIPT ÚNICO (Forzamos v2.9 para limpiar caché) -->
-    <script src="cart.js?v=2.9"></script>
+    <script src="cart.js?v=3.0"></script>
 </body>
 </html>

@@ -525,6 +525,26 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 /* ------------------------------------------------------------------
+   5.2 BARRA DE CATEGORÍAS STICKY: resalta el botón de la sección visible
+------------------------------------------------------------------ */
+document.addEventListener('DOMContentLoaded', function() {
+    var categoryButtons = document.querySelectorAll('.category-btn');
+    var categorySections = document.querySelectorAll('.category-block[id]');
+    if (!categoryButtons.length || !categorySections.length) return;
+
+    var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (!entry.isIntersecting) return;
+            categoryButtons.forEach(function(btn) {
+                btn.classList.toggle('active', btn.getAttribute('href') === '#' + entry.target.id);
+            });
+        });
+    }, { rootMargin: '-150px 0px -70% 0px', threshold: 0 });
+
+    categorySections.forEach(function(section) { observer.observe(section); });
+});
+
+/* ------------------------------------------------------------------
    6. MODO OSCURO PREMIUM AUTOMÁTICO
 ------------------------------------------------------------------ */
 function checkAutomaticDarkMode() {
