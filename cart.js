@@ -525,6 +525,44 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 /* ------------------------------------------------------------------
+   5.1.1 BURBUJA DE CACHIS: explica cómo ordenar (solo primera vez) o
+         da la bienvenida de regreso (si ya completó un pedido antes)
+------------------------------------------------------------------ */
+document.addEventListener('DOMContentLoaded', function() {
+    var bubble = document.getElementById('cachis-bubble');
+    var textEl = document.getElementById('cachis-text');
+    var closeBtn = document.getElementById('cachis-close');
+    if (!bubble || !textEl || !closeBtn) return;
+
+    var completedOrders = parseInt(localStorage.getItem(LOYALTY_STORAGE_KEY)) || 0;
+    var isFirstTime = completedOrders === 0;
+
+    textEl.innerHTML = isFirstTime
+        ? '<strong>¡Hola! Soy Cachis 🐱</strong>' +
+          '<ol>' +
+          '<li>Toca <strong>"Añadir al carrito"</strong> en cada platillo</li>' +
+          '<li>Toca la <strong>bolsa flotante</strong> 🛍️</li>' +
+          '<li>Confirma tus datos y <strong>envía por WhatsApp</strong></li>' +
+          '</ol>'
+        : '<strong>¡Qué bueno verte de nuevo! 🐱</strong>';
+
+    var hideTimeout;
+    function hideBubble() {
+        clearTimeout(hideTimeout);
+        bubble.classList.remove('show');
+        setTimeout(function() { bubble.classList.add('hidden'); }, 450);
+    }
+
+    setTimeout(function() {
+        bubble.classList.remove('hidden');
+        requestAnimationFrame(function() { bubble.classList.add('show'); });
+        hideTimeout = setTimeout(hideBubble, isFirstTime ? 11000 : 5000);
+    }, 1200);
+
+    closeBtn.addEventListener('click', hideBubble);
+});
+
+/* ------------------------------------------------------------------
    5.2 BARRA DE CATEGORÍAS STICKY: resalta el botón de la sección visible
 ------------------------------------------------------------------ */
 document.addEventListener('DOMContentLoaded', function() {

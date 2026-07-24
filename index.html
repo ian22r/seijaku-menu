@@ -17,7 +17,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="logo.png">
     <link rel="icon" type="image/png" sizes="16x16" href="logo.png">
     <link rel="apple-touch-icon" href="logo.png">
-    <link rel="stylesheet" href="style.css?v=2.0">
+    <link rel="stylesheet" href="style.css?v=2.1">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-EE4Q1K8BZF"></script>
@@ -67,23 +67,6 @@
 
     <main class="menu-section" id="menu">
         <h2 class="section-title">お品書き <span class="title-sub">Nuestra Carta</span></h2>
-
-        <div class="how-to-order">
-            <div class="how-to-order-step">
-                <span class="how-to-order-number">1</span>
-                <p>Toca <strong>"Añadir al carrito"</strong> en cada platillo</p>
-            </div>
-            <i class="fas fa-arrow-right how-to-order-arrow"></i>
-            <div class="how-to-order-step">
-                <span class="how-to-order-number">2</span>
-                <p>Toca la <strong>bolsa flotante</strong> 🛍️</p>
-            </div>
-            <i class="fas fa-arrow-right how-to-order-arrow"></i>
-            <div class="how-to-order-step">
-                <span class="how-to-order-number">3</span>
-                <p>Confirma tus datos y <strong>envía por WhatsApp</strong></p>
-            </div>
-        </div>
 
         <nav class="categories-nav" id="categories-nav">
             <div class="categories-scroll">
@@ -621,6 +604,16 @@
             <p class="footer-credits">© 2026 Seijaku • Gastronomía Japonesa</p>
         </div>
     </footer>
+
+    <!-- BURBUJA DE BIENVENIDA DE CACHIS -->
+    <div id="cachis-bubble" class="cachis-bubble hidden">
+        <button id="cachis-close" class="cachis-close" aria-label="Cerrar">&times;</button>
+        <div class="cachis-avatar">
+            <img src="logo.png" alt="Cachis">
+        </div>
+        <div class="cachis-text" id="cachis-text"></div>
+    </div>
+
   <!-- BOTÓN FLOTANTE CARRITO (ÚNICO Y CON LA BOLSITA NUEVA) -->
     <button id="cart-floating-btn" class="cart-floating-btn hidden" aria-label="Ver carrito">
         <div class="cart-icon-container">
@@ -650,6 +643,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 
     <!-- SCRIPT ÚNICO (Forzamos v2.9 para limpiar caché) -->
-    <script src="cart.js?v=3.0"></script>
+    <script src="cart.js?v=3.1"></script>
 </body>
 </html>
