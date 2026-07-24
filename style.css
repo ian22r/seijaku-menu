@@ -95,71 +95,54 @@ body {
    HERO
    ========================================================================== */
 .hero-section {
+    position: relative;
     background-color: #095a35;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 30px 20px 40px; /* Mantenemos el padding superior reducido */
+    padding: 30px 20px 40px;
     width: 100%;
+    overflow: hidden;
     animation: fadeIn 0.5s ease-out;
 }
 
+/* Resplandor dorado difuminado detrás del logo: toque premium sutil */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: -18%;
+    left: 50%;
+    width: 480px;
+    height: 480px;
+    transform: translateX(-50%);
+    background: radial-gradient(circle, rgba(201, 160, 84, 0.22), transparent 68%);
+    filter: blur(45px);
+    pointer-events: none;
+}
+
 .logo-wrapper {
-    margin-bottom: 0px; /* Sin espacio abajo del contenedor */
+    position: relative;
+    margin-bottom: 0px;
 }
 
 .brand-logo {
-    width: 320px; /* ← ¡Aumento drástico! Subimos de 240px a 320px forzados en móvil */
+    width: 320px;
+    max-width: 100%;
     height: auto;
     display: block;
     margin: 0 auto;
 }
 
 .slogan {
+    position: relative;
     font-family: 'Playfair Display', serif;
     font-style: italic;
     font-size: 20px;
     letter-spacing: 3px;
     color: #ebdcb9;
-    /* Ajustamos el margen negativo para un gato más grande: -8px es suficiente */
-    margin: -8px auto 25px; /* ← Jala el texto hacia arriba pero no tanto como antes para que respire */
-}/* ==========================================================================
-   HERO
-   ========================================================================== */
-.hero-section {
-    background-color: #095a35;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 30px 20px 40px; /* Mantenemos el padding superior reducido */
-    width: 100%;
-    animation: fadeIn 0.5s ease-out;
-}
-
-.logo-wrapper {
-    margin-bottom: 0px; /* Sin espacio abajo del contenedor */
-}
-
-.brand-logo {
-    width: 320px !important; /* ← Agregamos !important para obligar al iPhone a usar este tamaño */
-    max-width: 100% !important; /* ← También forzamos que no se salga de la pantalla */
-    height: auto !important;
-    display: block !important;
-    margin: 0 auto !important;
-}
-
-.slogan {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 20px;
-    letter-spacing: 3px;
-    color: #ebdcb9;
-    /* ¡La clave! Cambiamos -8px por -25px para que el texto suba y se pegue al gato grande */
-    margin: -25px auto 25px; 
+    margin: -8px auto 25px;
 }
 
 .shoji-divider-center {
@@ -232,9 +215,12 @@ body {
     gap: 14px;
     margin: -55px 0 60px 0;
     padding: 16px 20px;
-    background-color: #fcfbf7;
-    border: 1px solid rgba(9, 90, 53, 0.15);
-    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(10px) saturate(140%);
+    -webkit-backdrop-filter: blur(10px) saturate(140%);
+    border: 1px solid rgba(201, 160, 84, 0.3);
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(9, 90, 53, 0.06);
 }
 
 .how-to-order-step {
@@ -273,6 +259,7 @@ body {
 }
 
 .category-title {
+    position: relative;
     font-family: 'Montserrat', sans-serif;
     font-size: 14px;
     font-weight: 400;
@@ -282,6 +269,16 @@ body {
     padding-bottom: 15px;
     margin-bottom: 45px;
     border-bottom: 1px solid rgba(9, 90, 53, 0.15);
+}
+
+.category-title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 54px;
+    height: 2px;
+    background: linear-gradient(90deg, #c9a054, transparent);
 }
 
 .menu-grid {
@@ -400,6 +397,8 @@ body {
     font-weight: 500;
     color: #a83232;
     background-color: rgba(168, 50, 50, 0.08);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     border: 1px solid rgba(168, 50, 50, 0.25);
     border-radius: 20px;
     padding: 5px 14px;
@@ -421,10 +420,19 @@ body {
     flex-direction: row;
     gap: 25px;
     align-items: center;
-    background-color: rgba(255, 255, 255, 0.4);
-    padding: 15px;
-    border-radius: 8px;
-    border: 1px solid rgba(225, 219, 207, 0.5);
+    background: linear-gradient(155deg, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.32));
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    padding: 18px;
+    border-radius: 12px;
+    border: 1px solid rgba(201, 160, 84, 0.25);
+    box-shadow: 0 8px 30px rgba(9, 90, 53, 0.06);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.menu-item.item-with-image:hover {
+    border-color: rgba(201, 160, 84, 0.55);
+    box-shadow: 0 18px 40px rgba(9, 90, 53, 0.12);
 }
 
 .item-image-wrapper {
@@ -432,8 +440,9 @@ body {
     height: 110px;
     flex-shrink: 0;
     overflow: hidden;
-    border-radius: 6px;
+    border-radius: 9px;
     background-color: #ebdcb9;
+    box-shadow: inset 0 0 0 1px rgba(201, 160, 84, 0.3);
 }
 
 .item-photo {
@@ -456,9 +465,13 @@ body {
    ========================================================================== */
 .custom-roll-block {
     grid-column: 1 / -1;
-    border: 1px solid rgba(123, 133, 128, 0.2);
+    background: linear-gradient(155deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.28));
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    border: 1px solid rgba(201, 160, 84, 0.25);
     padding: 20px;
-    border-radius: 4px;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(9, 90, 53, 0.06);
 }
 
 .custom-roll-selectors {
@@ -481,9 +494,12 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 8px;
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     padding: 10px;
-    border: 1px solid rgba(140, 150, 144, 0.3);
+    border: 1px solid rgba(201, 160, 84, 0.2);
+    border-radius: 8px;
 }
 
 .custom-check {
@@ -698,6 +714,8 @@ body {
 
 .contact-card {
     background-color: rgba(247, 244, 235, 0.03);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     border: 1px solid rgba(235, 220, 185, 0.12);
     padding: 30px 25px;
     text-decoration: none;
@@ -752,7 +770,7 @@ body {
     padding: 6px 12px;
     margin-top: 10px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     align-self: flex-start;
 }
 
@@ -761,7 +779,8 @@ body {
     background-color: #095a35;
     color: #f7f4eb;
     border-color: #095a35;
-    transform: scale(1.05);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(9, 90, 53, 0.25);
 }
 
 .cart-floating-btn {
@@ -785,6 +804,7 @@ body {
 
 .cart-floating-btn:hover {
     transform: scale(1.08);
+    box-shadow: 0 8px 28px rgba(201, 160, 84, 0.4);
 }
 
 .cart-floating-btn.hidden {
@@ -834,15 +854,18 @@ body {
 }
 
 .modal-content {
-    background-color: #f7f4eb;
-    border: 1px solid rgba(225, 219, 207, 0.8);
+    background: rgba(247, 244, 235, 0.85);
+    backdrop-filter: blur(22px) saturate(160%);
+    -webkit-backdrop-filter: blur(22px) saturate(160%);
+    border: 1px solid rgba(201, 160, 84, 0.3);
+    border-radius: 14px;
     max-width: 500px;
     width: 90%;
     max-height: 90vh;
     overflow-y: auto;
     padding: 40px 30px;
     position: relative;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
     animation: fadeIn 0.5s ease-out;
 }
 
@@ -1094,11 +1117,9 @@ body {
 }
 
 /* ==========================================================================
-   KILL OLD CART ICON & FORCE BENTO BOX (PEGAR AL FINAL EN LA LÍNEA 800)
+   FORZAR ICONO BENTO BOX EN EL BOTÓN FLOTANTE DEL CARRITO
    ========================================================================== */
-
-/* 1. Borra por completo cualquier icono viejo inyectado en el botón */
-.cart-floating-btn::before, 
+.cart-floating-btn::before,
 .cart-floating-btn::after,
 .cart-floating-btn i,
 #cart-floating-btn::before,
@@ -1110,7 +1131,6 @@ body {
     visibility: hidden !important;
 }
 
-/* 2. Forzar contenedor limpio para el nuevo SVG */
 .cart-icon-container {
     display: flex !important;
     align-items: center !important;
@@ -1119,108 +1139,14 @@ body {
     height: 100% !important;
 }
 
-/* 3. Darle tamaño y color al Bento Box */
 .bento-svg {
     width: 24px !important;
     height: 24px !important;
-    color: #ffffff !important; /* Si tu botón es blanco, cambia #ffffff por #000000 */
-    display: block !important;
-}/* ==========================================================================
-   KILL OLD CART ICON & FORCE BENTO BOX (PEGAR AL FINAL EN LA LÍNEA 800)
-   ========================================================================== */
-
-/* 1. Borra por completo cualquier icono viejo inyectado en el botón */
-.cart-floating-btn::before, 
-.cart-floating-btn::after,
-.cart-floating-btn i,
-#cart-floating-btn::before,
-#cart-floating-btn::after,
-#cart-floating-btn i {
-    display: none !important;
-    content: "" !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-}
-
-/* 2. Forzar contenedor limpio para el nuevo SVG */
-.cart-icon-container {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 100% !important;
-    height: 100% !important;
-}
-
-/* 3. Darle tamaño y color al Bento Box */
-.bento-svg {
-    width: 24px !important;
-    height: 24px !important;
-    color: #ffffff !important; /* Si tu botón es blanco, cambia #ffffff por #000000 */
+    color: #ffffff !important;
     display: block !important;
 }
 /* ==========================================================================
-   LIMPIEZA DE ENFOQUE RESIDUAL EN MÓVILES (BOTONES DE COMPRA)
-   ========================================================================== */
-
-/* 1. Quita el recuadro/destello amarillo o azul nativo al hacer tap en celulares */
-.add-to-cart, 
-.add-to-cart-variant,
-#calpis-btn,
-#add-custom-roll-btn {
-    -webkit-tap-highlight-color: transparent !important;
-}
-
-/* 2. Evita que el botón se quede con un fondo extraño después de ser pulsado en el teléfono */
-.add-to-cart:focus,
-.add-to-cart-variant:focus,
-#calpis-btn:focus,
-#add-custom-roll-btn:focus,
-.add-to-cart:active,
-.add-to-cart-variant:active {
-    outline: none !important;
-    background-color: initial; /* O pon aquí el color base de tus botones si usas uno fijo */
-    box-shadow: none !important;
-}
-
-/* 3. Asegura que cuando cambie a "¡Añadido!" mantenga el verde correcto y no se mezcle */
-.add-to-cart:disabled,
-.add-to-cart-variant:disabled {
-    background-color: #095a35 !important;
-    color: #ffffff !important;
-    opacity: 1 !important; /* Evita que el celular lo ponga grisáceo por estar disabled */
-}/* ==========================================================================
-   LIMPIEZA DE ENFOQUE RESIDUAL EN MÓVILES (BOTONES DE COMPRA)
-   ========================================================================== */
-
-/* 1. Quita el recuadro/destello amarillo o azul nativo al hacer tap en celulares */
-.add-to-cart, 
-.add-to-cart-variant,
-#calpis-btn,
-#add-custom-roll-btn {
-    -webkit-tap-highlight-color: transparent !important;
-}
-
-/* 2. Evita que el botón se quede con un fondo extraño después de ser pulsado en el teléfono */
-.add-to-cart:focus,
-.add-to-cart-variant:focus,
-#calpis-btn:focus,
-#add-custom-roll-btn:focus,
-.add-to-cart:active,
-.add-to-cart-variant:active {
-    outline: none !important;
-    background-color: initial; /* O pon aquí el color base de tus botones si usas uno fijo */
-    box-shadow: none !important;
-}
-
-/* 3. Asegura que cuando cambie a "¡Añadido!" mantenga el verde correcto y no se mezcle */
-.add-to-cart:disabled,
-.add-to-cart-variant:disabled {
-    background-color: #095a35 !important;
-    color: #ffffff !important;
-    opacity: 1 !important; /* Evita que el celular lo ponga grisáceo por estar disabled */
-}
-/* ==========================================================================
-   PARCHE ESPECÍFICO PARA IPHONE (ELIMINAR ENFOQUE AMARILLO/AZUL EN iOS)
+   LIMPIEZA DE ENFOQUE RESIDUAL EN MÓVILES / iOS (BOTONES DE COMPRA)
    ========================================================================== */
 
 /* 1. Desactivar el sombreado y bordes de enfoque que iOS impone en botones y elementos activos */
@@ -1261,6 +1187,14 @@ button {
         background-color: initial !important; /* Evita que el botón cambie de color tras soltar el tap */
         color: initial !important;
     }
+}
+
+/* 4. Asegura que cuando cambie a "¡Añadido!" mantenga el verde correcto y no se mezcle */
+.add-to-cart:disabled,
+.add-to-cart-variant:disabled {
+    background-color: #095a35 !important;
+    color: #ffffff !important;
+    opacity: 1 !important;
 }
 /* ==========================================================================
    MODO OSCURO PREMIUM - SEIJAKU (AUTOMÁTICO NOTURNO)
@@ -1303,6 +1237,28 @@ body.dark-mode #cart-modal .modal-body {
 
 body.dark-mode .cart-item-row span {
     color: #cccccc !important;
+}
+
+/* Cristal oscuro: mantiene el efecto glass coherente en modo nocturno */
+body.dark-mode .menu-item.item-with-image,
+body.dark-mode .how-to-order,
+body.dark-mode .custom-roll-block,
+body.dark-mode .custom-checkbox-grid {
+    background: rgba(255, 255, 255, 0.04) !important;
+    border-color: rgba(201, 160, 84, 0.2) !important;
+}
+
+body.dark-mode .custom-roll-label {
+    color: #d4af37 !important;
+}
+
+body.dark-mode .modal-content {
+    background: rgba(15, 15, 15, 0.85) !important;
+    border-color: rgba(201, 160, 84, 0.25) !important;
+}
+
+body.dark-mode .item-image-wrapper {
+    box-shadow: inset 0 0 0 1px rgba(201, 160, 84, 0.25) !important;
 }
 /* ==========================================================================
    BARRA DE CATEGORÍAS FLOTANTE TOP
@@ -1403,21 +1359,6 @@ body.dark-mode .category-btn {
     /* ... tus otros estilos actuales de .menu-item ... */
 }
 /* --- ANIMACIÓN SHAKE PARA LA BOLSA --- */
-@keyframes seijakuShake {
-    0% { transform: scale(1); }
-    15% { transform: scale(1.1) rotate(-8deg); }
-    30% { transform: scale(1.1) rotate(8deg); }
-    45% { transform: scale(1.1) rotate(-6deg); }
-    60% { transform: scale(1.1) rotate(6deg); }
-    75% { transform: scale(1.1) rotate(-3deg); }
-    90% { transform: scale(1.1) rotate(3deg); }
-    100% { transform: scale(1) rotate(0deg); }
-}
-
-/* Clase que aplicaremos con JavaScript */
-.shake-cart {
-    animation: seijakuShake 0.5s ease-in-out;
-}/* --- ANIMACIÓN SHAKE PARA LA BOLSA --- */
 @keyframes seijakuShake {
     0% { transform: scale(1); }
     15% { transform: scale(1.1) rotate(-8deg); }

@@ -8,17 +8,14 @@ let notificationTimeout = null;
 let hasShownNotification = false;
 
 /* ------------------------------------------------------------------
-   0. PROMO DEL DÍA: 2 ROLLOS x $170 (solo 2026-07-17)
+   0. PROMO DE LOS VIERNES: 2 ROLLOS x $180
 ------------------------------------------------------------------ */
-const ROLL_PROMO_DATE  = "2026-07-17";
-const ROLL_PROMO_PRICE = 170;
+const ROLL_PROMO_DAY   = 5; // 0=domingo, 5=viernes
+const ROLL_PROMO_PRICE = 180;
 
 function isRollPromoActiveToday() {
     var now = new Date();
-    var todayStr = now.getFullYear() + "-" +
-        String(now.getMonth() + 1).padStart(2, "0") + "-" +
-        String(now.getDate()).padStart(2, "0");
-    return todayStr === ROLL_PROMO_DATE;
+    return now.getDay() === ROLL_PROMO_DAY;
 }
 
 // Calcula subtotal, descuento de promo, envío, descuento de lealtad y total a partir del carrito
@@ -435,7 +432,7 @@ function renderCartModal() {
     var promoLine = document.getElementById('cart-promo-line');
     if (promoLine) {
         if (totals.promoDiscount > 0) {
-            promoLine.textContent = '🎉 Promo del día 2 rollos x $' + ROLL_PROMO_PRICE + ' aplicada: -$' + totals.promoDiscount;
+            promoLine.textContent = '🎉 Promo de los viernes 2 rollos x $' + ROLL_PROMO_PRICE + ' aplicada: -$' + totals.promoDiscount;
             promoLine.classList.remove('hidden');
         } else {
             promoLine.textContent = '';
@@ -518,7 +515,7 @@ function animateFlyToCart(buttonElement) {
     }, 600);
 }
 /* ------------------------------------------------------------------
-   5.1 BANNER DE PROMO DEL DÍA (SOLO SE MUESTRA SI ESTÁ VIGENTE HOY)
+   5.1 BANNER DE PROMO DE LOS VIERNES (SOLO SE MUESTRA SI ESTÁ VIGENTE HOY)
 ------------------------------------------------------------------ */
 document.addEventListener('DOMContentLoaded', function() {
     var banner = document.getElementById('roll-promo-banner');
