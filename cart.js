@@ -526,18 +526,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
 /* ------------------------------------------------------------------
    5.1.1 BURBUJA DE CACHIS: explica cómo ordenar (solo primera vez) o
-         da la bienvenida de regreso (si ya completó un pedido antes)
+         da la bienvenida de regreso (si ya completó un pedido antes).
+         Se revela hasta que el preloader terminó de desaparecer, para
+         que no compita visualmente con la pantalla de carga.
 ------------------------------------------------------------------ */
+var cachisBubble, cachisCloseBtn, cachisIsFirstTime, cachisHideTimeout;
+
 document.addEventListener('DOMContentLoaded', function() {
-    var bubble = document.getElementById('cachis-bubble');
+    cachisBubble = document.getElementById('cachis-bubble');
     var textEl = document.getElementById('cachis-text');
-    var closeBtn = document.getElementById('cachis-close');
-    if (!bubble || !textEl || !closeBtn) return;
+    cachisCloseBtn = document.getElementById('cachis-close');
+    if (!cachisBubble || !textEl || !cachisCloseBtn) return;
 
     var completedOrders = parseInt(localStorage.getItem(LOYALTY_STORAGE_KEY)) || 0;
-    var isFirstTime = completedOrders === 0;
+    cachisIsFirstTime = completedOrders === 0;
 
-    textEl.innerHTML = isFirstTime
+    textEl.innerHTML = cachisIsFirstTime
         ? '<strong>¡Hola! Soy Cachis 🐱</strong>' +
           '<ol>' +
           '<li>Toca <strong>"Añadir al carrito"</strong> en cada platillo</li>' +
@@ -546,21 +550,22 @@ document.addEventListener('DOMContentLoaded', function() {
           '</ol>'
         : '<strong>¡Qué bueno verte de nuevo! 🐱</strong>';
 
-    var hideTimeout;
-    function hideBubble() {
-        clearTimeout(hideTimeout);
-        bubble.classList.remove('show');
-        setTimeout(function() { bubble.classList.add('hidden'); }, 450);
-    }
-
-    setTimeout(function() {
-        bubble.classList.remove('hidden');
-        requestAnimationFrame(function() { bubble.classList.add('show'); });
-        hideTimeout = setTimeout(hideBubble, isFirstTime ? 11000 : 5000);
-    }, 1200);
-
-    closeBtn.addEventListener('click', hideBubble);
+    cachisCloseBtn.addEventListener('click', hideCachisBubble);
 });
+
+function showCachisBubble() {
+    if (!cachisBubble) return;
+    cachisBubble.classList.remove('hidden');
+    requestAnimationFrame(function() { cachisBubble.classList.add('show'); });
+    cachisHideTimeout = setTimeout(hideCachisBubble, cachisIsFirstTime ? 11000 : 5000);
+}
+
+function hideCachisBubble() {
+    if (!cachisBubble) return;
+    clearTimeout(cachisHideTimeout);
+    cachisBubble.classList.remove('show');
+    setTimeout(function() { cachisBubble.classList.add('hidden'); }, 450);
+}
 
 /* ------------------------------------------------------------------
    5.2 BARRA DE CATEGORÍAS STICKY: resalta el botón de la sección visible
@@ -946,9 +951,12 @@ window.addEventListener('load', function() {
         // Cambia la opacidad para que se desvanezca suavemente
         preloader.style.opacity = '0';
         preloader.style.visibility = 'hidden';
-        
+
         // Reactiva el scroll en el body
         document.body.classList.remove('loading');
+
+        // Hasta que el preloader terminó de desvanecerse (transición de 0.5s) mostramos a Cachis
+        setTimeout(showCachisBubble, 500);
     }, 1000); // 1000 milisegundos = 1 segundo de retraso total
 });
 
